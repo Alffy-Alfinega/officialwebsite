@@ -1,0 +1,38 @@
+name: IndexNow — Notify Search Engines
+
+on:
+  push:
+    branches: [alffy]
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deploy
+        run: |
+          echo "Waiting 120s for Vercel to finish building..."
+          sleep 120
+
+      - name: Verify site is live
+        run: |
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://alffy.alfinega.com)
+            if [ "$STATUS" = "200" ]; then
+              echo "Site is live (HTTP $STATUS)"
+              break
+            fi
+            echo "Attempt $i: HTTP $STATUS — retrying in 30s..."
+            sleep 30
+          done
+
+      - name: Ping IndexNow
+        run: |
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X POST https://alffy.alfinega.com/api/indexnow)
+          echo "$RESPONSE"
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS" | cut -d: -f2)
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "IndexNow submitted successfully"
+          else
+            echo "IndexNow submission returned HTTP $HTTP_STATUS"
+            exit 1
+          fi
