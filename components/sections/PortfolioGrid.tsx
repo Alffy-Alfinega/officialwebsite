@@ -160,6 +160,20 @@ const projects = [
     accentColor: '#2C6FED',
     status: 'Live',
   },
+  {
+    id: 8,
+    title: 'NAGABA Association',
+    url: 'https://nagaba.proj.alfinega.com',
+    category: 'Web Design',
+    subCategory: 'Non-Profit & NGO',
+    tags: ['NGO', 'Community', 'Multi-Page'],
+    year: '2025',
+    location: 'Western Uganda',
+    description: 'Community-based organisation website for a western Uganda NGO — HIV/AIDS awareness, women & youth empowerment, skills training, and donation/volunteer portal with a warm, mission-driven design.',
+    accent: 'linear-gradient(135deg, #0A1008, #141A08)',
+    accentColor: '#65A30D',
+    status: 'Live',
+  },
 ]
 
 function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {

@@ -1,4 +1,4 @@
-# Portfolio (7 projects)
+# Portfolio (8 projects)
 
 Rendered on [[routes/map#Page Routes\|/portfolio]] via PortfolioGrid component ([[components/overview]]). R3F scene: [[components/r3f#Scene Variants\|PortfolioScene]].
 
@@ -11,5 +11,6 @@ Rendered on [[routes/map#Page Routes\|/portfolio]] via PortfolioGrid component (
 | 5 | E2E Hub Africa — Transformation consultancy | Web Design | Live |
 | 6 | Light High School — Seguku | Web Design | Live |
 | 7 | Alffy (Alfinega) — Agency website | Web Design | Live |
+| 8 | NAGABA Association — Women, youth & needy NGO | Web Design | Live |
 
 All projects are hardcoded in `components/sections/PortfolioGrid.tsx`. Sub-routes (`/portfolio/web-design`, `/branding`, `/video`) redirect to `/portfolio` — see [[foundation/infrastructure#Redirects]].

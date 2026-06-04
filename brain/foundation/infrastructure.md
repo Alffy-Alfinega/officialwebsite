@@ -8,7 +8,7 @@
 
 ### `vercel.json` Headers
 
-- Security: X-Content-Type-Options, X-Frame-Options (DENY), X-XSS-Protection, Referrer-Policy, Permissions-Policy, **Content-Security-Policy** (self + GA + Vercel + Google Fonts)
+- Security: X-Content-Type-Options, X-Frame-Options (DENY), X-XSS-Protection, Referrer-Policy, Permissions-Policy, **Content-Security-Policy** (self + GA + Vercel + Google Fonts + `*.dev.alfinega.com` for portfolio iframe previews)
 - Cache: fonts and `/_next/static/` — 1 year immutable
 
 CSP is particularly relevant to [[routes/analytics]] (GA script loading) and [[routes/seo]] (structured data inline scripts).
