@@ -5,6 +5,7 @@ The hierarchy is rendered by [[routes/map#Root Layout\|app/layout.tsx]] which wr
 ## Hierarchy
 ```
 RootLayout
+├── PagePreloader (brand loading screen, 600ms display + fade)
 ├── SmoothScrollProvider (Lenis — [[foundation/stack]])
 ├── Navbar (fixed, dropdowns + mobile slide-out)
 ├── <main>{children}</main>
@@ -48,6 +49,7 @@ RootLayout
 | ContactForm | `components/ui/ContactForm.tsx` | [[apis/contact]] |
 | NewsletterForm | `components/ui/NewsletterForm.tsx` | [[apis/newsletter]] |
 | CookieBanner | `components/ui/CookieBanner.tsx` | — (localStorage + [[routes/analytics]]) |
+| PagePreloader | `components/ui/PagePreloader.tsx` | — |
 | PricingFAQ | `components/ui/PricingFAQ.tsx` | Pricing data ([[business/pricing]]) |
 
 ## State Management

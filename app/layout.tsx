@@ -21,6 +21,7 @@ import Navbar from '@/components/nav/Navbar'
 import Footer from '@/components/layout/Footer'
 import SmoothScrollProvider from '@/components/layout/SmoothScrollProvider'
 import CookieBanner from '@/components/ui/CookieBanner'
+import PagePreloader from '@/components/ui/PagePreloader'
 // Vercel's first‑party analytics & speed‑insight scripts.
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -195,6 +196,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="ga-config" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{page_location:window.location.href});`}
         </Script>
+
+        {/* Page preloader — fades out after hydration */}
+        <PagePreloader />
 
         {/* Wrap page content in the smooth‑scroll provider
             (Lenis). Inside: navbar, main content, footer, and

@@ -72,7 +72,7 @@
 | Category | Count |
 |---|---|
 | Pages (app router) | 36 |
-| Components | 16 |
+| Components | 17 |
 | Babylon.js (3D) | 2 |
 | Data files | 0 |
 | Config files | 7 |

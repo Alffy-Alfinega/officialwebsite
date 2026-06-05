@@ -110,6 +110,11 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+@keyframes preloaderBar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
 hr.rule { border: none; border-top: 1px solid var(--border); }
 
 .tag {
