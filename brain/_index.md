@@ -18,13 +18,13 @@
 - [[foundation/env]] — Environment variables reference
 
 ### Routes & Pages
-- [[routes/map]] — All 21 routes, metadata, sitemap priority
+- [[routes/map]] — All 36 routes, metadata, sitemap priority
 - [[routes/seo]] — SEO metadata, sitemap, robots, OG, structured data
 - [[routes/analytics]] — GA4 consent mode, Vercel Analytics, cookie consent
 
 ### Components
 - [[components/overview]] — Navbar, footer, sections, UI components, styling patterns
-- [[components/r3f]] — All React Three Fiber scenes (13 variants + particle wave)
+- [[components/r3f]] — Babylon.js 3D scenes (replaced R3F)
 
 ### APIs
 - [[apis/overview]] — Shared utilities, rate limiting, CSRF
@@ -37,7 +37,7 @@
 
 ### Business
 - [[business/company]] — Company info, timeline, targets
-- [[business/services]] — All 12 services catalog
+- [[business/services]] — 6 merged service categories (was 12)
 - [[business/pricing]] — Pricing packages (web, SEO, brand)
 - [[business/team]] — Team members and open roles
 - [[business/portfolio]] — Portfolio projects (6)
@@ -56,13 +56,13 @@
 |---|---|
 | Root layout | `app/layout.tsx` |
 | Homepage | `app/page.tsx`, `components/sections/Hero.tsx` |
-| Services | `app/services/page.tsx`, `app/services/[slug]/page.tsx` |
-| Blog listing + content | `app/blog/page.tsx`, `app/blog/[slug]/page.tsx` |
+| Services | `app/services/page.tsx`, `app/services/{category}/page.tsx` (6 pages) |
+| Blog listing + content | `app/blog/page.tsx`, `app/blog/{slug}/page.tsx` (6 pages) |
 | Portfolio projects | `components/sections/PortfolioGrid.tsx` |
 | Team pages | `app/about/page.tsx`, `app/about/team/page.tsx` |
 | Nav / Footer | `components/nav/Navbar.tsx`, `components/layout/Footer.tsx` |
 | API security utils | `lib/api-utils.ts` |
-| 3D scenes | `components/r3f/SceneVariants.tsx` |
+| 3D scenes | `components/3d/BabylonScene.tsx`, `components/3d/BabylonSceneCanvas.tsx` |
 | Design tokens | `tailwind.config.ts` + `app/globals.css` |
 
 ---
@@ -71,12 +71,12 @@
 
 | Category | Count |
 |---|---|
-| Pages (app router) | 21 |
-| Components | 19 |
-| R3F (3D) | 6 |
+| Pages (app router) | 36 |
+| Components | 16 |
+| Babylon.js (3D) | 2 |
 | Data files | 0 |
-| Config files | 8 |
+| Config files | 7 |
 | API routes | 3 |
 | Library utilities | 2 (`lib/utils.ts`, `lib/api-utils.ts`) |
-| Type declarations | 2 (`types/r3f.d.ts`, `types/gtag.d.ts`) |
-| **Total source** | **~65 files** |
+| Type declarations | 1 (`types/gtag.d.ts`) |
+| **Total source** | **~70 files** |

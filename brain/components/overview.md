@@ -9,7 +9,7 @@ RootLayout
 ├── Navbar (fixed, dropdowns + mobile slide-out)
 ├── <main>{children}</main>
 │   └── [Page Component] — see [[routes/map]]
-│       ├── FloatingGeometryWrapper (per-page 3D scene) — see [[components/r3f]]
+│       ├── BabylonScene (decorative 3D background) — see [[components/r3f]]
 │       └── [Section Components]
 ├── Footer (4-column grid + newsletter)
 ├── CookieBanner — analytics consent ([[routes/analytics]])

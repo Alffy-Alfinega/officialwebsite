@@ -1,23 +1,42 @@
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+// ============================================================
+// Privacy Policy Page — Legal page explaining data collection
+// Covers information collected, how it's used, legal basis,
+// data sharing, retention, user rights, security, and more.
+// Route: /privacy-policy
+// ============================================================
+
+// Import the 3D Babylon.js scene component for background decoration
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Import Metadata for setting the page title and SEO description
 import type { Metadata } from 'next'
+
+// Import Link for navigation between legal pages
 import Link from 'next/link'
 
+// Metadata for SEO
 export const metadata: Metadata = {
   title: 'Privacy Policy | Alffy (Alfinega)',
   description: 'Privacy policy for Alffy (Alfinega). How we collect, use, and protect your personal data.',
 }
 
+// Constants used throughout the policy text — defined at the top
+// so they're easy to find and update if details change.
 const EFFECTIVE = '1 March 2026'
 const COMPANY   = 'Alffy (Alfinega)'
-const EMAIL     = 'hello@alfinega.com'
+const EMAIL     = 'contact@alfinega.com'
 const ADDRESS   = 'Makindye, Kampala, Uganda'
 
+// Main component for the Privacy Policy page. Default export.
 export default function PrivacyPolicyPage() {
   return (
     <div className="pt-[68px]">
-      <div className="fixed top-0 right-0 w-1/2 h-screen opacity-100 pointer-events-none z-0">
-        <FloatingGeometryWrapper className="w-full h-full" variant="legal" />
+      {/* 3D scene contained in a small corner — hidden on mobile, faded to bg */}
+      <div className="absolute top-24 right-6 w-[360px] h-[360px] pointer-events-none z-0 hidden md:block">
+        <BabylonScene className="w-full h-full" />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, transparent 15%, var(--bg) 80%)' }} />
       </div>
+      {/* Content section with constrained width (860px) for readability */}
       <section className="py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[860px] mx-auto">
 
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Legal</span>
@@ -28,9 +47,9 @@ export default function PrivacyPolicyPage() {
 
         <div className="h-px bg-[#1C1C34] mb-12" />
 
-        <div className="prose-custom space-y-10">
+        <div className="space-y-10">
 
-          {/* Intro */}
+          {/* Introductory section — defines who Alffy is and links to the website */}
           <div>
             <p className="font-outfit text-[#BBBBDD] leading-relaxed">
               {COMPANY} (&ldquo;Alffy&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates the website at <a href="https://alffy.alfinega.com" className="text-[#2C6FED] hover:text-white transition-colors">alffy.alfinega.com</a>. This Privacy Policy explains what information we collect, how we use it, and what rights you have in relation to it.
@@ -40,6 +59,10 @@ export default function PrivacyPolicyPage() {
             </p>
           </div>
 
+          {/* Array of policy sections — each has a title and an
+              array of content items (each with optional sub-heading
+              and text body). This array is mapped over to render
+              each section dynamically. */}
           {[
             {
               title: '1. Information We Collect',
@@ -95,7 +118,7 @@ export default function PrivacyPolicyPage() {
               ],
             },
             {
-              title: '9. Children\'s Privacy',
+              title: "9. Children's Privacy",
               content: [
                 { sub: '', text: 'Our website and services are not directed at children under the age of 13. We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately at ' + EMAIL + '.' },
               ],
@@ -127,6 +150,7 @@ export default function PrivacyPolicyPage() {
           ))}
         </div>
 
+        {/* Footer links to related legal pages */}
         <div className="h-px bg-[#1C1C34] mt-16 mb-8" />
         <div className="flex flex-wrap gap-4">
           <Link href="/terms" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] transition-colors uppercase tracking-wide">Terms of Service</Link>

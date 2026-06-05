@@ -1,12 +1,30 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+// ============================================================
+// Why Alffy Page — Explains what makes Alffy different
+// This sub-page of /about presents 6 compelling reasons to
+// choose Alffy, a comparison table vs. freelancers and
+// international agencies, and a call-to-action to start a
+// project.
+// Route: /about/why
+// ============================================================
 
+// Import Metadata for setting the page title and SEO description
+import type { Metadata } from 'next'
+
+// Import Link for client-side navigation between pages
+import Link from 'next/link'
+
+// Import the 3D Babylon.js scene component for background decoration
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Metadata for SEO — tells search engines and browsers the
+// page title and description
 export const metadata: Metadata = {
   title: 'Why Alffy — What Makes Us Different | Kampala Digital Agency',
   description: 'Why businesses in Uganda and East Africa choose Alffy for web design, SEO, and branding. Full-service, honest, results-focused.',
 }
 
+// Array of 6 "reasons" objects. Each has a number, title,
+// short body copy, and a longer detail paragraph.
 const reasons = [
   {
     number: '01',
@@ -46,10 +64,12 @@ const reasons = [
   },
 ]
 
+// Main component for the Why Alffy page. Default export.
 export default function WhyAlffyPage() {
   return (
+    // Outer wrapper with top padding for the fixed navbar
     <div className="pt-[68px]">
-      {/* Breadcrumb */}
+      {/* Breadcrumb navigation: About > Why Alffy */}
       <div className="px-6 md:px-16 lg:px-24 pt-8 max-w-[1440px] mx-auto">
         <nav className="flex items-center gap-2 font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest" aria-label="Breadcrumb">
           <Link href="/about" className="hover:text-[#2C6FED] transition-colors">About</Link>
@@ -58,10 +78,10 @@ export default function WhyAlffyPage() {
         </nav>
       </div>
 
-      {/* Hero */}
+      {/* Hero Section — headline and subtitle with 3D background */}
       <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <FloatingGeometryWrapper className="w-full h-full" variant="why" />
+          <BabylonScene className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10 max-w-3xl">
@@ -79,7 +99,8 @@ export default function WhyAlffyPage() {
         </div>
       </section>
 
-      {/* Reasons */}
+      {/* Reasons Section — loops over the reasons array and renders
+          each as a row with number, title, body, and detail */}
       <section className="py-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="space-y-0">
           {reasons.map((r, i) => (
@@ -87,14 +108,17 @@ export default function WhyAlffyPage() {
               key={r.number}
               className="py-12 border-b border-[#1C1C34] grid grid-cols-1 lg:grid-cols-3 gap-6 group"
             >
+              {/* Left column: number and title */}
               <div className="lg:col-span-1">
                 <span className="font-mono text-[11px] text-[#7A7A9A] block mb-3">{r.number}</span>
                 <h2 className="font-syne font-bold text-2xl text-white group-hover:text-[#2C6FED] transition-colors duration-300">
                   {r.title}
                 </h2>
               </div>
+              {/* Right column: body text and detail paragraph */}
               <div className="lg:col-span-2">
                 <p className="font-outfit text-base text-[#BBBBDD] leading-relaxed mb-4">{r.body}</p>
+                {/* Detail has a left border accent that changes color on hover */}
                 <p className="font-outfit text-sm text-[#8A8AAA] leading-relaxed border-l-2 border-[#1C1C34] pl-4 group-hover:border-[#2C6FED]/40 transition-colors duration-300">
                   {r.detail}
                 </p>
@@ -104,7 +128,8 @@ export default function WhyAlffyPage() {
         </div>
       </section>
 
-      {/* Comparison */}
+      {/* Comparison Table Section — compares Alffy vs Freelancer vs
+          International Agency across several dimensions */}
       <section className="py-12 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="h-px bg-[#1C1C34] mb-16" />
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-6 block">Honest Comparison</span>
@@ -114,8 +139,10 @@ export default function WhyAlffyPage() {
         >
           Alffy vs. the alternatives.
         </h2>
+        {/* Scrollable table wrapper for mobile responsiveness */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
+            {/* Table header row */}
             <thead>
               <tr>
                 <th className="text-left py-3 pr-6 font-mono text-[10px] text-[#8A8AAA] uppercase tracking-widest border-b border-[#1C1C34]">Feature</th>
@@ -124,6 +151,7 @@ export default function WhyAlffyPage() {
                 <th className="text-center py-3 px-6 font-mono text-[10px] text-[#8A8AAA] uppercase tracking-widest border-b border-[#1C1C34]">Int&apos;l Agency</th>
               </tr>
             </thead>
+            {/* Table body — rows of feature comparisons */}
             <tbody>
               {[
                 ['Local market knowledge',   '✓', 'Varies', '✗'],
@@ -146,7 +174,8 @@ export default function WhyAlffyPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA Section — bottom call-to-action with links to team
+          and contact pages */}
       <section className="py-12 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto pb-28">
         <div className="h-px bg-[#1C1C34] mb-12" />
         <div className="flex flex-wrap items-center justify-between gap-6">

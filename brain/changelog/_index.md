@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-06-05
+- [[changelog/2026-06-05-services-blogs-expansion|Service & blog content expansion; R3F → Babylon.js migration]]
+
 ## 2026-06-04
 - [[changelog/2026-06-04-initial-cleanup|Security, tooling, data cleanup & brain restructure]]
 

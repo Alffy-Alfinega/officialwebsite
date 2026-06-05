@@ -1,13 +1,30 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import PricingFAQ from '@/components/ui/PricingFAQ'
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+// ============================================================
+// Pricing Page — Shows transparent pricing for all services
+// Displays three categories of packages: Website, SEO, and
+// Design & Branding. Each package has a pricing card, features
+// list, and a call-to-action. Also includes a FAQ section.
+// Route: /pricing
+// ============================================================
 
+// Import Metadata for setting the page title and SEO description
+import type { Metadata } from 'next'
+
+// Import Link for client-side navigation
+import Link from 'next/link'
+
+// Import the PricingFAQ component — renders common pricing questions
+import PricingFAQ from '@/components/ui/PricingFAQ'
+
+// Import the 3D Babylon.js scene component for background decoration
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Metadata for SEO
 export const metadata: Metadata = {
   title: 'Pricing — Web Design, SEO & Branding Packages | Alffy Kampala',
   description: 'Transparent, fixed pricing for web design, SEO, branding, and digital services from Alffy (Alfinega), Kampala Uganda. Starter websites from UGX 850,000.',
 }
 
+// Array of website packages shown as large pricing cards
 const webPackages = [
   {
     name: 'Starter',
@@ -24,7 +41,7 @@ const webPackages = [
       '30-day post-launch support',
     ],
     cta: 'Get Started',
-    highlight: false,
+    highlight: false, // whether this card is visually emphasized
   },
   {
     name: 'Growth',
@@ -42,7 +59,7 @@ const webPackages = [
       '90-day post-launch support',
     ],
     cta: 'Most Popular — Get Started',
-    highlight: true,
+    highlight: true, // This card is highlighted as the recommended option
   },
   {
     name: 'Enterprise',
@@ -63,6 +80,7 @@ const webPackages = [
   },
 ]
 
+// Array of SEO packages shown as smaller cards
 const seoPackages = [
   {
     name: 'Local SEO',
@@ -84,6 +102,7 @@ const seoPackages = [
   },
 ]
 
+// Array of design & branding packages shown as smaller cards
 const designPackages = [
   {
     name: 'Brand Starter',
@@ -108,6 +127,9 @@ const designPackages = [
   },
 ]
 
+// WebCard Component — renders a single large pricing card for
+// website packages. Accepts a package object and displays its
+// name, price, features, and a CTA button.
 function WebCard({ pkg }: { pkg: typeof webPackages[0] }) {
   return (
     <div className={`relative flex flex-col p-8 rounded-2xl border transition-all ${pkg.highlight ? 'border-[#2C6FED] bg-[#2C6FED]/5' : 'border-[#1C1C34] bg-[#0A0A16]'}`}>
@@ -116,15 +138,18 @@ function WebCard({ pkg }: { pkg: typeof webPackages[0] }) {
           Recommended
         </span>
       )}
+      {/* Card header — name, tagline, and price */}
       <div className="mb-6">
         <h3 className={`font-syne font-bold text-xl mb-1 ${pkg.highlight ? 'text-[#2C6FED]' : 'text-white'}`}>{pkg.name}</h3>
         <p className="font-outfit text-xs text-[#8A8AAA] mb-4">{pkg.tagline}</p>
+        {/* Price display — currency symbol + amount + period */}
         <div className="flex items-end gap-1.5">
           {pkg.currency && <span className="font-mono text-xs text-[#8A8AAA] mb-1.5">{pkg.currency}</span>}
           <span className="font-syne font-extrabold text-3xl text-white">{pkg.price}</span>
           {pkg.period !== 'quote' && <span className="font-mono text-[11px] text-[#8A8AAA] mb-1">/ {pkg.period}</span>}
         </div>
       </div>
+      {/* Features list with checkmark icons */}
       <ul className="space-y-2.5 flex-1 mb-8">
         {pkg.features.map((f) => (
           <li key={f} className="flex items-center gap-3 font-outfit text-sm text-[#BBBBDD]">
@@ -135,6 +160,7 @@ function WebCard({ pkg }: { pkg: typeof webPackages[0] }) {
           </li>
         ))}
       </ul>
+      {/* Call-to-action button linking to contact page */}
       <Link href="/contact" className={`block text-center px-6 py-3.5 font-syne font-semibold text-sm rounded-full transition-all ${pkg.highlight ? 'bg-[#2C6FED] text-white hover:opacity-90' : 'border border-[#333] text-[#ccc] hover:border-[#2C6FED] hover:text-[#2C6FED]'}`}>
         {pkg.cta}
       </Link>
@@ -142,17 +168,22 @@ function WebCard({ pkg }: { pkg: typeof webPackages[0] }) {
   )
 }
 
+// SmallCard Component — renders a smaller pricing card used for
+// SEO and Design packages. Takes a package object with optional
+// period field.
 function SmallCard({ pkg }: { pkg: typeof seoPackages[0] & { period?: string } }) {
   const periodLabel = pkg.period === 'one-time' ? 'one-time' : '/ mo'
   return (
     <div className="p-6 border border-[#1C1C34] rounded-2xl hover:border-[#2C6FED]/25 transition-all card-hover group flex flex-col">
       <h3 className="font-syne font-bold text-lg text-white mb-0.5 group-hover:text-[#2C6FED] transition-colors">{pkg.name}</h3>
+      {/* Price row */}
       <div className="flex items-end gap-1 mb-3">
         <span className="font-mono text-[10px] text-[#8A8AAA] mb-1">UGX</span>
         <span className="font-syne font-extrabold text-2xl text-[#2C6FED]">{pkg.price}</span>
         <span className="font-mono text-[10px] text-[#8A8AAA] mb-0.5">{periodLabel}</span>
       </div>
       <p className="font-outfit text-xs text-[#9A9ABB] mb-4 leading-relaxed">{pkg.description}</p>
+      {/* Features list */}
       <ul className="space-y-1.5 flex-1">
         {pkg.features.map((f) => (
           <li key={f} className="flex items-start gap-2 font-outfit text-xs text-[#AAAACC]">
@@ -167,12 +198,15 @@ function SmallCard({ pkg }: { pkg: typeof seoPackages[0] & { period?: string } }
   )
 }
 
+// Main component for the Pricing page. Default export.
 export default function PricingPage() {
   return (
     <div className="pt-[68px]">
+      {/* Hero + All Pricing Sections */}
       <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
+        {/* 3D background scene */}
         <div className="absolute right-0 top-0 w-1/3 h-64 opacity-100 pointer-events-none">
-          <FloatingGeometryWrapper className="w-full h-full" variant="pricing" />
+          <BabylonScene className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 80% at 90% 20%, transparent 0%, var(--bg) 70%)' }} />
         <div className="relative z-10">
@@ -186,6 +220,7 @@ export default function PricingPage() {
             <p className="font-outfit text-[#9A9ABB] text-sm leading-relaxed mb-3">
               All prices shown in Ugandan Shillings. Fixed-price projects — no hourly billing, no surprises.
             </p>
+            {/* Status indicator */}
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#2C6FED] animate-pulse" />
               <span className="font-outfit text-xs text-[#8A8AAA]">Currently accepting new clients</span>
@@ -195,15 +230,15 @@ export default function PricingPage() {
 
         <div className="h-px bg-[#1C1C34] mb-20" />
 
-        {/* Website Packages */}
+        {/* Website Packages Section — 3 cards in a row */}
         <div className="mb-20">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div>
               <h2 className="font-syne font-bold text-2xl text-white mb-1">Website Packages</h2>
               <p className="font-outfit text-sm text-[#9A9ABB]">One-time investment — you own everything at delivery.</p>
             </div>
-            <Link href="/services/website-design" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
-              Website Design service →
+            <Link href="/services/web-design" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
+              Web Design service →
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -211,14 +246,14 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* SEO Packages */}
+        {/* SEO Packages Section */}
         <div className="mb-20">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div>
               <h2 className="font-syne font-bold text-2xl text-white mb-1">SEO Packages</h2>
               <p className="font-outfit text-sm text-[#9A9ABB]">Monthly retainers — minimum 3 months, cancel anytime after.</p>
             </div>
-            <Link href="/services/seo-services" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
+            <Link href="/services/seo-marketing" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
               SEO service →
             </Link>
           </div>
@@ -227,14 +262,14 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Design Packages */}
+        {/* Design & Branding Packages Section */}
         <div className="mb-20">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
             <div>
               <h2 className="font-syne font-bold text-2xl text-white mb-1">Design & Branding Packages</h2>
               <p className="font-outfit text-sm text-[#9A9ABB]">One-time project fees. Revisions included.</p>
             </div>
-            <Link href="/services/branding" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
+            <Link href="/services/branding-design" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
               Branding service →
             </Link>
           </div>
@@ -243,7 +278,8 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Custom Quote Banner */}
+        {/* Custom Quote Banner — for services without fixed packages
+            (video, animation, architectural design, etc.) */}
         <div className="mb-20 relative rounded-3xl border border-[#2C6FED]/20 bg-[#2C6FED]/5 p-10 md:p-14 overflow-hidden">
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(44,111,237,0.08) 0%, transparent 70%)' }} />
@@ -261,7 +297,8 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* FAQ */}
+        {/* FAQ Section — left side has heading, right side renders the
+            PricingFAQ component */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Have questions?</span>
@@ -270,8 +307,8 @@ export default function PricingPage() {
             </h2>
             <p className="font-outfit text-sm text-[#9A9ABB] leading-relaxed mb-6">
               Can&apos;t find your answer here? Email us at{' '}
-              <a href="mailto:hello@alfinega.com" className="text-[#2C6FED] hover:underline">
-                hello@alfinega.com
+               <a href="mailto:contact@alfinega.com" className="text-[#2C6FED] hover:underline">
+                contact@alfinega.com
               </a>{' '}
               — we reply within 24 hours.
             </p>
