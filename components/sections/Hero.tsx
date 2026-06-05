@@ -103,7 +103,7 @@ export default function HeroSection() {
         {/* Big headline — three lines that fade up with staggered delays */}
         <h1
           className="font-syne font-extrabold leading-[0.9] tracking-[-0.03em] mb-8 uppercase"
-          style={{ fontSize: 'clamp(3.5rem, 11vw, 10rem)' }}
+          style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)' }}
         >
           <span className="block text-white opacity-0 animate-[fadeUp_1.4s_0.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">Your Digital</span>
           <span className="block blue-glow opacity-0 animate-[fadeUp_1.4s_0.38s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{ color: '#2C6FED' }}>Agency</span>
