@@ -49,7 +49,7 @@ export default function ServicesPage() {
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Services</span>
             <h1
               className="font-syne font-extrabold text-white leading-none"
-              style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
             >
               Everything you<br />
               <span style={{ color: '#2C6FED' }}>need to grow.</span>

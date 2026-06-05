@@ -36,7 +36,7 @@ export default function SeoMarketingPage() {
             <span className="font-mono text-[11px] text-[#2C6FED] uppercase tracking-widest">{service.shortTitle}</span>
           </div>
           <span className="font-mono text-[11px] text-[#7A7A9A] block mb-4">{service.number} / {String(allServices.length).padStart(2, '0')}</span>
-          <h1 className="font-syne font-extrabold text-white leading-none mb-4" style={{ fontSize: 'clamp(2rem, 7vw, 6.5rem)', letterSpacing: '-0.03em', wordBreak: 'break-word', overflowWrap: 'break-word' }}>{service.title}</h1>
+          <h1 className="font-syne font-extrabold text-white leading-none mb-4" style={{ fontSize: 'clamp(2rem, 6vw, 4.5rem)', letterSpacing: '-0.03em', wordBreak: 'break-word', overflowWrap: 'break-word' }}>{service.title}</h1>
           <p className="font-syne font-semibold text-xl md:text-2xl" style={{ color: '#2C6FED' }}>{service.tagline}</p>
         </div>
       </section>

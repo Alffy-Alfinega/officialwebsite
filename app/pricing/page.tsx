@@ -213,7 +213,7 @@ export default function PricingPage() {
         {/* Header */}
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Pricing</span>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-4">
-          <h1 className="font-syne font-extrabold text-white leading-none" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.03em' }}>
+          <h1 className="font-syne font-extrabold text-white leading-none" style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}>
             Transparent.<br /><span style={{ color: '#2C6FED' }}>Fair. Clear.</span>
           </h1>
           <div className="max-w-xs">

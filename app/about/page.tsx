@@ -103,7 +103,7 @@ export default function AboutPage() {
           <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">About Alffy</span>
           <h1
             className="font-syne font-extrabold text-white leading-none mb-6"
-            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
           >
             We make the<br />
             <span style={{ color: '#2C6FED' }}>digital world</span><br />

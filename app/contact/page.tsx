@@ -38,7 +38,7 @@ export default function ContactPage() {
         <div className="flex flex-col lg:flex-row lg:justify-between gap-16 mb-16">
           <h1
             className="font-syne font-extrabold text-white leading-none"
-            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
           >
             {"Let's build"}<br />
             <span style={{ color: '#2C6FED' }}>something.</span>
