@@ -1,25 +1,7 @@
-// ============================================================
-// Team Page — Introduces the people behind Alffy
-// This sub-page of /about shows the CEO in a featured card,
-// the rest of the team in a grid, culture values, and a
-// "join us" call-to-action.
-// Route: /about/team
-// ============================================================
-
-// Import Metadata for setting the page title and SEO description
 import type { Metadata } from 'next'
-
-// Import Next.js Image component for optimized image loading
-// (lazy loading, responsive sizes, blur placeholder)
 import Image from 'next/image'
-
-// Import Link for client-side navigation between pages
 import Link from 'next/link'
-
-// Import the 3D Babylon.js scene component for background decoration
-import { BabylonScene } from '@/components/3d/BabylonScene'
-
-// TypeScript interface defining the shape of a TeamMember object
+import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
 interface TeamMember {
   name: string
   role: string
@@ -27,17 +9,13 @@ interface TeamMember {
   bio: string
   shortBio: string
   skills: string[]
-  image?: string // optional — if missing, a letter avatar is shown
+  image?: string
 }
 
-// CEOMember extends TeamMember with an extra "tagline" field.
-// This uses TypeScript's "extends" to inherit all TeamMember fields
-// and add new ones without repeating them.
 interface CEOMember extends TeamMember {
   tagline: string
 }
 
-// Single CEO object with all fields including the tagline
 const ceo: CEOMember = {
   name: 'Mullo Nashiifu',
   role: 'CEO & Founder',
@@ -49,7 +27,6 @@ const ceo: CEOMember = {
   image: '/team/mullo-nashiifu.jpg',
 }
 
-// Array of remaining team members (non-CEO)
 const team: TeamMember[] = [
   {
     name: 'Musoke Joshua Prosper',
@@ -72,18 +49,15 @@ const team: TeamMember[] = [
 
 ]
 
-// Metadata for SEO — sets the browser tab title and meta description
 export const metadata: Metadata = {
   title: 'Our Team — The People Behind Alffy | Kampala, Uganda',
   description: 'Meet the Alffy team — designers, developers, SEO strategists, and creatives based in Kampala, Uganda delivering digital work across East Africa.',
 }
 
-// Main component for the Team page. This is the default export.
 export default function TeamPage() {
   return (
-    // Outer wrapper with top padding for the fixed navbar
     <div className="pt-[68px]">
-      {/* Breadcrumb navigation: About > The Team */}
+      {/* Breadcrumb */}
       <div className="px-6 md:px-16 lg:px-24 pt-8 max-w-[1440px] mx-auto">
         <nav className="flex items-center gap-2 font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest" aria-label="Breadcrumb">
           <Link href="/about" className="hover:text-[#2C6FED] transition-colors">About</Link>
@@ -92,10 +66,10 @@ export default function TeamPage() {
         </nav>
       </div>
 
-      {/* Hero Section — large heading with 3D background */}
+      {/* Hero */}
       <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <FloatingGeometryWrapper className="w-full h-full" variant="team" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10 max-w-3xl">
@@ -113,17 +87,15 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Horizontal divider */}
       <div className="h-px bg-[#1C1C34] mx-6 md:mx-16 lg:mx-24" />
 
-      {/* CEO Card Section — a large featured card for the CEO
-          with photo, name, role, biography, and skills */}
+      {/* CEO Card */}
       <section className="py-16 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div
           className="relative overflow-hidden rounded-2xl border border-[#2C6FED]/30"
           style={{ background: 'linear-gradient(135deg, #0A0A16 0%, #0D0D20 50%, #0A0F1A 100%)' }}
         >
-          {/* Subtle blue gradient glow in the top-right */}
+          {/* Subtle gradient accent */}
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 80% 30%, rgba(44,111,237,0.3), transparent 70%)' }} />
 
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 p-8 md:p-12">
@@ -131,24 +103,24 @@ export default function TeamPage() {
             <div className="shrink-0">
               <div className="w-40 h-40 md:w-52 md:h-52 rounded-2xl overflow-hidden border-2 border-[#2C6FED]/40 shadow-lg shadow-[#2C6FED]/10">
                 <Image
-                  src={ceo.image!}    // "!" tells TS it's definitely not undefined
+                  src={ceo.image!}
                   alt={`${ceo.name}, ${ceo.role} at Alffy`}
                   width={416}
                   height={416}
                   className="w-full h-full object-cover"
-                  priority             // Load this image first (above-the-fold)
+                  priority
                 />
               </div>
             </div>
 
-            {/* CEO Info — department, name, role, bio, skill tags */}
+            {/* CEO Info */}
             <div className="text-center md:text-left flex-1">
               <span className="font-mono text-[10px] text-[#2C6FED] uppercase tracking-widest mb-2 block">{ceo.dept}</span>
               <p className="font-syne font-extrabold text-white text-2xl md:text-3xl mb-1">{ceo.name}</p>
               <p className="font-outfit text-[#2C6FED] text-sm font-medium mb-4">{ceo.role}</p>
               <p className="font-outfit text-[#AAAACC] text-base leading-relaxed mb-6 max-w-xl">{ceo.bio}</p>
 
-              {/* Skills displayed as small pill-shaped badges */}
+              {/* Skills */}
               <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                 {ceo.skills.map((s) => (
                   <span
@@ -165,7 +137,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Team Grid Section — cards for the remaining team members */}
+      {/* Team grid */}
       <section className="pb-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {team.map((member) => (
@@ -174,8 +146,7 @@ export default function TeamPage() {
               className="p-7 border border-[#1C1C34] rounded-2xl hover:border-[#2C6FED]/40 transition-all duration-300 card-hover group"
               style={{ background: '#0A0A16' }}
             >
-              {/* Avatar — shows the real photo if available, otherwise
-                  shows the first letter of the role as a fallback */}
+              {/* Avatar — real photo or letter fallback */}
               {member.image ? (
                 <div className="w-24 h-24 rounded-2xl overflow-hidden mb-5 border border-[#2C6FED]/25">
                   <Image
@@ -207,7 +178,7 @@ export default function TeamPage() {
               <p className="font-outfit text-[#2C6FED] text-xs font-medium mb-3">{member.role}</p>
               <p className="font-outfit text-sm text-[#9A9ABB] leading-relaxed mb-5">{member.bio}</p>
 
-              {/* Skills tags */}
+              {/* Skills */}
               <div className="flex flex-wrap gap-1.5">
                 {member.skills.map((s) => (
                   <span key={s} className="tag text-[10px]">{s}</span>
@@ -218,9 +189,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Culture Section — "How We Work" values displayed in a
-          two-column layout with text on the left and feature
-          cards on the right */}
+      {/* Culture section */}
       <section className="py-16 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="h-px bg-[#1C1C34] mb-16" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -238,7 +207,6 @@ export default function TeamPage() {
               <p>Every project starts with a proper discovery conversation. We ask uncomfortable questions about your business goals — not just what you want to see on screen, but what you need it to achieve.</p>
             </div>
           </div>
-          {/* Feature cards showing culture values */}
           <div className="grid grid-cols-2 gap-4">
             {[
               { icon: '⚡', title: 'Direct Communication', body: 'No account managers. Talk straight to the people building your project.' },
@@ -256,8 +224,7 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Join Us Section — a bottom banner with links to careers
-          and contact pages for interested candidates */}
+      {/* Join us + nav */}
       <section className="py-12 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto pb-24">
         <div className="h-px bg-[#1C1C34] mb-12" />
         <div className="flex flex-wrap items-center justify-between gap-6">

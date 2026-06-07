@@ -8,7 +8,7 @@ Set in Vercel → Settings → Environment Variables (see [[foundation/infrastru
 | `SMTP_PORT` | Contact + Newsletter | `587` |
 | `SMTP_USER` | Contact + Newsletter | — |
 | `SMTP_PASS` | Contact + Newsletter | — |
-| `CONTACT_TO` | Contact + Newsletter | `contact@alfinega.com` |
+| `CONTACT_TO` | Contact + Newsletter | `hello@alfinega.com` |
 | `INDEXNOW_SECRET` | IndexNow auth (optional) | — |
 
 Usage details:

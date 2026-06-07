@@ -1,32 +1,23 @@
-# Services Catalog (6 categories, merged from 12)
+# Services Catalog (12)
 
-Rendered on [[routes/map#Page Routes\|/services]], `/services/{category}`, the homepage ServicesSection ([[components/overview]]), Navbar, and Footer.
+Rendered on [[routes/map#Page Routes\|/services]], `/services/[slug]`, the homepage ServicesSection ([[components/overview]]), Navbar, and Footer. Each slug maps to an R3F scene ([[components/r3f#Per-Service Slug Scenes]]). The sitemap ([[routes/seo#Sitemap]]) includes all slugs.
 
-The 12 original services were merged into 6 categories to reduce page count and improve navigation. Each category has its own page file (no dynamic `[slug]` routing) at `app/services/{slug}/page.tsx`.
-
-| # | Category | Slug | Short Title | Key Services Merged |
+| # | Service | Slug | Starting Price | R3F Scene |
 |---|---|---|---|---|
-| 1 | Web Design & Development | `web-design` | Web Design | Website design, development, CMS, e-commerce |
-| 2 | SEO & Digital Marketing | `seo-marketing` | SEO & Marketing | SEO, paid ads, social media, content |
-| 3 | Branding & Graphic Design | `branding-design` | Branding & Design | Branding, graphic design, print |
-| 4 | Video, Animation & Image Editing | `media-production` | Media Production | Video, animation, image editing |
-| 5 | Architectural Visualisation | `architectural-visualisation` | Architecture | Arch viz, floor plans, walkthroughs |
-| 6 | Cybersecurity & Data Services | `cybersecurity-data` | Security & Data | Security audits, data entry, migration |
+| 1 | Website Design | `website-design` | UGX 850,000 | OrbitalScene |
+| 2 | SEO Services | `seo-services` | UGX 450,000/mo | RadarScene |
+| 3 | Graphic Design | `graphic-design` | Per project | PrismScene |
+| 4 | Branding | `branding` | UGX 600,000 | CrystalScene |
+| 5 | Digital Marketing | `digital-marketing` | Per project | SignalScene |
+| 6 | Video Editing | `video-editing` | Per project | FilmReelScene |
+| 7 | Image Editing | `image-editing` | Per project | LensScene |
+| 8 | 2D & 3D Animation | `animation` | Per project | SpiralScene |
+| 9 | Architectural Design | `architectural-design` | Per project | GridBoxScene |
+| 10 | Content Creation | `content-creation` | Per project | TextWaveScene |
+| 11 | Cybersecurity | `cybersecurity` | Per project | ShieldScene |
+| 12 | Mass Data Entry | `data-entry` | Per project | DataStreamScene |
 
-## Page structure (duplicated data)
-Each of the 6 page files contains the full `allServices` array (same data duplicated across files) plus a "How we work" 4-step process section specific to that category.
-
-## Data duplication
-Service data is duplicated across:
-- `app/services/page.tsx` (listing cards)
-- `app/services/{slug}/page.tsx` (6 files, each has the full array)
-- `components/sections/ServicesSection.tsx` (homepage cards)
-- `components/nav/Navbar.tsx` (nav links)
-- `components/layout/Footer.tsx` (footer links)
-- `app/sitemap.ts` (SEO)
-- `app/layout.tsx` (structured data JSON-LD)
-
-See [[data/overview]] for the full duplication map.
+See [[business/pricing]] for package details and [[data/overview]] for where service data is duplicated.
 
 ## Key Differentiators
 - Africa-rooted, globally competitive (see [[business/company]])
@@ -34,4 +25,3 @@ See [[data/overview]] for the full duplication map.
 - Fixed pricing, clear timelines ([[business/pricing]])
 - 24/7 WhatsApp support ([[business/company#Company]])
 - Modern tech stack ([[foundation/stack]])
-- Each category page includes a process section explaining the 4-step workflow

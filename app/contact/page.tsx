@@ -1,54 +1,35 @@
-// ============================================================
-// Contact Page — Lets visitors get in touch with Alffy
-// Shows contact info (email, phone, location), a contact form,
-// and a FAQ section with common questions.
-// Route: /contact
-// ============================================================
-
-// Import Metadata for setting the page title and SEO description
 import type { Metadata } from 'next'
-
-// Import the ContactForm component — a form that collects name,
-// email, and message, then sends it via email (SMTP).
 import ContactForm from '@/components/ui/ContactForm'
+import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
 
-// Import the 3D Babylon.js scene component for background decoration
-import { BabylonScene } from '@/components/3d/BabylonScene'
-
-// Metadata for SEO — sets <title> and <meta name="description">
 export const metadata: Metadata = {
   title: 'Contact Alffy — Start a Project | Kampala, Uganda',
   description: 'Get in touch with Alffy (Alfinega). Start a project, request a quote, or ask a question. Based in Kampala, Uganda — we respond within 24 hours.',
 }
 
-// Main component for the Contact page. Default export.
 export default function ContactPage() {
   return (
     <div className="pt-[68px]">
-      {/* Hero + Content Section */}
       <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
-        {/* 3D background scene */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <FloatingGeometryWrapper className="w-full h-full" variant="contact" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10">
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Contact</span>
-        {/* Two-column layout: heading on left, contact info on right */}
         <div className="flex flex-col lg:flex-row lg:justify-between gap-16 mb-16">
           <h1
             className="font-syne font-extrabold text-white leading-none"
-            style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
           >
             {"Let's build"}<br />
             <span style={{ color: '#2C6FED' }}>something.</span>
           </h1>
-          {/* Contact details sidebar */}
           <div className="max-w-sm space-y-6 lg:pt-4">
             <div>
               <span className="font-mono text-[10px] text-[#8A8AAA] uppercase tracking-widest block mb-1">Email</span>
-               <a href="mailto:contact@alfinega.com" className="font-outfit hover:text-white transition-colors" style={{ color: '#2C6FED' }}>
-                contact@alfinega.com
+              <a href="mailto:hello@alfinega.com" className="font-outfit hover:text-white transition-colors" style={{ color: '#2C6FED' }}>
+                hello@alfinega.com
               </a>
             </div>
             <div>
@@ -64,7 +45,6 @@ export default function ContactPage() {
             <div>
               <span className="font-mono text-[10px] text-[#8A8AAA] uppercase tracking-widest block mb-2">Response Time</span>
               <div className="flex items-center gap-2">
-                {/* Animated pulse dot to indicate "live" status */}
                 <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#2C6FED' }} />
                 <span className="font-outfit text-sm text-[#AAAACC]">Usually within 24 hours</span>
               </div>
@@ -74,11 +54,10 @@ export default function ContactPage() {
 
         <div className="h-px bg-[#1C1C34] mb-16" />
 
-        {/* Contact form — a separate component that handles form state
-            and submission logic */}
+        {/* Contact form */}
         <ContactForm />
 
-        {/* FAQ Section — commonly asked questions in a 2-column grid */}
+        {/* FAQ */}
         <div className="mt-24">
           <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-6 block">Common Questions</span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

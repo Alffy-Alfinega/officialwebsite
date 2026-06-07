@@ -1,39 +1,20 @@
-// ============================================================
-// Terms of Service Page — Legal page for using Alffy's services
-// Covers services, client responsibilities, proposals,
-// payments, intellectual property, revisions, confidentiality,
-// warranties, termination, website use, governing law, etc.
-// Route: /terms
-// ============================================================
-
-// Import the 3D Babylon.js scene component for background decoration
-import { BabylonScene } from '@/components/3d/BabylonScene'
-
-// Import Metadata for setting the page title and SEO description
+import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
 import type { Metadata } from 'next'
-
-// Import Link for navigation between legal pages
 import Link from 'next/link'
 
-// Metadata for SEO
 export const metadata: Metadata = {
   title: 'Terms of Service | Alffy (Alfinega)',
   description: 'Terms and conditions for using Alffy (Alfinega) services and website.',
 }
 
-// Effective date constant — easy to update when terms change
 const EFFECTIVE = '1 March 2026'
 
-// Main component for the Terms of Service page. Default export.
 export default function TermsPage() {
   return (
     <div className="pt-[68px]">
-      {/* 3D scene contained in a small corner — hidden on mobile, faded to bg */}
-      <div className="absolute top-24 right-6 w-[360px] h-[360px] pointer-events-none z-0 hidden md:block">
-        <BabylonScene className="w-full h-full" />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, transparent 15%, var(--bg) 80%)' }} />
+      <div className="fixed top-0 right-0 w-1/2 h-screen opacity-100 pointer-events-none z-0">
+        <FloatingGeometryWrapper className="w-full h-full" variant="legal" />
       </div>
-      {/* Content section with constrained width (860px) for readability */}
       <section className="py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[860px] mx-auto">
 
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Legal</span>
@@ -46,15 +27,12 @@ export default function TermsPage() {
 
         <div className="space-y-10">
 
-          {/* Introductory paragraph — explains what the Terms cover */}
           <div>
             <p className="font-outfit text-[#BBBBDD] leading-relaxed">
               These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the website at alffy.alfinega.com and any services provided by Alffy (Alfinega) (&ldquo;Alffy&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). By accessing the website or engaging our services, you agree to these Terms in full. If you do not agree, please do not use our website or services.
             </p>
           </div>
 
-          {/* Array of policy sections — each has a title and body text.
-              Mapped over to render each section as a heading + paragraph. */}
           {[
             {
               title: '1. Services',
@@ -106,7 +84,7 @@ export default function TermsPage() {
             },
             {
               title: '13. Contact',
-              text: 'For questions about these Terms, contact us at:\n\nAlffy (Alfinega)\nMakindye, Kampala, Uganda\ncontact@alfinega.com\n+256 747 113 059'
+              text: 'For questions about these Terms, contact us at:\n\nAlffy (Alfinega)\nMakindye, Kampala, Uganda\nhello@alfinega.com\n+256 747 113 059'
             },
           ].map((section) => (
             <div key={section.title}>
@@ -116,7 +94,6 @@ export default function TermsPage() {
           ))}
         </div>
 
-        {/* Footer links to related legal pages */}
         <div className="h-px bg-[#1C1C34] mt-16 mb-8" />
         <div className="flex flex-wrap gap-4">
           <Link href="/privacy-policy" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] transition-colors uppercase tracking-wide">Privacy Policy</Link>

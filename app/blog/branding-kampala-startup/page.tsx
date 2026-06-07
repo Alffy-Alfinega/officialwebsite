@@ -1,40 +1,48 @@
-// ============================================================
-// Blog Post: "How Good Branding Helped a Kampala Startup Grow 3x"
-// This file defines the page content and SEO metadata for a
-// single blog post about branding. Each blog post is a standalone
-// page with hardcoded content (no CMS or database).
-// ============================================================
-
-// Metadata type from Next.js — provides TypeScript types for the
-// `metadata` export used by Next.js for <head> tags (title, description, Open Graph).
 import type { Metadata } from 'next'
-
-// Link component from Next.js — enables client-side navigation between
-// pages without a full browser refresh (like <a> but faster).
 import Link from 'next/link'
+import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
 
-// BabylonScene — a custom 3D animation component rendered in the
-// page header as a decorative background using the Babylon.js WebGL library.
-import { BabylonScene } from '@/components/3d/BabylonScene'
+const post = {
+  title: 'How Good Branding Helped a Kampala Startup Grow 3x',
+  category: 'Branding',
+  date: 'Jan 14, 2026',
+  readTime: '6 min read',
+  excerpt: "A real story from our client work — how a consistent brand identity transformed one Kampala business's market presence and customer trust.",
+  content: [
+    { type: 'p', text: "In mid-2025, a Kampala-based honey and natural foods business came to us with a problem most small businesses in Uganda quietly share: their product was excellent, their prices were competitive, but their brand looked like it had been put together in a hurry — because it had been." },
+    { type: 'h2', text: 'The starting point: a business with no visual identity' },
+    { type: 'p', text: "The business had a name, a handwritten logo, and inconsistent packaging across their product range. Their Jumia store looked different from their Instagram, which looked different from the stickers on their jars. There was no consistent colour palette, no typography, no brand guidelines. Every touchpoint communicated something slightly different." },
+    { type: 'p', text: "The founder knew something was wrong. She was getting traffic but poor conversion. People were landing on her Jumia page, looking at the products, and leaving. The product photos were good. The pricing was reasonable. Something else was failing." },
+    { type: 'h2', text: 'What we built: a full brand identity system' },
+    { type: 'p', text: "We started with discovery — understanding who her customers actually were, what she wanted the brand to feel like, and what separated her products from supermarket alternatives. The answer was clear: this was premium, natural, locally-sourced honey positioned for urban Ugandan consumers who cared about quality and origin." },
+    { type: 'ul', items: [
+      '3 logo concepts rooted in Ugandan natural imagery, refined to a final mark',
+      'A warm earth-tone colour palette — amber, deep green, cream — that read as premium and natural',
+      'Typography pairing: a clean serif for the brand name, a readable sans-serif for body copy',
+      'Full brand guidelines document covering usage rules, don\'ts, and colour codes',
+      'Packaging templates for all product sizes, ready for the printer',
+      'A social media visual kit: post templates, story frames, highlight covers',
+    ]},
+    { type: 'h2', text: 'The results: measurable and fast' },
+    { type: 'p', text: "Within six weeks of relaunching the Jumia store with the new packaging and photography, conversion improved by 40%. The same traffic that had been bouncing was now converting. Nothing else had changed — same products, same prices, same platform. Only the brand." },
+    { type: 'p', text: "Three months later, the business had secured placement in two Kampala supermarkets — something the founder had been trying to achieve for over a year. She told us the buyer's exact words: 'Your packaging looks like it belongs on our shelves.'" },
+    { type: 'h2', text: 'What this means for your business' },
+    { type: 'p', text: "Branding is not a luxury reserved for large companies. For a small business in Uganda, a consistent, professional brand identity is often the single fastest lever for improving conversion and opening doors. You are not just buying a logo — you are buying the ability to compete in spaces that previously would have turned you away." },
+    { type: 'p', text: "The investment for a full brand identity at Alffy starts at 600,000 UGX. For most businesses, it pays for itself within the first month of improved conversion." },
+  ],
+}
 
-// Next.js reads this exported `metadata` object to populate the
-// page's <title>, <meta name="description">, and Open Graph tags
-// (used by social media previews like Facebook, Twitter, WhatsApp).
 export const metadata: Metadata = {
   title: 'How Good Branding Helped a Kampala Startup Grow 3x | Alffy Blog',
-  description: "A real story from our client work — how a consistent brand identity transformed one Kampala business's market presence and customer trust.",
+  description: post.excerpt,
   openGraph: {
-    title: 'How Good Branding Helped a Kampala Startup Grow 3x',
-    description: "A real story from our client work — how a consistent brand identity transformed one Kampala business's market presence and customer trust.",
-    type: 'article',        // Tells social platforms this is an article (not a website or video)
-    publishedTime: 'Jan 14, 2026',
+    title: post.title,
+    description: post.excerpt,
+    type: 'article',
+    publishedTime: post.date,
   },
 }
 
-// Block — a small helper component that renders a single piece of
-// blog content (paragraph, heading, or list). It receives a "block"
-// object and an index, and returns the correct JSX element.
-// This keeps the content array clean — just data, no markup.
 function Block({ b, i }: { b: { type: string; text?: string; items?: string[] }; i: number }) {
   if (b.type === 'h2') return <h2 key={i} id={b.text?.toLowerCase().replace(/\s+/g, '-')} className="font-syne font-bold text-2xl text-white mt-12 mb-4 scroll-mt-24" style={{ color: 'var(--text)' }}>{b.text}</h2>
   if (b.type === 'h3') return <h3 key={i} className="font-syne font-bold text-xl mt-8 mb-3" style={{ color: 'var(--text)' }}>{b.text}</h3>
@@ -52,98 +60,36 @@ function Block({ b, i }: { b: { type: string; text?: string; items?: string[] };
   return null
 }
 
-// Post metadata used for display (title, category, date, read time, excerpt).
-// This is separate from the Next.js `metadata` export — this one is
-// rendered visually on the page, not in <head> tags.
-const post = {
-  title: 'How Good Branding Helped a Kampala Startup Grow 3x',
-  category: 'Branding',
-  date: 'Jan 14, 2026',
-  readTime: '7 min read',
-  excerpt: "A real story from our client work — how a consistent brand identity transformed one Kampala business's market presence and customer trust.",
-}
-
-// The blog article body as an array of typed block objects.
-// Each object has a `type` (h2, h3, p, ul) and optionally `text` or `items`.
-// This data-driven approach means the article text lives here, and the
-// `Block` component above handles converting it into HTML.
-const content: { type: string; text?: string; items?: string[] }[] = [
-  { type: 'p', text: "In mid-2025, a Kampala-based honey and natural foods business came to us with a problem most small businesses in Uganda quietly share: their product was excellent, their prices were competitive, but their brand looked like it had been put together in a hurry — because it had been." },
-  { type: 'h2', text: 'The starting point: a business with no visual identity' },
-  { type: 'p', text: "The business had a name, a handwritten logo, and inconsistent packaging across their product range. Their Jumia store looked different from their Instagram, which looked different from the stickers on their jars. There was no consistent colour palette, no typography, no brand guidelines. Every touchpoint communicated something slightly different." },
-  { type: 'p', text: "The founder knew something was wrong. She was getting traffic but poor conversion. People were landing on her Jumia page, looking at the products, and leaving. The product photos were good. The pricing was reasonable. Something else was failing." },
-  { type: 'h2', text: 'What we built: a full brand identity system' },
-  { type: 'p', text: "We started with discovery — understanding who her customers actually were, what she wanted the brand to feel like, and what separated her products from supermarket alternatives. The answer was clear: this was premium, natural, locally-sourced honey positioned for urban Ugandan consumers who cared about quality and origin." },
-  { type: 'ul', items: [
-    '3 logo concepts rooted in Ugandan natural imagery, refined to a final mark',
-    'A warm earth-tone colour palette — amber, deep green, cream — that read as premium and natural',
-    'Typography pairing: a clean serif for the brand name, a readable sans-serif for body copy',
-    'Full brand guidelines document covering usage rules, don\'ts, and colour codes',
-    'Packaging templates for all product sizes, ready for the printer',
-    'A social media visual kit: post templates, story frames, highlight covers',
-  ]},
-  { type: 'h2', text: 'The results: measurable and fast' },
-  { type: 'p', text: "Within six weeks of relaunching the Jumia store with the new packaging and photography, conversion improved by 40%. The same traffic that had been bouncing was now converting. Nothing else had changed — same products, same prices, same platform. Only the brand." },
-  { type: 'p', text: "Three months later, the business had secured placement in two Kampala supermarkets — something the founder had been trying to achieve for over a year. She told us the buyer's exact words: 'Your packaging looks like it belongs on our shelves.'" },
-  { type: 'h2', text: 'What this means for your business' },
-  { type: 'p', text: "Branding is not a luxury reserved for large companies. For a small business in Uganda, a consistent, professional brand identity is often the single fastest lever for improving conversion and opening doors. You are not just buying a logo — you are buying the ability to compete in spaces that previously would have turned you away." },
-  { type: 'p', text: "The investment for a full brand identity at Alffy starts at 600,000 UGX. For most businesses, it pays for itself within the first month of improved conversion." },
-  { type: 'h2', text: 'How to maintain your brand after launch' },
-  { type: 'p', text: "A brand guidelines document is only useful if your team actually uses it. We recommend doing a quick audit every quarter: check that all social media profiles use the correct profile picture and cover image, that your email signatures match the brand colours, that any new marketing materials follow the typography rules, and that your packaging or printed collateral has not drifted from the original design." },
-  { type: 'p', text: "The businesses that maintain the strictest brand consistency are almost always the ones that customers perceive as the most trustworthy. A logo is a starting point. Consistency across every customer touchpoint is what builds a brand that lasts." },
-]
-
-// BlogPostPage — the default export (main component) for this route.
-// Next.js renders this component when a user visits /blog/branding-kampala-startup.
 export default function BlogPostPage() {
-  // Extract h2 headings from the content array to build a "table of contents"
-  // sidebar that links to each section via anchor IDs.
-  const headings = content.filter((b) => b.type === 'h2').map((b) => b.text!)
+  const headings = post.content.filter((b) => b.type === 'h2').map((b) => b.text!)
 
   return (
-    // Outer wrapper with top padding to clear the fixed navbar (68px).
     <div className="pt-[68px]" style={{ background: 'var(--bg)' }}>
-      {/* ----- Hero / Page Header ----- */}
-      {/* Full-width hero section with the post title, category, date, and a 3D scene */}
       <header className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 border-b overflow-hidden" style={{ borderColor: 'var(--border)' }}>
-        {/* Decorative 3D background scene (right half of the header) */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <FloatingGeometryWrapper className="w-full h-full" variant="blog-slug" />
         </div>
-        {/* Gradient overlay that fades the 3D scene into the background colour at the left edge */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="max-w-[1200px] mx-auto relative z-10">
-          {/* "All Posts" back link — navigates to /blog */}
           <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-[11px] hover:text-[#2C6FED] uppercase tracking-widest mb-8 transition-colors" style={{ color: 'var(--text-faint)' }}>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             All Posts
           </Link>
-          {/* Category badge, date, and read time */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="tag active">{post.category}</span>
             <span className="font-mono text-[10px]" style={{ color: 'var(--text-faint)' }}>{post.date}</span>
             <span className="font-mono text-[10px]" style={{ color: 'var(--text-faint)' }}>·</span>
             <span className="font-mono text-[10px]" style={{ color: 'var(--text-faint)' }}>{post.readTime}</span>
           </div>
-          {/* Post title — responsive font size using clamp() */}
-          <h1 className="font-syne font-extrabold leading-tight max-w-4xl" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}>
-            {post.title}
-          </h1>
-          {/* Post excerpt / subtitle */}
+          <h1 className="font-syne font-extrabold leading-tight max-w-4xl" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}>{post.title}</h1>
           <p className="mt-5 font-outfit text-lg max-w-2xl leading-relaxed" style={{ color: 'var(--text-muted)' }}>{post.excerpt}</p>
         </div>
       </header>
 
-      {/* ----- Main Content Area ----- */}
       <div className="px-6 md:px-16 lg:px-24 max-w-[1200px] mx-auto py-16">
-        {/* Two-column grid: article body + sidebar on large screens */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-16">
-          {/* ----- Left Column: Article Body ----- */}
           <div className="space-y-5 max-w-[680px]">
-            {/* Map over the content array and render each block via the Block helper */}
-            {content.map((b, i) => <Block key={i} b={b} i={i} />)}
-
-            {/* ----- Author Bio Card ----- */}
+            {post.content.map((b, i) => <Block key={i} b={b} i={i} />)}
             <div className="mt-14 pt-10 border-t" style={{ borderColor: 'var(--border)' }}>
               <div className="flex items-start gap-4 p-6 border rounded-2xl" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
                 <div className="w-12 h-12 rounded-full bg-[#2C6FED]/10 border border-[#2C6FED]/20 flex items-center justify-center shrink-0">
@@ -157,9 +103,6 @@ export default function BlogPostPage() {
                 </div>
               </div>
             </div>
-
-            {/* ----- CTA Banner ----- */}
-            {/* Prompts the reader to get in touch if they need help with the topic */}
             <div className="mt-6 p-8 border border-[#2C6FED]/20 bg-[#2C6FED]/5 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
               <div>
                 <h3 className="font-syne font-bold mb-1" style={{ color: 'var(--text)' }}>Need help with this?</h3>
@@ -171,11 +114,9 @@ export default function BlogPostPage() {
             </div>
           </div>
 
-          {/* ----- Right Column: Sidebar (hidden on mobile) ----- */}
           {headings.length > 0 && (
             <aside className="hidden lg:block">
               <div className="sticky top-28">
-                {/* Table of Contents — links to h2 sections within the article */}
                 <h4 className="font-mono text-[10px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-faint)' }}>In this article</h4>
                 <nav className="space-y-1">
                   {headings.map((h) => (
@@ -186,12 +127,11 @@ export default function BlogPostPage() {
                     </a>
                   ))}
                 </nav>
-                {/* Related Services — cross-links to service pages */}
                 <div className="mt-8 p-4 border rounded-xl space-y-1.5" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
                   <p className="font-mono text-[10px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-faint)' }}>Related Services</p>
-                  <Link href="/services/seo-marketing" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>SEO & Digital Marketing →</Link>
-                  <Link href="/services/web-design" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>Web Design & Development →</Link>
-                  <Link href="/services/branding-design" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>Branding & Graphic Design →</Link>
+                  <Link href="/services/seo-services" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>SEO Services →</Link>
+                  <Link href="/services/website-design" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>Website Design →</Link>
+                  <Link href="/services/content-creation" className="block font-outfit text-sm hover:text-[#2C6FED] transition-colors" style={{ color: 'var(--text-muted)' }}>Content Creation →</Link>
                 </div>
               </div>
             </aside>
@@ -201,4 +141,3 @@ export default function BlogPostPage() {
     </div>
   )
 }
-

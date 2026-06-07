@@ -1,41 +1,19 @@
-// =============================================================================
-// PortfolioGrid.tsx — Portfolio / projects filterable grid
-// Purpose: Displays client projects in a card grid with category filtering.
-// Each card can lazy-load a live iframe preview of the deployed site.
-// Used on the portfolio/work page.
-// =============================================================================
-
 'use client'
 
-// useState: tracks the currently active filter category
-// useRef: references DOM element for IntersectionObserver and ResizeObserver
-// useEffect: sets up observers on mount
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-// cn: utility that merges Tailwind class names (clsx + tailwind-merge)
 import { cn } from '@/lib/utils'
 
-// ---------------------------------------------------------------------------
-// LivePreview — embeds a scaled-down live website preview inside a project card
-// Uses IntersectionObserver to defer loading (doesn't load until near viewport)
-// Uses ResizeObserver to scale the 1280px-wide iframe to fit the card container
-// ---------------------------------------------------------------------------
 function LivePreview({ url, title }: { url: string; title: string }) {
-  // loaded: tracks whether the iframe's onLoad event has fired
   const [loaded, setLoaded] = useState(false)
-  // visible: becomes true when the card enters the viewport (triggers iframe creation)
   const [visible, setVisible] = useState(false)
-  // scale: calculated ratio to shrink the 1280px-wide iframe into the card width
   const [scale, setScale] = useState(0.3)
-  // containerRef: the parent div whose width determines the scale factor
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Only load the iframe when the card scrolls into view
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    // rootMargin: '200px' means trigger when the element is 200px outside the viewport
-    // (loads the iframe slightly before the user scrolls to it — perceived as instant)
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
       { rootMargin: '200px' },
@@ -48,7 +26,6 @@ function LivePreview({ url, title }: { url: string; title: string }) {
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    // ResizeObserver: fires whenever the container's dimensions change
     const update = () => setScale(el.offsetWidth / 1280)
     update()
     const ro = new ResizeObserver(update)
@@ -63,14 +40,12 @@ function LivePreview({ url, title }: { url: string; title: string }) {
           src={url}
           title={`Live preview of ${title}`}
           loading="lazy"
-          // sandbox restricts what the iframe can do (no forms, no popups, no top nav)
           sandbox="allow-scripts allow-same-origin"
           onLoad={() => setLoaded(true)}
           className={`absolute top-0 left-0 border-0 pointer-events-none transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}
           style={{
             width: '1280px',
             height: '960px',
-            // CSS scale transforms shrink the 1280px layout into the card width
             transform: `scale(${scale})`,
             transformOrigin: 'top left',
           }}
@@ -84,13 +59,8 @@ function LivePreview({ url, title }: { url: string; title: string }) {
   )
 }
 
-// Filter categories that appear as tab buttons
 const categories = ['All Work', 'Web Design', 'Education', 'Non-Profit & NGO', 'Product']
 
-// ---------------------------------------------------------------------------
-// Projects data — hardcoded array of portfolio items
-// Each project has identifying info, metadata, and styling fields (accent gradient, color)
-// ---------------------------------------------------------------------------
 const projects = [
   {
     id: 1,
@@ -182,7 +152,7 @@ const projects = [
     url: 'https://alffy.alfinega.com',
     category: 'Web Design',
     subCategory: 'Product',
-    tags: ['Next.js', 'Babylon.js', 'Agency Site'],
+    tags: ['Next.js', 'React Three Fiber', 'Agency Site'],
     year: '2026',
     location: 'Kampala, Uganda',
     description: 'The Alffy agency website — a living showcase of design, SEO, branding, and media capabilities with interactive 3D hero, client testimonials, full service catalog, and process timeline.',
@@ -206,11 +176,6 @@ const projects = [
   },
 ]
 
-// ---------------------------------------------------------------------------
-// ProjectCard — a single project card
-// Shows a live preview thumbnail on the top half, project details on the bottom
-// Opens the project URL in a new tab when clicked
-// ---------------------------------------------------------------------------
 function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
   return (
     <a
@@ -221,23 +186,22 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
       style={{ background: p.accent, animationDelay: `${index * 0.04}s` }}
       aria-label={`View ${p.title} — opens in new tab`}
     >
-      {/* Visual header — 4:3 aspect ratio region for the live preview + overlays */}
+      {/* Visual header */}
       <div className="aspect-[4/3] relative overflow-hidden flex items-end justify-start p-4">
-        {/* Live site preview iframe (only for 'Live' projects) */}
+        {/* Live site preview */}
         {p.status === 'Live' && (
           <LivePreview url={p.url} title={p.title} />
         )}
 
-        {/* Grid line texture overlay */}
         <div className="absolute inset-0 grid-lines opacity-15" />
 
-        {/* Accent glow — subtle color wash from top-left */}
+        {/* Accent glow */}
         <div
           className="absolute inset-0 opacity-30"
           style={{ background: `radial-gradient(ellipse at 30% 30%, ${p.accentColor}18 0%, transparent 65%)` }}
         />
 
-        {/* Big number watermark (e.g. "01", "02") */}
+        {/* Big number watermark */}
         <span
           className="absolute right-3 top-3 font-syne font-extrabold leading-none select-none"
           style={{ fontSize: '5rem', color: `${p.accentColor}0B` }}
@@ -245,7 +209,7 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
           {String(p.id).padStart(2, '0')}
         </span>
 
-        {/* Title watermark — very faint text centered behind the preview */}
+        {/* Title watermark */}
         <span
           className="absolute inset-0 flex items-center justify-center font-syne font-extrabold text-center px-6 leading-tight"
           style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'rgba(228,228,240,0.05)' }}
@@ -259,13 +223,13 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
           style={{ background: 'linear-gradient(to top, rgba(4,4,12,0.85) 0%, transparent 100%)' }}
         />
 
-        {/* Hover glow — brightens on card hover */}
+        {/* Hover glow */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500"
           style={{ background: `radial-gradient(ellipse at center, ${p.accentColor}0D 0%, transparent 70%)` }}
         />
 
-        {/* Bottom row: status badge + arrow button */}
+        {/* Bottom row: status + arrow */}
         <div className="relative z-10 flex items-center justify-between w-full">
           <span
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-medium uppercase tracking-wide"
@@ -282,7 +246,6 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
             {p.status}
           </span>
 
-          {/* Arrow circle — slides up and fades in on hover */}
           <div
             className="w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
             style={{ background: `${p.accentColor}1A`, border: `1px solid ${p.accentColor}4D` }}
@@ -294,9 +257,8 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
         </div>
       </div>
 
-      {/* Card body — project details */}
+      {/* Card body */}
       <div className="p-5 flex flex-col flex-1">
-        {/* Title row + year */}
         <div className="flex items-start justify-between mb-2 gap-2">
           <p
             className="font-syne font-bold text-[17px] group-hover:text-[#2C6FED] transition-colors leading-tight"
@@ -309,17 +271,14 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
           </span>
         </div>
 
-        {/* Location */}
         <p className="font-mono text-[10px] uppercase tracking-widest mb-2" style={{ color: p.accentColor }}>
           {p.location}
         </p>
 
-        {/* Description */}
         <p className="font-outfit text-[13px] mb-4 leading-relaxed flex-1" style={{ color: 'rgba(228,228,240,0.5)' }}>
           {p.description}
         </p>
 
-        {/* Tech / category tags */}
         <div className="flex flex-wrap gap-1.5">
           {p.tags.map((t) => (
             <span
@@ -337,17 +296,15 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
 }
 
 export default function PortfolioGrid() {
-  // active: tracks which filter tab is currently selected
   const [active, setActive] = useState('All Work')
 
-  // filtered: the subset of projects matching the active category
   const filtered = active === 'All Work'
     ? projects
     : projects.filter((p) => p.category === active || p.subCategory === active)
 
   return (
     <div>
-      {/* Filter tabs — buttons that set the active category */}
+      {/* Filter tabs */}
       <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter projects by category">
         {categories.map((cat) => (
           <button
@@ -368,7 +325,6 @@ export default function PortfolioGrid() {
         ))}
       </div>
 
-      {/* Project card grid — responsive: 1 col mobile, 2 col tablet, 3 col desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.map((p, i) => (
           <ProjectCard key={p.id} p={p} index={i} />
