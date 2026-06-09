@@ -1,12 +1,33 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+// ============================================================
+// Our Story Page — Tells the founding story of Alffy in detail
+// This sub-page of /about walks through why Alffy was started,
+// displays a timeline of milestones, shows year-1 targets as
+// stats, and links to related pages (team, why, contact).
+// Route: /about/story
+// ============================================================
 
+// Import the Metadata type from Next.js for setting the page
+// title and SEO description in the <head>.
+import type { Metadata } from 'next'
+
+// Import Link from Next.js for navigation between pages
+// without a full page reload (client-side transition).
+import Link from 'next/link'
+
+// Import a reusable 3D Babylon.js scene for the background
+// decoration behind the hero heading.
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Metadata object — Next.js reads this to set <title> and
+// <meta name="description"> for SEO and social sharing.
 export const metadata: Metadata = {
   title: 'Our Story — How Alffy Started | Kampala, Uganda',
   description: 'The story behind Alffy (Alfinega) — a digital agency born in Kampala, Uganda in 2025 to give East African businesses access to quality digital services.',
 }
 
+// Array of milestone objects for the timeline section. Each
+// entry has a year and a description of key events in the
+// company's history.
 const milestones = [
   { year: 'Jan 2025', event: 'Alffy (Alfinega) incorporated in Makindye, Kampala. Core team assembled; service blueprints for web design, branding, and graphic design developed.' },
   { year: 'Mid 2025', event: 'Internal build phase. Service processes established, technology stack finalised, and initial client discovery work completed.' },
@@ -15,10 +36,14 @@ const milestones = [
   { year: 'Early 2026', event: 'Launched Alffy v2 — full digital rebrand, new website, and expanded team to match growing client demand.' },
 ]
 
+// Main component for the Our Story page. This is the default
+// export that Next.js renders at the /about/story route.
 export default function OurStoryPage() {
   return (
+    // Outer wrapper with top padding for the fixed navbar
     <div className="pt-[68px]">
-      {/* Breadcrumb */}
+      {/* Breadcrumb navigation — shows the user where they are
+          in the site hierarchy: About > Our Story */}
       <div className="px-6 md:px-16 lg:px-24 pt-8 max-w-[1440px] mx-auto">
         <nav className="flex items-center gap-2 font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest" aria-label="Breadcrumb">
           <Link href="/about" className="hover:text-[#2C6FED] transition-colors">About</Link>
@@ -27,11 +52,14 @@ export default function OurStoryPage() {
         </nav>
       </div>
 
-      {/* Hero */}
+      {/* Hero Section — large banner with headline, description,
+          and a decorative 3D scene in the background */}
       <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
+        {/* 3D Babylon scene positioned on the right */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <FloatingGeometryWrapper className="w-full h-full" variant="story" />
+          <BabylonScene className="w-full h-full" />
         </div>
+        {/* Gradient overlay to darken the right edge for text readability */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10">
         <div className="max-w-3xl">
@@ -50,11 +78,14 @@ export default function OurStoryPage() {
         </div>
       </section>
 
+      {/* Horizontal divider line */}
       <div className="h-px bg-[#1C1C34] mx-6 md:mx-16 lg:mx-24" />
 
-      {/* Full story */}
+      {/* Full Story Section — two-column layout: narrative paragraphs
+          on the left, timeline milestones on the right */}
       <section className="py-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left column — in-depth story paragraphs */}
           <div className="space-y-6 font-outfit text-base text-[#BBBBDD] leading-[1.85]">
             <p>
               When we founded Alffy in Makindye, Kampala in January 2025, we noticed a gap in the market that was hard to ignore. Businesses across Uganda — from small family shops to growing startups — were being underserved. Too many agencies were selling overpriced, template-driven websites that looked nothing like the brand and performed even worse on search.
@@ -73,12 +104,13 @@ export default function OurStoryPage() {
             </p>
           </div>
 
-          {/* Timeline */}
+          {/* Right column — visual timeline with dot markers */}
           <div>
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-8 block">Our Timeline</span>
             <div className="relative pl-6 border-l border-[#1C1C34]">
               {milestones.map((m, i) => (
                 <div key={i} className="mb-10 relative">
+                  {/* Circular dot on the timeline line */}
                   <span
                     className="absolute -left-[25px] top-1 w-3 h-3 rounded-full border-2 border-[#2C6FED]"
                     style={{ background: '#04040C' }}
@@ -92,13 +124,14 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats Section — grid of year-1 target metrics (50+ projects, 95% satisfaction, etc.) */}
       <section className="py-16 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="h-px bg-[#1C1C34] mb-16" />
         <div className="flex items-center gap-2 mb-6">
           <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: '#2C6FED' }} />
           <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest">2026 Year 1 Targets</span>
         </div>
+        {/* 4-column grid of stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { value: '50+',  label: 'Projects Goal' },
@@ -114,7 +147,8 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      {/* Sub-page nav */}
+      {/* Sub-page Navigation — links to related pages:
+          Meet the Team, Why Alffy, and Start a Project */}
       <section className="py-12 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto pb-24">
         <div className="h-px bg-[#1C1C34] mb-12" />
         <div className="flex flex-wrap gap-4">

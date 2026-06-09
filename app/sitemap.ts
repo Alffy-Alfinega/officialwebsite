@@ -1,9 +1,8 @@
 import { MetadataRoute } from 'next'
 
 const serviceSlugs = [
-  'website-design', 'seo-services', 'graphic-design', 'branding',
-  'digital-marketing', 'video-editing', 'image-editing', 'animation',
-  'architectural-design', 'content-creation', 'cybersecurity', 'data-entry',
+  'web-design', 'seo-marketing', 'branding-design',
+  'media-production', 'architectural-visualisation', 'cybersecurity-data',
 ]
 
 const blogSlugs = [

@@ -132,8 +132,8 @@ export default function ContactForm() {
       {status === 'error' && (
         <p className="font-outfit text-sm text-red-400">
           Something went wrong. Please try emailing us directly at{' '}
-          <a href="mailto:hello@alfinega.com" className="text-[#2C6FED] hover:underline">
-            hello@alfinega.com
+           <a href="mailto:contact@alfinega.com" className="text-[#2C6FED] hover:underline">
+            contact@alfinega.com
           </a>
         </p>
       )}

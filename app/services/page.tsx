@@ -1,33 +1,47 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+// ============================================================
+// Services Page — Lists all 12 services Alffy offers
+// This is the main services landing page. Each service is
+// shown as a card with its number, title, description, and
+// top features. Clicking a card navigates to the service's
+// detail page at /services/[slug].
+// Route: /services
+// ============================================================
 
+// Import Metadata for setting the page title and SEO description
+import type { Metadata } from 'next'
+
+// Import Link for client-side navigation to service detail pages
+import Link from 'next/link'
+
+// Import the 3D Babylon.js scene component for background decoration
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Array of 6 merged service categories. Each service has a slug,
+// display number, title, description, and features for the listing cards.
 const services = [
-  { slug: 'website-design', number: '01', title: 'Website Design', description: 'Modern, responsive websites built to convert visitors into loyal customers. We craft digital experiences that balance stunning visuals with intuitive UX — your brand, expressed at its absolute best.', features: ['Custom UI/UX design', 'Mobile-first responsive development', 'Next.js & React development', 'CMS integration (WordPress, Sanity)', 'Performance optimisation', 'Accessibility compliance'] },
-  { slug: 'seo-services', number: '02', title: 'SEO Services', description: 'Comprehensive SEO strategies that boost your organic visibility and drive qualified traffic. From technical audits to content optimisation, we make sure your audience finds you — not your competitors.', features: ['Technical SEO audits', 'On-page optimisation', 'Local SEO (Uganda & East Africa)', 'Keyword research & strategy', 'Link building', 'Monthly performance reports'] },
-  { slug: 'graphic-design', number: '03', title: 'Graphic Design', description: 'Eye-catching graphics that narrate your brand story with precision. From social media content to print collateral, every pixel is intentional.', features: ['Social media graphics', 'Print materials (flyers, brochures)', 'Presentations & pitch decks', 'Infographics & data visualisation', 'Display advertising', 'Icon & illustration sets'] },
-  { slug: 'branding', number: '04', title: 'Branding', description: 'Complete branding solutions that define who you are before you say a word. We build cohesive brand identities — logo, colour, voice, and everything in between — that your audience remembers.', features: ['Logo design & variations', 'Brand colour palette', 'Typography system', 'Brand voice & messaging', 'Brand guidelines document', 'Stationery & collateral design'] },
-  { slug: 'digital-marketing', number: '05', title: 'Digital Marketing', description: 'Strategic digital marketing that reaches your audience where they live. From social media management to paid ad campaigns, we deliver measurable ROI — not vanity metrics.', features: ['Social media strategy & management', 'Paid advertising (Meta, Google)', 'Email marketing campaigns', 'Analytics & conversion tracking', 'Influencer coordination', 'Content calendar planning'] },
-  { slug: 'video-editing', number: '06', title: 'Video Editing', description: 'Professional video editing that transforms your raw footage into polished, narrative-driven content. We handle colour grading, motion graphics, sound, and everything else that separates good from great.', features: ['Commercial & promo videos', 'Social media video cuts', 'Colour grading & correction', 'Motion graphics & titles', 'Sound design & mixing', 'Multi-format delivery'] },
-  { slug: 'image-editing', number: '07', title: 'Image Editing', description: 'High-quality image editing and enhancement for web, social media, and print. We handle everything from basic retouching to complex composites — your visuals, elevated.', features: ['Product photo retouching', 'Background removal & replacement', 'Colour correction', 'Photo compositing', 'Batch editing', 'Format conversion & compression'] },
-  { slug: 'animation', number: '08', title: '2D & 3D Animation', description: 'Captivating 2D and 3D animations that breathe life into your ideas. From explainer videos and motion graphics to full 3D renders, we make the complex beautifully simple.', features: ['2D motion graphics', '3D product animations', 'Explainer videos', 'Animated logos & intros', 'Character animation', 'Visual effects (VFX)'] },
-  { slug: 'architectural-design', number: '09', title: 'Architectural Design', description: 'Professional architectural visualisation that lets clients see their project before the first brick is laid. Photorealistic renders, walkthroughs, and floor plans that sell the dream.', features: ['Exterior visualisation', 'Interior renders', '3D walkthroughs & flythroughs', 'Floor plan design', 'Landscape visualisation', 'Virtual staging'] },
-  { slug: 'content-creation', number: '10', title: 'Content Creation', description: 'Engaging, SEO-optimised content crafted for your specific audience. Blog posts, website copy, scripts, and multimedia content that builds authority and drives organic growth.', features: ['Blog posts & long-form articles', 'Website & landing page copy', 'Social media content', 'Video scripts', 'Email sequences', 'Product descriptions'] },
-  { slug: 'cybersecurity', number: '11', title: 'Cybersecurity', description: 'Comprehensive digital security services that protect your business, website, and customer data. From vulnerability audits to ongoing monitoring, we keep threats out before they get in.', features: ['Website security audits', 'SSL & HTTPS configuration', 'Malware scanning & removal', 'Firewall setup & hardening', 'Data breach risk assessment', 'Security monitoring & alerts'] },
-  { slug: 'data-entry', number: '12', title: 'Mass Data Entry', description: 'Professional mass data entry services for businesses that need large volumes of data processed quickly and accurately. From product catalogues to database migration, we handle the volume so you can focus on the business.', features: ['Product catalogue data entry', 'Database population & migration', 'Spreadsheet & CRM data entry', 'Document digitisation', 'Form processing & data extraction', 'Quality assurance & validation'] },
+  { slug: 'web-design', number: '01', title: 'Web Design & Development', description: 'Modern, responsive websites built to convert visitors into customers. Custom UI/UX, mobile-first development, CMS integration, and performance optimisation — your brand at its absolute best.', features: ['Custom UI/UX design', 'Mobile-first development', 'Next.js & React', 'CMS integration', 'Performance optimisation', 'E-commerce'] },
+  { slug: 'seo-marketing', number: '02', title: 'SEO & Digital Marketing', description: 'Rank higher and reach further with technical SEO, local SEO, paid ads, social media management, and content marketing — all tailored to East African markets.', features: ['Technical SEO', 'Local SEO (Uganda/East Africa)', 'Paid ads (Meta, Google)', 'Social media management', 'Content marketing', 'Analytics & reporting'] },
+  { slug: 'branding-design', number: '03', title: 'Branding & Graphic Design', description: 'Cohesive brand identities and stunning visuals — logos, colour systems, brand guidelines, social media graphics, print materials, and presentations.', features: ['Logo & identity systems', 'Brand guidelines', 'Social media graphics', 'Print materials', 'Presentations', 'Infographics'] },
+  { slug: 'media-production', number: '04', title: 'Video, Animation & Image Editing', description: 'Polished video content, 2D/3D animation, and professional image editing. Commercials, explainers, product edits, and social media cuts — all from one team.', features: ['Video editing & grading', '2D motion graphics', '3D product animation', 'Photo retouching', 'Background removal', 'Batch editing'] },
+  { slug: 'architectural-visualisation', number: '05', title: 'Architectural Visualisation', description: 'Photorealistic renders, 3D walkthroughs, floor plans, and virtual staging that let clients see their project before the first brick is laid.', features: ['Exterior visualisation', 'Interior renders', '3D walkthroughs', 'Floor plan design', 'Virtual staging', 'VR-ready scenes'] },
+  { slug: 'cybersecurity-data', number: '06', title: 'Cybersecurity & Data Services', description: 'Protect your business with security audits, malware protection, and firewall hardening — and manage data at scale with professional data entry and migration.', features: ['Security audits', 'Malware removal & monitoring', 'Firewall & SSL setup', 'Data breach assessment', 'Mass data entry', 'Database migration'] },
 ]
 
+// Metadata for SEO
 export const metadata: Metadata = {
-  title: 'Services — Web Design, SEO, Branding & More | Alffy',
-  description: 'All 12 services from Alffy (Alfinega), Kampala Uganda: web design, SEO, branding, graphic design, video editing, 2D & 3D animation, architectural design, digital marketing, image editing, content creation, cybersecurity, mass data entry.',
+  title: 'Services — Web Design, SEO, Branding & More | Alffy Kampala',
+  description: '6 core service categories from Alffy (Alfinega), Kampala Uganda: web design, SEO & digital marketing, branding & graphic design, video & animation, architectural visualisation, cybersecurity & data services.',
 }
 
+// Main component for the Services page. Default export.
 export default function ServicesPage() {
   return (
     <div className="pt-[68px]">
+      {/* Hero Section */}
       <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
+        {/* 3D background scene */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <FloatingGeometryWrapper className="w-full h-full" variant="services" />
+          <BabylonScene className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
@@ -35,27 +49,30 @@ export default function ServicesPage() {
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Services</span>
             <h1
               className="font-syne font-extrabold text-white leading-none"
-              style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
+              style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
             >
               Everything you<br />
               <span style={{ color: '#2C6FED' }}>need to grow.</span>
             </h1>
           </div>
           <p className="max-w-sm font-outfit text-[#9A9ABB] leading-relaxed">
-            12 specialist services. One cohesive team. From brand identity to search domination — we handle the full digital picture.
+            6 core capabilities. One cohesive team. From brand identity to search domination — we handle the full digital picture.
           </p>
         </div>
         <div className="mt-8 h-px bg-[#1C1C34]" />
       </section>
 
+      {/* Services Grid Section — renders a 2-column grid of service cards */}
       <section className="pb-24 md:pb-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {services.map((service) => (
+            // Each card is a Link that navigates to the service detail page
             <Link
               key={service.slug}
               href={`/services/${service.slug}`}
               className="group relative p-8 md:p-10 border border-[#1C1C34] rounded-2xl hover:border-[#2C6FED]/30 transition-all duration-300 overflow-hidden card-hover"
             >
+              {/* Large semi-transparent number watermark */}
               <span
                 className="absolute -right-2 -bottom-4 font-syne font-extrabold text-[8rem] select-none pointer-events-none leading-none transition-colors"
                 style={{ color: 'rgba(44,111,237,0.04)' }}
@@ -71,6 +88,7 @@ export default function ServicesPage() {
                 <p className="font-outfit text-sm mb-6 leading-relaxed line-clamp-2" style={{ color: '#8A8AAA' }}>
                   {service.description}
                 </p>
+                {/* Up to 3 feature tags displayed on the card */}
                 <div className="flex flex-wrap gap-2 mb-8">
                   {service.features.slice(0, 3).map((f) => (
                     <span
@@ -82,6 +100,7 @@ export default function ServicesPage() {
                     </span>
                   ))}
                 </div>
+                {/* "Learn more" link with arrow icon */}
                 <div className="flex items-center gap-2 font-syne font-semibold text-sm text-[#2C6FED] group-hover:gap-3 transition-all">
                   Learn more
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -94,6 +113,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* CTA Section — bottom banner for visitors who are unsure what they need */}
       <section className="pb-24 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="rounded-3xl border border-[#1C1C34] bg-[#0A0A16] p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>

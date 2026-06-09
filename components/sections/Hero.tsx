@@ -1,28 +1,47 @@
+// =============================================================================
+// Hero.tsx — Home page hero section
+// Purpose: First thing visitors see on the landing page. Features a full-screen
+// 3D Babylon.js scene as background, animated headline with staggered fade-in,
+// call-to-action buttons, and a stats counter bar showing yearly targets.
+// =============================================================================
+
 'use client'
 
-import dynamic from 'next/dynamic'
+// Next.js Link — client-side navigation between pages without full refresh
 import Link from 'next/link'
+// useState: stores values that persist across renders (like the animated counter)
+// useRef: references DOM elements without causing re-renders
+// useEffect: runs side-effect code (like setting up observers) after component renders
 import { useEffect, useRef, useState } from 'react'
+// BabylonScene: the 3D WebGL canvas rendered behind the hero content
+import { BabylonScene } from '@/components/3d/BabylonScene'
 
-const HeroCanvas = dynamic(
-  () => import('@/components/r3f/HeroCanvas').then((m) => m.HeroCanvas),
-  { ssr: false, loading: () => null }
-)
-
+// ---------------------------------------------------------------------------
+// AnimatedCounter — counts from 0 up to a target number when it scrolls into view
+// Uses IntersectionObserver to start the animation only once
+// ---------------------------------------------------------------------------
 function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
+  // count: the current displayed number, updates every ~28ms during animation
   const [count, setCount] = useState(0)
+  // ref: attaches to the <span> so we can observe when it's visible
   const ref = useRef<HTMLSpanElement>(null)
+  // started: prevents the animation from re-triggering (stored in ref so it doesn't cause re-renders)
   const started = useRef(false)
 
+  // Set up IntersectionObserver — triggers counter animation once element is visible
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // IntersectionObserver: browser API that detects when an element enters the viewport
     const obs = new IntersectionObserver(
       ([entry]) => {
+        // Only start counting if the element is visible AND we haven't started yet
         if (entry.isIntersecting && !started.current) {
           started.current = true
           let start = 0
+          // Divide target into 50 steps for smooth animation
           const step = target / 50
+          // setInterval: runs every 28ms to increment the count
           const timer = setInterval(() => {
             start += step
             if (start >= target) { setCount(target); clearInterval(timer) }
@@ -30,9 +49,11 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
           }, 28)
         }
       },
+      // threshold: 0.1 means fire when 10% of the element is visible
       { threshold: 0.1 }
     )
     obs.observe(el)
+    // Cleanup: disconnect observer when component unmounts (prevents memory leaks)
     return () => obs.disconnect()
   }, [target])
 
@@ -45,16 +66,17 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
 
 export default function HeroSection() {
   return (
+    // Main hero container: full viewport height, dark background
     <section className="relative w-full min-h-screen flex flex-col overflow-hidden" style={{ background: '#04040C' }}>
-      {/* R3F Canvas */}
+      {/* 3D canvas layer — renders Babylon.js scene as full-screen background */}
       <div className="absolute inset-0">
-        <HeroCanvas />
+        <BabylonScene />
       </div>
 
-      {/* Grid line overlay */}
+      {/* Grid line overlay — subtle background grid for visual texture */}
       <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
 
-      {/* Blue radial glow behind headline */}
+      {/* Blue radial glow behind headline — decorative light effect behind text */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -64,36 +86,37 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Vignette */}
+      {/* Vignette overlay — darkens edges to draw focus toward center */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 0%, #04040C 100%)' }}
       />
 
-      {/* Content */}
+      {/* Foreground content — stacked at the bottom of the screen */}
       <div className="relative z-10 flex flex-col justify-end pb-20 px-6 md:px-16 lg:px-24 min-h-screen max-w-[1440px] mx-auto w-full pt-[68px]">
 
-        {/* Pre-label */}
+        {/* Pre-label — location tag that fades in first */}
         <div className="mb-6 opacity-0 animate-[fadeIn_1.2s_0.1s_cubic-bezier(0.16,1,0.3,1)_forwards]">
           <span className="tag active">Kampala, Uganda · Est. 2025</span>
         </div>
 
-        {/* Big headline */}
+        {/* Big headline — three lines that fade up with staggered delays */}
         <h1
           className="font-syne font-extrabold leading-[0.9] tracking-[-0.03em] mb-8 uppercase"
-          style={{ fontSize: 'clamp(3.5rem, 11vw, 10rem)' }}
+          style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)' }}
         >
           <span className="block text-white opacity-0 animate-[fadeUp_1.4s_0.2s_cubic-bezier(0.16,1,0.3,1)_forwards]">Your Digital</span>
           <span className="block blue-glow opacity-0 animate-[fadeUp_1.4s_0.38s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{ color: '#2C6FED' }}>Agency</span>
           <span className="block text-white opacity-0 animate-[fadeUp_1.4s_0.54s_cubic-bezier(0.16,1,0.3,1)_forwards]">in Kampala.</span>
         </h1>
 
-        {/* Sub-row */}
+        {/* Sub-row — description paragraph + CTA buttons side-by-side on desktop */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 opacity-0 animate-[fadeUp_1.2s_0.72s_cubic-bezier(0.16,1,0.3,1)_forwards]">
           <p className="max-w-md font-outfit font-light text-lg text-[#CCCCEE] leading-relaxed">
             We build professional websites, grow search rankings, define brand identities,
             and produce compelling media — all in-house from Kampala, Uganda.
           </p>
+          {/* Call-to-action button group */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/contact"
@@ -111,12 +134,13 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Stats bar — 2026 Year 1 targets */}
+        {/* Stats bar — animated counters for yearly targets, fades in last */}
         <div className="mt-16 pt-8 border-t border-[#1C1C34] opacity-0 animate-[fadeIn_1.4s_1.0s_cubic-bezier(0.16,1,0.3,1)_forwards]">
           <div className="flex items-center gap-2 mb-5">
             <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: '#2C6FED' }} />
             <span className="font-mono text-[10px] text-[#8A8AAA] uppercase tracking-widest">2026 Year 1 Targets</span>
           </div>
+          {/* 4-column grid of stats — each counter animates on scroll */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <AnimatedCounter target={50} suffix="+" />
@@ -138,7 +162,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — animated bar at bottom-right, hints user to scroll down */}
       <div className="absolute bottom-6 right-8 z-10 flex items-center gap-2 opacity-40">
         <span className="font-mono text-[10px] text-[#9A9ABB] uppercase tracking-widest">Scroll</span>
         <div className="w-px h-10 bg-[#222] relative overflow-hidden">
@@ -149,6 +173,7 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* In-page keyframe for the scroll indicator animation */}
       <style jsx>{`
         @keyframes scrollLine {
           0%   { transform: translateY(-100%); opacity: 0; }

@@ -26,12 +26,12 @@ No tests or test runner exist.
 - **Dark theme only** — `data-theme="dark"` on `<html>`, no light mode.
 - **Path alias**: `@/*` → project root.
 
-## R3F (3D Scenes)
+## 3D Scenes (Babylon.js)
 
-- All R3F scene files use `// @ts-nocheck` at the top.
-- 3D canvases are dynamically imported with `ssr: false` to avoid server-side Three.js errors.
-- Each page has its own scene variant defined in `components/r3f/SceneVariants.tsx` (13 variants).
-- Hero uses a separate particle wave (`ParticleWave.tsx`), not the `FloatingGeometryWrapper` path.
+- All 3D logic lives in `components/3d/BabylonSceneCanvas.tsx` — a single rotating decoration (box, sphere, torus) using imperative Babylon.js API.
+- `components/3d/BabylonScene.tsx` wraps it with `next/dynamic({ ssr: false })` to avoid server-side WebGL errors.
+- Uses `// @ts-nocheck` for Babylon.js module imports.
+- Babylon.js is used directly (no Reactylon wrapper) — the babel-plugin-reactylon was removed due to SSR incompatibility with Turbopack.
 
 ## Environment Variables
 
@@ -40,9 +40,9 @@ Required for contact form & newsletter APIs (set in Vercel or `.env.local`):
 ```
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=hello@alfinega.com
-SMTP_PASS=<gmail-app-password>
-CONTACT_TO=hello@alfinega.com
+SMTP_USER=contact@alfinega.com
+SMTP_PASS=
+CONTACT_TO=contact@alfinega.com
 ```
 
 `INDEXNOW_SECRET` is optional (for IndexNow API auth). A `.env.example` file is committed as a template. No `.env` file is committed.
@@ -57,6 +57,6 @@ CONTACT_TO=hello@alfinega.com
 
 - **Styling**: `cn()` from `@/lib/utils` (clsx + tailwind-merge) for conditional classes. Inline `style` props with CSS var references for dynamic theming.
 - **Animations**: IntersectionObserver + inline style transitions for section entries. CSS `@keyframes` for hero text. Lenis for smooth scroll.
-- **Content changes**: To add a service → edit the service arrays in `app/services/page.tsx`, `app/services/[slug]/page.tsx`, and `components/sections/ServicesSection.tsx`. To add a blog post → edit `app/blog/page.tsx` (metadata) + content block in `app/blog/[slug]/page.tsx`. To add a portfolio project → edit the `projects` array in `components/sections/PortfolioGrid.tsx`. To add a team member → edit `app/about/page.tsx` and `app/about/team/page.tsx`. To edit nav/footer links → edit `components/nav/Navbar.tsx` and `components/layout/Footer.tsx`.
+- **Content changes**: To add a service → edit the service listing in `app/services/page.tsx`, each detail page under `app/services/<slug>/page.tsx`, and `components/sections/ServicesSection.tsx`. Also update the structured data in `app/layout.tsx`, nav in `components/nav/Navbar.tsx`, footer in `components/layout/Footer.tsx`, and `app/sitemap.ts`. To add a blog post → add a new page under `app/blog/<slug>/page.tsx` with its own `metadata` export and content. To add a portfolio project → edit the `projects` array in `components/sections/PortfolioGrid.tsx`. To add a team member → edit `app/about/page.tsx` and `app/about/team/page.tsx`. To edit nav/footer links → edit `components/nav/Navbar.tsx` and `components/layout/Footer.tsx`.
 - **Prettier** configured via `.prettierrc` (no semi, single quotes, trailing commas, 120 width). Run `npx prettier --write .` to format.
 - **No formatters or codegen** configured beyond PostCSS/Tailwind.

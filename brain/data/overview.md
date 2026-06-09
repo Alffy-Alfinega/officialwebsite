@@ -6,9 +6,9 @@
 
 | Original | Inlined into | Business Reference |
 |---|---|---|
-| `data/services.ts` | `app/services/page.tsx`, `app/services/{slug}/page.tsx` (12 individual), `components/sections/ServicesSection.tsx` | [[business/services]] |
+| `data/services.ts` | `app/services/page.tsx`, `app/services/{6-categories}/page.tsx` (each has full array), `components/sections/ServicesSection.tsx` | [[business/services]] |
 | `data/team.ts` | `app/about/page.tsx`, `app/about/team/page.tsx` | [[business/team]] |
-| `data/blog.ts` | `app/blog/page.tsx`, `app/blog/{slug}/page.tsx` (6 individual) | [[business/blog]] |
+| `data/blog.ts` | `app/blog/blog-content.tsx` (listing) + each `app/blog/{slug}/page.tsx` (content + display metadata) | [[business/blog]] |
 | `data/navigation.ts` | `components/nav/Navbar.tsx`, `components/layout/Footer.tsx` | [[components/overview]] |
 | sitemap slugs | `app/sitemap.ts` (hardcoded) | [[routes/seo#Sitemap]] |
 
@@ -16,11 +16,11 @@
 
 | Dataset | Duplicated Across | Action Needed When Adding |
 |---|---|---|
-| **Services** | 14 places (1 listing + 12 individual + section + nav) | Update listing + individual page + section + nav |
+| **Services** | 8+ places (listing, 6 category pages all have full array, section, nav, footer, sitemap, layout.tsx structured data, pricing, blog sidebars) | Update ALL files — see [[business/services]] |
 | **Team** | 2 pages (about, team) | Update both files |
-| **Blog** | 7 places (listing + 6 individual) | Update listing + individual page file |
+| **Blog** | 7+ places (listing array + 6 individual page metadata + content) | Update slug in listing + create page file |
 | **Nav links** | Navbar + Footer | Update both components |
-| **ContactForm** | 1 place (its own list) | Update service list |
-| **Sitemap slugs** | `app/sitemap.ts` | Add slug to hardcoded array |
+| **ContactForm** | 1 place (own list) | Update service list |
+| **Sitemap slugs** | `app/sitemap.ts` | Add/remove slug from hardcoded array |
 
 The route map ([[routes/map]]) shows which pages consume which data. The component hierarchy ([[components/overview]]) shows which components render which data.

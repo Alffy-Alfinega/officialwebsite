@@ -1,6 +1,27 @@
+// ============================================================
+// About Page — The main "About Us" page for Alffy
+// This page tells visitors who Alffy is, shows the company
+// timeline/milestones, introduces the core team, and ends
+// with a call-to-action to start a project.
+// Route: /about
+// ============================================================
+
+// Import the Metadata type from Next.js — this lets us set
+// the page title and description for SEO (search engine
+// results and browser tabs).
 import type { Metadata } from 'next'
+
+// Import Link from Next.js for client-side navigation between
+// pages without a full browser refresh.
 import Link from 'next/link'
-import { FloatingGeometryWrapper } from '@/components/r3f/FloatingGeometryWrapper'
+
+// Import a 3D scene component that renders a Babylon.js
+// animation in the background (decorative only).
+import { BabylonScene } from '@/components/3d/BabylonScene'
+
+// Define the shape/structure of a team member object using a
+// TypeScript interface. This acts as a contract — any object
+// that claims to be a TeamMember must have these fields.
 interface TeamMember {
   name: string
   role: string
@@ -8,9 +29,12 @@ interface TeamMember {
   shortBio: string
   bio: string
   skills: string[]
-  image?: string
+  image?: string // The "?" means this field is optional
 }
 
+// Hardcoded array of team members displayed on the page.
+// In a real app this might come from a database or CMS, but
+// here the data lives directly in the page file.
 const team: TeamMember[] = [
   {
     name: 'Musoke Joshua Prosper',
@@ -32,11 +56,17 @@ const team: TeamMember[] = [
   },
 ]
 
+// Metadata object — Next.js reads this at build time and
+// injects <title> and <meta name="description"> into the
+// <head> of the page for SEO purposes.
 export const metadata: Metadata = {
   title: 'About Us — Alffy Digital Agency | Kampala, Uganda',
   description: 'Alffy (Alfinega) is a full-service digital agency founded in Kampala, Uganda in January 2025. Web design, SEO, branding, animation, and creative media for East African businesses.',
 }
 
+// Array of milestone objects for the company timeline shown
+// on the page. Each entry has a year and a description of
+// what happened at that point in the company's history.
 const milestones = [
   { year: 'Jan 2025', event: 'Alffy (Alfinega) incorporated in Makindye, Kampala. Core team assembled; foundations laid across web design, branding, and graphic design.' },
   { year: 'Mid 2025', event: 'Development and testing phase. Service frameworks built, internal processes established, early client discovery work conducted.' },
@@ -45,28 +75,35 @@ const milestones = [
   { year: '2026', event: 'Launched Alffy v2 — a complete digital rebrand and new online presence to match our growing capabilities.' },
 ]
 
+// The main component for the About page. This is the default
+// export, so Next.js renders this when a user visits /about.
 export default function AboutPage() {
   return (
+    // Outer wrapper with top padding to offset the fixed navbar
     <div className="pt-[68px]">
-      {/* Hero */}
+      {/* Hero Section — the large banner at the top of the page
+          with the headline, description, and a 3D background scene */}
       <section className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24 overflow-hidden">
+        {/* 3D background scene positioned on the right side */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <FloatingGeometryWrapper className="w-full h-full" variant="about" />
+          <BabylonScene className="w-full h-full" />
         </div>
+        {/* Gradient overlay to darken the edge so text stays readable */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, #04040C 82%)' }}
         />
-        {/* Blue ambient glow */}
+        {/* Blue ambient glow effect behind the heading */}
         <div
           className="absolute left-0 top-1/4 pointer-events-none"
           style={{ width: '500px', height: '400px', background: 'radial-gradient(ellipse, rgba(44,111,237,0.08) 0%, transparent 70%)' }}
         />
+        {/* Content wrapper — relative z-10 ensures text sits above backgrounds */}
         <div className="relative z-10 max-w-[1440px] mx-auto">
           <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">About Alffy</span>
           <h1
             className="font-syne font-extrabold text-white leading-none mb-6"
-            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.03em' }}
+            style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}
           >
             We make the<br />
             <span style={{ color: '#2C6FED' }}>digital world</span><br />
@@ -75,6 +112,7 @@ export default function AboutPage() {
           <p className="max-w-lg font-outfit text-[#AAAACC] text-lg leading-relaxed">
             Alffy is a full-service digital agency based in Kampala, Uganda. We partner with businesses to design, build, and grow their digital presence — professionally and affordably.
           </p>
+          {/* Tags showing key facts about the company */}
           <div className="mt-8 flex items-center gap-4">
             <span className="tag active">Est. 2025</span>
             <span className="tag">Kampala, Uganda</span>
@@ -83,10 +121,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story + Timeline */}
+      {/* Story + Timeline Section — two-column layout with the
+          company narrative on the left and a visual timeline
+          of milestones on the right */}
       <section id="story" className="py-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="h-px bg-[#1C1C34] mb-20" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left column — the story text */}
           <div>
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Our Story</span>
             <h2
@@ -95,11 +136,13 @@ export default function AboutPage() {
             >
               Built for the African market. Open to the world.
             </h2>
+            {/* Paragraphs of the company backstory */}
             <div className="space-y-5 font-outfit text-[#AAAACC] text-base leading-relaxed">
               <p>Alffy was founded in January 2025 from a simple observation: businesses in Uganda and across East Africa were being underserved by the digital agency landscape. Too many providers were offering generic, template-driven work that didn&rsquo;t reflect the ambition of local brands.</p>
               <p>We spent 2025 building the right foundations — assembling the team, developing our service frameworks, and testing our process before opening to clients. In January 2026 we launched publicly, and we&rsquo;re now delivering for clients across Uganda and East Africa.</p>
               <p>As a newly-launched agency, our goal for 2026 is clear: deliver 50+ projects with 95% client satisfaction, building a reputation on craft and honest communication. Every project we take on is a chance to show what&rsquo;s possible when digital expertise meets local knowledge.</p>
             </div>
+            {/* Stats grid — 2026 year 1 targets shown as cards */}
             <div className="mt-10">
               <div className="flex items-center gap-2 mb-4">
                 <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: '#2C6FED' }} />
@@ -121,12 +164,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Timeline */}
+          {/* Right column — timeline with dot markers */}
           <div>
             <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-8 block">Timeline</span>
             <div className="relative pl-6 border-l border-[#1C1C34]">
               {milestones.map((m, i) => (
                 <div key={i} className="mb-10 relative">
+                  {/* Circular dot marker on the timeline line */}
                   <span
                     className="absolute -left-[25px] top-1 w-3 h-3 rounded-full border-2 border-[#2C6FED]"
                     style={{ background: '#04040C' }}
@@ -140,7 +184,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Team Section — displays the core team members in a responsive grid */}
       <section className="py-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
         <div className="h-px bg-[#1C1C34] mb-16" />
         <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">The Team</span>
@@ -150,6 +194,7 @@ export default function AboutPage() {
         >
           The people behind the work.
         </h2>
+        {/* Responsive grid: 1 column on mobile, 2 on md, 3 on lg */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {team.map((member) => (
             <div
@@ -157,7 +202,7 @@ export default function AboutPage() {
               className="p-6 border border-[#1C1C34] rounded-2xl hover:border-[#2C6FED]/30 transition-all duration-300 card-hover group"
               style={{ background: '#0A0A16' }}
             >
-              {/* Role avatar */}
+              {/* Role avatar — initials-based icon */}
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                 style={{ background: 'linear-gradient(135deg, rgba(44,111,237,0.15), rgba(26,82,196,0.05))', border: '1px solid rgba(44,111,237,0.2)' }}
@@ -181,7 +226,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA Section — a call-to-action banner at the bottom
+          encouraging visitors to get in touch */}
       <section className="py-20 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto pb-32">
         <div
           className="p-10 md:p-16 rounded-3xl border border-[#1C1C34] text-center"
@@ -197,6 +243,7 @@ export default function AboutPage() {
           <p className="font-outfit text-[#AAAACC] mb-8 max-w-md mx-auto">
             Tell us what you need. We&rsquo;ll come back with a clear proposal within 24 hours.
           </p>
+          {/* Link button that navigates to the contact page */}
           <Link
             href="/contact"
             className="inline-block px-8 py-4 font-syne font-semibold text-sm text-white rounded-full transition-all duration-200"
