@@ -112,7 +112,7 @@ export default function BlogPostPage() {
       <header className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 border-b overflow-hidden" style={{ borderColor: 'var(--border)' }}>
         {/* 3D decorative scene positioned on the right side */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <BabylonScene variant="blog" className="w-full h-full" />
         </div>
         {/* Gradient that softens the 3D scene into the background on the left */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />

@@ -206,7 +206,7 @@ export default function PricingPage() {
       <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
         {/* 3D background scene */}
         <div className="absolute right-0 top-0 w-1/3 h-64 opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <BabylonScene variant="pricing" className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 80% at 90% 20%, transparent 0%, var(--bg) 70%)' }} />
         <div className="relative z-10">

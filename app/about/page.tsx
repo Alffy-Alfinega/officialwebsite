@@ -86,7 +86,7 @@ export default function AboutPage() {
       <section className="relative py-24 md:py-36 px-6 md:px-16 lg:px-24 overflow-hidden">
         {/* 3D background scene positioned on the right side */}
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <BabylonScene variant="about" className="w-full h-full" />
         </div>
         {/* Gradient overlay to darken the edge so text stays readable */}
         <div

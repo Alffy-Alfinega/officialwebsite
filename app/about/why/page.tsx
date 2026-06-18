@@ -81,7 +81,7 @@ export default function WhyAlffyPage() {
       {/* Hero Section — headline and subtitle with 3D background */}
       <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-100 pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <BabylonScene variant="about" className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
         <div className="relative z-10 max-w-3xl">

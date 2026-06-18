@@ -33,7 +33,7 @@ export default function PortfolioPage() {
       <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
         {/* 3D background scene */}
         <div className="absolute right-0 top-0 w-1/2 h-full pointer-events-none">
-          <BabylonScene className="w-full h-full" />
+          <BabylonScene variant="portfolio" className="w-full h-full" />
         </div>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 100% at 90% 50%, transparent 0%, var(--bg) 82%)' }} />
 

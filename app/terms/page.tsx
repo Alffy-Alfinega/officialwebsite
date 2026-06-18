@@ -30,7 +30,7 @@ export default function TermsPage() {
     <div className="pt-[68px]">
       {/* 3D scene contained in a small corner — hidden on mobile, faded to bg */}
       <div className="absolute top-24 right-6 w-[360px] h-[360px] pointer-events-none z-0 hidden md:block">
-        <BabylonScene className="w-full h-full" />
+        <BabylonScene variant="legal" className="w-full h-full" />
         <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, transparent 15%, var(--bg) 80%)' }} />
       </div>
       {/* Content section with constrained width (860px) for readability */}
