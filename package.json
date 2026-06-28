@@ -20,7 +20,6 @@
     "next": "^16.2.9",
     "nodemailer": "^9.0.1",
     "react": "^19.2.7",
-    "react-babylonjs": "^4.0.2",
     "react-dom": "^19.2.7",
     "tailwind-merge": "^3.6.0"
   },
