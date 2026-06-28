@@ -47,3 +47,16 @@ Brain loaded. Full repo surveyed. Awaiting task directive.
 4. `components/3d/BabylonSceneCanvas.tsx` — full rewrite to react-babylonjs 4.0.2; all 15 variants; zero TS errors
 
 New packages: `react-babylonjs@4.0.2`, `@babylonjs/gui@9.14.0`, `@tailwindcss/postcss@4.3.1`
+
+## Tailwind v4 Fix (post-breakage)
+
+**Root cause of broken CSS:** I ran a manual v3→v4 migration without using the official upgrade tool. The `@config "../tailwind.config.ts"` directive was incorrect — Tailwind v4 does not read JS config files. All custom theme tokens were silently dropped.
+
+**Fix applied:**
+1. Installed `tailwindcss@4.3.1` + `@tailwindcss/postcss@4.3.1`
+2. Ran the **official** `npx @tailwindcss/upgrade@4` tool — it migrated 5 template files (deprecated class syntax) and `postcss.config.mjs`
+3. Added a proper `@theme {}` block to `globals.css` with all custom tokens from `tailwind.config.ts` translated to v4 CSS variable format (`--font-*`, `--color-*`, `--text-*`, `--animate-*`)
+4. Corrected font declarations to use actual font names (`'Syne'`, `'Outfit'`, `'JetBrains Mono'`) since they're loaded via Google Fonts `<link>`, not `next/font` CSS vars
+5. `next build` passes clean — all 36 routes rendered
+
+**Lesson:** Never manually migrate Tailwind major versions. Always use `npx @tailwindcss/upgrade`.
