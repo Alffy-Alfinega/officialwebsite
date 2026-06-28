@@ -42,7 +42,7 @@
     },
     {
       "source": "/services/seo",
-      "destination": "/services/seo-services",
+      "destination": "/services/seo-marketing",
       "permanent": true
     }
   ]
