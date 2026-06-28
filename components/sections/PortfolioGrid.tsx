@@ -222,7 +222,7 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
       aria-label={`View ${p.title} — opens in new tab`}
     >
       {/* Visual header — 4:3 aspect ratio region for the live preview + overlays */}
-      <div className="aspect-[4/3] relative overflow-hidden flex items-end justify-start p-4">
+      <div className="aspect-4/3 relative overflow-hidden flex items-end justify-start p-4">
         {/* Live site preview iframe (only for 'Live' projects) */}
         {p.status === 'Live' && (
           <LivePreview url={p.url} title={p.title} />

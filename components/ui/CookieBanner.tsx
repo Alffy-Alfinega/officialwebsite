@@ -68,7 +68,7 @@ export default function CookieBanner() {
       // Fixed to viewport – bottom‑left on mobile, bottom‑right
       // on md+ screens, with a high z‑index so it sits above
       // everything.
-      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-sm z-[9999]"
+      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-sm z-9999"
       style={{
         background: '#0F0F1E',
         border: '1px solid #1C1C34',

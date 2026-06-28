@@ -216,7 +216,7 @@ export default function Navbar() {
                   when `menuOpen` is true. */}
               <span className={cn('block w-5 h-[1.5px] transition-all duration-300', menuOpen && 'rotate-45 translate-y-[6.5px]')} style={{ background: 'var(--text)' }} />
               <span className={cn('block w-5 h-[1.5px] transition-all duration-300', menuOpen && 'opacity-0')} style={{ background: 'var(--text)' }} />
-              <span className={cn('block w-5 h-[1.5px] transition-all duration-300', menuOpen && '-rotate-45 -translate-y-[6.5px]')} style={{ background: 'var(--text)' }} />
+              <span className={cn('block w-5 h-[1.5px] transition-all duration-300', menuOpen && '-rotate-45 translate-y-[-6.5px]')} style={{ background: 'var(--text)' }} />
             </button>
           </div>
         </div>
