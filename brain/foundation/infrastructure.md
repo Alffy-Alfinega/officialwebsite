@@ -24,7 +24,7 @@ See [[apis/indexnow]] for the API endpoint details.
 
 ## Git State
 
-- Single commit (`bf3d2b6`), all files untracked — treat as fresh scaffold.
+- Multi-commit history. Latest: `d56fb35 feat: migrate BabylonSceneCanvas to react-babylonjs`. See `git log --oneline` for current state.
 - See [[changelog/_index]] for session history.
 
 ## License
