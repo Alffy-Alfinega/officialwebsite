@@ -16,9 +16,7 @@ export default function PricingFAQ() {
 
   return (
     <div>
-      <h2 className="font-syne font-bold text-2xl md:text-3xl text-white mb-8">
-        Pricing FAQs
-      </h2>
+      <h2 className="font-syne font-bold text-2xl md:text-3xl text-white mb-8">Pricing FAQs</h2>
       <div className="space-y-2">
         {faqs.map((faq, i) => (
           <div
@@ -34,9 +32,7 @@ export default function PricingFAQ() {
               <span className={`font-syne font-semibold text-sm transition-colors ${open === i ? 'text-[#2C6FED]' : 'text-white group-hover:text-[#2C6FED]'}`}>
                 {faq.q}
               </span>
-              <span
-                className={`font-mono text-sm ml-4 shrink-0 transition-all duration-200 ${open === i ? 'text-[#2C6FED] rotate-45' : 'text-[#8A8AAA]'}`}
-              >
+              <span className={`font-mono text-sm ml-4 shrink-0 transition-all duration-200 ${open === i ? 'text-[#2C6FED] rotate-45' : 'text-[#8A8AAA]'}`}>
                 +
               </span>
             </button>

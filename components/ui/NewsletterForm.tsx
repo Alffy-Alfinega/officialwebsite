@@ -5,17 +5,15 @@ import { useState } from 'react'
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 export default function NewsletterForm() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<Status>('idle')
+  const [email,    setEmail]    = useState('')
+  const [status,   setStatus]   = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || status === 'loading') return
-
     setStatus('loading')
     setErrorMsg('')
-
     try {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
@@ -36,11 +34,7 @@ export default function NewsletterForm() {
   }
 
   if (status === 'success') {
-    return (
-      <p className="font-outfit text-sm text-[#2C6FED]">
-        ✓ You&apos;re on the list!
-      </p>
-    )
+    return <p className="font-outfit text-sm text-[#2C6FED]">✓ You&apos;re on the list!</p>
   }
 
   return (
@@ -54,7 +48,7 @@ export default function NewsletterForm() {
           required
           disabled={status === 'loading'}
           aria-label="Email address for newsletter"
-          className="newsletter-input flex-1 border rounded-full px-4 py-2.5 text-sm font-outfit placeholder-[#888] focus:border-[#2C6FED] outline-none transition-colors min-w-0 disabled:opacity-50"
+          className="flex-1 border rounded-full px-4 py-2.5 text-sm font-outfit placeholder-[#888] focus:border-[#2C6FED] outline-none transition-colors min-w-0 disabled:opacity-50"
           style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text)' }}
         />
         <button

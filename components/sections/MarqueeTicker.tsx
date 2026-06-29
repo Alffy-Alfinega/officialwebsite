@@ -1,17 +1,8 @@
 export default function MarqueeTicker() {
   const items = [
-    'Website Design',
-    'SEO Strategy',
-    'Brand Identity',
-    'Motion Graphics',
-    '3D Animation',
-    'Digital Marketing',
-    'Content Creation',
-    'Architectural Viz',
-    'Video Production',
-    'Image Editing',
-    'Cybersecurity',
-    'Mass Data Entry',
+    'Website Design', 'SEO Strategy', 'Brand Identity', 'Motion Graphics',
+    '3D Animation', 'Digital Marketing', 'Content Creation', 'Architectural Viz',
+    'Video Production', 'Image Editing', 'Cybersecurity', 'Mass Data Entry',
   ]
   const doubled = [...items, ...items]
 

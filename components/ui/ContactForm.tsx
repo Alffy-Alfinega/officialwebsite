@@ -2,23 +2,15 @@
 
 import { useState } from 'react'
 
-type FormState = {
-  name: string
-  email: string
-  service: string
-  budget: string
-  message: string
-}
-
+type FormState = { name: string; email: string; service: string; budget: string; message: string }
 const INITIAL: FormState = { name: '', email: '', service: '', budget: '', message: '' }
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormState>(INITIAL)
+  const [form,   setForm]   = useState<FormState>(INITIAL)
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,10 +28,9 @@ export default function ContactForm() {
     }
   }
 
-  const inputClass =
+  const inputCls =
     'w-full border rounded-xl px-4 py-3 font-outfit text-sm placeholder-[#888] focus:border-[#2C6FED] outline-none transition-colors'
-  const labelClass =
-    'font-mono text-[10px] uppercase tracking-widest block mb-2'
+  const labelCls = 'font-mono text-[10px] uppercase tracking-widest block mb-2'
 
   if (status === 'success') {
     return (
@@ -68,29 +59,27 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="contact-name" className={labelClass} style={{ color: 'var(--text-faint)' }}>Name *</label>
+          <label htmlFor="contact-name" className={labelCls} style={{ color: 'var(--text-faint)' }}>Name *</label>
           <input
-            id="contact-name"
-            type="text" name="name" required value={form.name}
-            onChange={handleChange} placeholder="Your name" className={inputClass}
+            id="contact-name" type="text" name="name" required value={form.name}
+            onChange={handleChange} placeholder="Your name" className={inputCls}
             style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text)' }}
           />
         </div>
         <div>
-          <label htmlFor="contact-email" className={labelClass} style={{ color: 'var(--text-faint)' }}>Email *</label>
+          <label htmlFor="contact-email" className={labelCls} style={{ color: 'var(--text-faint)' }}>Email *</label>
           <input
-            id="contact-email"
-            type="email" name="email" required value={form.email}
-            onChange={handleChange} placeholder="your@email.com" className={inputClass}
+            id="contact-email" type="email" name="email" required value={form.email}
+            onChange={handleChange} placeholder="your@email.com" className={inputCls}
             style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text)' }}
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="contact-service" className={labelClass} style={{ color: 'var(--text-faint)' }}>Service Needed</label>
+        <label htmlFor="contact-service" className={labelCls} style={{ color: 'var(--text-faint)' }}>Service Needed</label>
         <select id="contact-service" name="service" value={form.service} onChange={handleChange}
-          className={inputClass + ' cursor-pointer'}
+          className={inputCls + ' cursor-pointer'}
           style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: form.service ? 'var(--text)' : 'var(--text-faint)' }}
         >
           <option value="">Select a service...</option>
@@ -104,9 +93,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="contact-budget" className={labelClass} style={{ color: 'var(--text-faint)' }}>Budget Range</label>
+        <label htmlFor="contact-budget" className={labelCls} style={{ color: 'var(--text-faint)' }}>Budget Range</label>
         <select id="contact-budget" name="budget" value={form.budget} onChange={handleChange}
-          className={inputClass + ' cursor-pointer'}
+          className={inputCls + ' cursor-pointer'}
           style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: form.budget ? 'var(--text)' : 'var(--text-faint)' }}
         >
           <option value="">Select a range...</option>
@@ -118,21 +107,20 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="contact-message" className={labelClass} style={{ color: 'var(--text-faint)' }}>Message *</label>
+        <label htmlFor="contact-message" className={labelCls} style={{ color: 'var(--text-faint)' }}>Message *</label>
         <textarea
-          id="contact-message"
-          name="message" required rows={5} value={form.message}
+          id="contact-message" name="message" required rows={5} value={form.message}
           onChange={handleChange}
           placeholder="Tell us about your project, goals, and timeline..."
-          className={inputClass + ' resize-none'}
+          className={inputCls + ' resize-none'}
           style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text)' }}
         />
       </div>
 
       {status === 'error' && (
         <p className="font-outfit text-sm text-red-400">
-          Something went wrong. Please try emailing us directly at{' '}
-           <a href="mailto:contact@alfinega.com" className="text-[#2C6FED] hover:underline">
+          Something went wrong. Please email us directly at{' '}
+          <a href="mailto:contact@alfinega.com" className="text-[#2C6FED] hover:underline">
             contact@alfinega.com
           </a>
         </p>
@@ -152,9 +140,7 @@ export default function ContactForm() {
             </svg>
             Sending…
           </>
-        ) : (
-          'Send Message'
-        )}
+        ) : 'Send Message'}
       </button>
     </form>
   )

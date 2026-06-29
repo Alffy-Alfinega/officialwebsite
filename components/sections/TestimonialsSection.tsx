@@ -5,30 +5,18 @@ import { useRef, useEffect, useState } from 'react'
 const testimonials = [
   {
     quote: 'Alffy redesigned our website from scratch. Within 6 weeks of launch, our inbound enquiries went from 4 a month to 23. The SEO work they layered on top has kept those numbers growing.',
-    author: 'Nakato Brenda',
-    title: 'CEO, Savannah Foods Uganda',
-    service: 'Website Design',
-    initials: 'NB',
-    color: '#2C6FED',
-    bg: 'linear-gradient(135deg, #0D1E3D, #0A1628)',
+    author: 'Nakato Brenda', title: 'CEO, Savannah Foods Uganda', service: 'Website Design',
+    initials: 'NB', color: '#2C6FED', bg: 'linear-gradient(135deg, #0D1E3D, #0A1628)',
   },
   {
     quote: 'They delivered a complete brand identity — logo, guidelines, packaging templates, and social kit — in under two weeks. Our Jumia store conversions improved by 40% after the rebrand.',
-    author: 'Ssekito Daniel',
-    title: 'Founder, Kampala Honey Co.',
-    service: 'Branding',
-    initials: 'SD',
-    color: '#D4A843',
-    bg: 'linear-gradient(135deg, #2A1E08, #1C1408)',
+    author: 'Ssekito Daniel', title: 'Founder, Kampala Honey Co.', service: 'Branding',
+    initials: 'SD', color: '#D4A843', bg: 'linear-gradient(135deg, #2A1E08, #1C1408)',
   },
   {
     quote: 'We hired Alffy for an SEO audit and ended up engaging them for 3 months. We went from page 3 to position 4 on Google for our main search term. Real, measurable difference.',
-    author: 'Achieng Faith',
-    title: 'Marketing Manager, Pearl Clinics Kampala',
-    service: 'SEO',
-    initials: 'AF',
-    color: '#2C6FED',
-    bg: 'linear-gradient(135deg, #0C1435, #080E28)',
+    author: 'Achieng Faith', title: 'Marketing Manager, Pearl Clinics Kampala', service: 'SEO',
+    initials: 'AF', color: '#2C6FED', bg: 'linear-gradient(135deg, #0C1435, #080E28)',
   },
 ]
 
@@ -46,34 +34,12 @@ function StarRating() {
 
 function Avatar({ initials, color, bg }: { initials: string; color: string; bg: string }) {
   return (
-    <div
-      className="shrink-0 relative"
-      style={{ width: 44, height: 44 }}
-      aria-hidden="true"
-    >
-      {/* Outer ring */}
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{ border: `2px solid ${color}`, opacity: 0.35 }}
-      />
-      {/* Inner circle with gradient */}
-      <div
-        className="absolute inset-[3px] rounded-full flex items-center justify-center"
-        style={{ background: bg, border: `1px solid ${color}30` }}
-      >
-        {/* Initials */}
-        <span
-          className="font-syne font-extrabold select-none tracking-tight"
-          style={{ fontSize: 13, color, letterSpacing: '0.05em' }}
-        >
-          {initials}
-        </span>
+    <div className="shrink-0 relative" style={{ width: 44, height: 44 }} aria-hidden="true">
+      <div className="absolute inset-0 rounded-full" style={{ border: `2px solid ${color}`, opacity: 0.35 }} />
+      <div className="absolute inset-[3px] rounded-full flex items-center justify-center" style={{ background: bg, border: `1px solid ${color}30` }}>
+        <span className="font-syne font-extrabold select-none tracking-tight" style={{ fontSize: 13, color, letterSpacing: '0.05em' }}>{initials}</span>
       </div>
-      {/* Subtle glow */}
-      <div
-        className="absolute inset-0 rounded-full"
-        style={{ boxShadow: `0 0 10px ${color}30` }}
-      />
+      <div className="absolute inset-0 rounded-full" style={{ boxShadow: `0 0 10px ${color}30` }} />
     </div>
   )
 }
@@ -112,8 +78,8 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 export default function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [paused, setPaused] = useState(false)
-  const posRef = useRef(0)
-  const rafRef = useRef<number | undefined>(undefined)
+  const posRef   = useRef(0)
+  const rafRef   = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     const track = trackRef.current
@@ -132,33 +98,23 @@ export default function TestimonialsSection() {
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
   }, [paused])
 
-
   return (
     <section className="py-20 md:py-28 overflow-x-hidden" aria-label="Client testimonials">
       <div className="px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto mb-12">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
             <span className="font-mono text-[11px] uppercase tracking-widest mb-3 block" style={{ color: 'var(--text-faint)' }}>Client Feedback</span>
-            <h2
-              className="font-syne font-extrabold"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', color: 'var(--text)' }}
-            >
+            <h2 className="font-syne font-extrabold" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', color: 'var(--text)' }}>
               What clients say.
             </h2>
           </div>
           <div className="flex gap-8">
-            <div className="text-center">
-              <p className="font-syne font-bold text-2xl" style={{ color: '#D4A843' }}>5★</p>
-              <p className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>Standard</p>
-            </div>
-            <div className="text-center">
-              <p className="font-syne font-bold text-2xl" style={{ color: 'var(--text)' }}>50+</p>
-              <p className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>2026 Goal</p>
-            </div>
-            <div className="text-center">
-              <p className="font-syne font-bold text-2xl" style={{ color: 'var(--text)' }}>95%</p>
-              <p className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>Target</p>
-            </div>
+            {[{ v: '5★', l: 'Standard', c: '#D4A843' }, { v: '50+', l: '2026 Goal' }, { v: '95%', l: 'Target' }].map(({ v, l, c }) => (
+              <div key={l} className="text-center">
+                <p className="font-syne font-bold text-2xl" style={{ color: c || 'var(--text)' }}>{v}</p>
+                <p className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>{l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -171,14 +127,9 @@ export default function TestimonialsSection() {
         onTouchEnd={() => setPaused(false)}
       >
         <div ref={trackRef} className="flex will-change-transform">
+          {testimonials.map((t, i) => <TestimonialCard key={`a${i}`} t={t} />)}
           {testimonials.map((t, i) => (
-            <TestimonialCard key={`orig-${i}`} t={t} />
-          ))}
-          {/* Duplicate set for infinite scroll — hidden from screen readers & crawlers */}
-          {testimonials.map((t, i) => (
-            <div key={`dup-${i}`} aria-hidden="true">
-              <TestimonialCard t={t} />
-            </div>
+            <div key={`b${i}`} aria-hidden="true"><TestimonialCard t={t} /></div>
           ))}
         </div>
       </div>

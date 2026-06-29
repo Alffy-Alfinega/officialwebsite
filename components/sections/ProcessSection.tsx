@@ -3,11 +3,11 @@
 import { useRef, useEffect, useState } from 'react'
 
 const steps = [
-  { number: '01', title: 'Discovery Call', body: 'We start with a focused conversation about your goals, audience, and constraints. No fluff — just the information we need to put together a smart proposal.', duration: '1–2 days' },
-  { number: '02', title: 'Strategy & Proposal', body: 'Based on discovery, we deliver a clear scope, timeline, and fixed price. No hourly billing, no scope creep surprises.', duration: '2–3 days' },
-  { number: '03', title: 'Design & Build', body: 'Our team gets to work. You receive regular updates and milestone previews — so there are never any surprises at delivery.', duration: 'Project-dependent' },
-  { number: '04', title: 'Review & Refine', body: "You give feedback on the deliverables. We iterate until it's exactly right. Two revision rounds are included in all packages.", duration: '3–5 days' },
-  { number: '05', title: 'Launch & Support', body: 'We deploy, go live, and then stick around. Post-launch support is included, and long-term retainers are available for ongoing growth.', duration: 'Ongoing' },
+  { number: '01', title: 'Discovery Call',       duration: '1–2 days',        body: 'We start with a focused conversation about your goals, audience, and constraints. No fluff — just the information we need to put together a smart proposal.' },
+  { number: '02', title: 'Strategy & Proposal',  duration: '2–3 days',        body: 'Based on discovery, we deliver a clear scope, timeline, and fixed price. No hourly billing, no scope creep surprises.' },
+  { number: '03', title: 'Design & Build',       duration: 'Project-dependent', body: 'Our team gets to work. You receive regular updates and milestone previews — so there are never any surprises at delivery.' },
+  { number: '04', title: 'Review & Refine',      duration: '3–5 days',        body: "You give feedback on the deliverables. We iterate until it's exactly right. Two revision rounds are included in all packages." },
+  { number: '05', title: 'Launch & Support',     duration: 'Ongoing',         body: 'We deploy, go live, and then stick around. Post-launch support is included, and long-term retainers are available for ongoing growth.' },
 ]
 
 function Step({ step, index }: { step: typeof steps[0]; index: number }) {
@@ -40,7 +40,7 @@ function Step({ step, index }: { step: typeof steps[0]; index: number }) {
           <span className="font-syne font-extrabold text-lg md:text-xl text-[#2C6FED]">{step.number}</span>
         </div>
         {index < steps.length - 1 && (
-          <div className="w-px flex-1 mt-3 min-h-[40px]" style={{ background: `linear-gradient(to bottom, var(--border), transparent)` }} />
+          <div className="w-px flex-1 mt-3 min-h-[40px]" style={{ background: 'linear-gradient(to bottom, var(--border), transparent)' }} />
         )}
       </div>
       <div className="pb-10">
@@ -67,10 +67,7 @@ export default function ProcessSection() {
           <span className="font-mono text-[11px] uppercase tracking-widest mb-4 block" style={{ color: 'var(--text-faint)' }}>
             05 / Our Process
           </span>
-          <h2
-            className="font-syne font-extrabold leading-none mb-6"
-            style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}
-          >
+          <h2 className="font-syne font-extrabold leading-none mb-6" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}>
             How we work.<br />
             <span style={{ color: '#2C6FED' }}>No surprises.</span>
           </h2>

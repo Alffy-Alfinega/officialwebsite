@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://alffy.alfinega.com'
   const now  = new Date()
 
-  // ── Static pages (redirect-only sub-pages excluded) ──────────────────────
   const staticPages: MetadataRoute.Sitemap = [
     { url: base,                     lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
     { url: `${base}/services`,       lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
@@ -33,7 +32,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/data-handling`,  lastModified: now, changeFrequency: 'yearly',  priority: 0.3 },
   ]
 
-  // ── Service pages ────────────────────────────────────────────────────────
   const servicePages: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${base}/services/${slug}`,
     lastModified: now,
@@ -41,7 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  // ── Blog posts ───────────────────────────────────────────────────────────
   const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
     url: `${base}/blog/${slug}`,
     lastModified: now,

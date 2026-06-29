@@ -112,7 +112,7 @@ export default function OurStoryPage() {
                 <div key={i} className="mb-10 relative">
                   {/* Circular dot on the timeline line */}
                   <span
-                    className="absolute left-[-25px] top-1 w-3 h-3 rounded-full border-2 border-[#2C6FED]"
+                    className="absolute -left-[25px] top-1 w-3 h-3 rounded-full border-2 border-[#2C6FED]"
                     style={{ background: '#04040C' }}
                   />
                   <span className="font-mono text-[11px] text-[#2C6FED] uppercase tracking-widest block mb-1">{m.year}</span>

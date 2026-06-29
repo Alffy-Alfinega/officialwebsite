@@ -1,50 +1,29 @@
-// =============================================================================
-// ServicesSection.tsx — Home page services overview
-// Purpose: Displays all 12 services as a numbered list with staggered scroll-in
-// animation. Each row links to the service detail page. Used on homepage and also
-// available for reuse on the /services page.
-// =============================================================================
-
 'use client'
 
-// Next.js Link — enables client-side navigation to service detail pages
 import Link from 'next/link'
-// useRef: references DOM element for IntersectionObserver
-// useEffect: sets up observer on mount, tears it down on unmount
-// useState: tracks whether the row has scrolled into view
 import { useRef, useEffect, useState } from 'react'
 
-// Hardcoded service data — each entry has a URL slug, display number, title, and tagline
 const services = [
-  { slug: 'web-design', number: '01', title: 'Web Design & Development', tagline: 'Websites that convert visitors into customers' },
-  { slug: 'seo-marketing', number: '02', title: 'SEO & Digital Marketing', tagline: 'Rank higher. Reach further. Grow faster.' },
-  { slug: 'branding-design', number: '03', title: 'Branding & Graphic Design', tagline: 'Visual identity that sticks' },
-  { slug: 'media-production', number: '04', title: 'Video, Animation & Image Editing', tagline: 'Moving stories. Static perfection.' },
+  { slug: 'web-design',              number: '01', title: 'Web Design & Development',        tagline: 'Websites that convert visitors into customers' },
+  { slug: 'seo-marketing',           number: '02', title: 'SEO & Digital Marketing',         tagline: 'Rank higher. Reach further. Grow faster.' },
+  { slug: 'branding-design',         number: '03', title: 'Branding & Graphic Design',       tagline: 'Visual identity that sticks' },
+  { slug: 'media-production',        number: '04', title: 'Video, Animation & Image Editing', tagline: 'Moving stories. Static perfection.' },
   { slug: 'architectural-visualisation', number: '05', title: 'Architectural Visualisation', tagline: "See it before it's built" },
-  { slug: 'cybersecurity-data', number: '06', title: 'Cybersecurity & Data Services', tagline: 'Protect your data. Manage your scale.' },
+  { slug: 'cybersecurity-data',      number: '06', title: 'Cybersecurity & Data Services',   tagline: 'Protect your data. Manage your scale.' },
 ]
 
-// Derive a TypeScript type from the services array so we stay in sync
 type Service = typeof services[0]
 
-// ---------------------------------------------------------------------------
-// ServiceRow — a single clickable row in the services list
-// Animates in from the left when it scrolls into view, with progressive delay
-// based on its index so rows appear one after another
-// ---------------------------------------------------------------------------
 function ServiceRow({ service, index }: { service: Service; index: number }) {
-  // ref: attached to the <Link> so the observer knows which element to watch
-  const ref = useRef<HTMLAnchorElement>(null)
-  // visible: becomes true once this row has entered the viewport (triggers fade-in)
+  const ref     = useRef<HTMLAnchorElement>(null)
   const [visible, setVisible] = useState(false)
 
-  // Watch the row with IntersectionObserver and mark visible when it appears
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     )
     obs.observe(el)
     return () => obs.disconnect()
@@ -57,25 +36,21 @@ function ServiceRow({ service, index }: { service: Service; index: number }) {
       className="group flex items-center justify-between py-5 md:py-6 border-b hover:border-[#2C6FED]/30 transition-all duration-300"
       style={{
         borderColor: 'var(--border)',
-        // Slide-in-fade animation: each row's delay = index * 0.06s for staircase effect
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateX(0)' : 'translateX(-20px)',
         transition: `opacity 0.5s ease ${index * 0.06}s, transform 0.5s ease ${index * 0.06}s, border-color 0.3s ease`,
       }}
     >
-      {/* Left side: number + title */}
       <div className="flex items-center gap-6">
         <span className="font-mono text-[11px] w-6 shrink-0" style={{ color: 'var(--text-dimmer)' }}>{service.number}</span>
         <p className="font-syne font-semibold text-xl md:text-2xl group-hover:text-[#2C6FED] transition-colors duration-200" style={{ color: 'var(--text)' }}>
           {service.title}
         </p>
       </div>
-      {/* Right side: tagline (desktop only) + arrow icon */}
       <div className="flex items-center gap-6">
         <span className="hidden md:block font-outfit text-sm group-hover:text-[#BBBBDD] transition-colors" style={{ color: 'var(--text-faint)' }}>
           {service.tagline}
         </span>
-        {/* Arrow circle — two SVG paths: blue arrow on hover, grey arrow default */}
         <span className="w-8 h-8 rounded-full border group-hover:border-[#2C6FED] group-hover:bg-[#2C6FED]/10 flex items-center justify-center transition-all duration-300" style={{ borderColor: 'var(--border)' }}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="#2C6FED" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" strokeOpacity={0} className="group-hover:[stroke-opacity:1] transition-all" />
@@ -89,12 +64,9 @@ function ServiceRow({ service, index }: { service: Service; index: number }) {
 
 export default function ServicesSection() {
   return (
-    // Outer section wrapper with vertical padding and max-width constraint
     <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
-      {/* Header row: section label + headline on the left, description + link on the right */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
         <div>
-          {/* Section number and label */}
           <span className="font-mono text-[11px] uppercase tracking-widest mb-3 block" style={{ color: 'var(--text-faint)' }}>02 / What We Do</span>
           <h2
             className="font-syne font-extrabold leading-none"
@@ -104,7 +76,6 @@ export default function ServicesSection() {
             <span style={{ color: '#2C6FED' }}>One team.</span>
           </h2>
         </div>
-        {/* Right column: blurb + "View all services" link */}
         <div className="max-w-sm">
           <p className="font-outfit text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             Comprehensive digital solutions from a single expert agency. No outsourcing, no middlemen — just craft.
@@ -120,7 +91,6 @@ export default function ServicesSection() {
           </Link>
         </div>
       </div>
-      {/* Service rows — map over the data array, rendering one row per service */}
       <div>
         {services.map((s, i) => (
           <ServiceRow key={s.slug} service={s} index={i} />

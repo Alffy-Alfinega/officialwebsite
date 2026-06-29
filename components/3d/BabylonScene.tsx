@@ -1,5 +1,10 @@
 'use client'
 
+// BabylonScene — SSR-safe wrapper for BabylonSceneCanvas.
+// Dynamic import with ssr: false prevents Babylon.js (which uses browser APIs
+// like WebGL and window) from running during server-side rendering, which would
+// cause a build-time crash. The canvas only renders in the browser.
+
 import dynamic from 'next/dynamic'
 import type { SceneVariant } from './BabylonSceneCanvas'
 
@@ -10,9 +15,18 @@ const SceneCanvas = dynamic<{ variant?: SceneVariant }>(
   { ssr: false, loading: () => null },
 )
 
-export function BabylonScene({ className, variant = 'home' }: { className?: string; variant?: SceneVariant }) {
+// className is forwarded to the wrapper div so callers can set size.
+// The canvas inside fills 100% of the wrapper via `w-full h-full`.
+// The wrapper must have a defined height for the canvas to expand into.
+export function BabylonScene({
+  className,
+  variant = 'home',
+}: {
+  className?: string
+  variant?: SceneVariant
+}) {
   return (
-    <div className={className}>
+    <div className={className} style={{ width: '100%', height: '100%' }}>
       <SceneCanvas variant={variant} />
     </div>
   )
