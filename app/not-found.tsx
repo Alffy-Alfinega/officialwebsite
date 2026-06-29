@@ -1,27 +1,11 @@
 import Link from 'next/link'
-
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
-      <span
-        className="font-syne font-extrabold text-[10rem] leading-none select-none"
-        style={{ color: 'rgba(44,111,237,0.08)' }}
-      >
-        404
-      </span>
-      <h1 className="font-syne font-bold text-3xl text-white mt-4 mb-3 -mt-8">
-        Page not found
-      </h1>
-      <p className="font-outfit text-sm text-[#9A9ABB] mb-8 max-w-sm">
-        This page doesn&apos;t exist or may have moved. Head back to the home page and find what you&apos;re looking for.
-      </p>
-      <Link
-        href="/"
-        className="px-8 py-4 font-syne font-semibold text-sm text-white rounded-full transition-all duration-200 hover:opacity-90"
-        style={{ background: 'linear-gradient(135deg, #2C6FED, #1A52C4)' }}
-      >
-        Back to Home
-      </Link>
+    <div style={{ minHeight:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:40, textAlign:'center' }}>
+      <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'9rem', lineHeight:1, color:'rgba(44,111,237,0.07)', display:'block' }}>404</span>
+      <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:28, color:'#fff', marginTop:-24, marginBottom:12 }}>Page not found</h1>
+      <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:14, color:'#8A8AAA', marginBottom:28, maxWidth:340 }}>This page doesn't exist or has moved. Head back to the home page.</p>
+      <Link href="/" style={{ padding:'12px 28px', borderRadius:100, background:'linear-gradient(135deg,#2C6FED,#1A52C4)', color:'#fff', fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:14, textDecoration:'none' }}>Back to Home</Link>
     </div>
   )
 }

@@ -1,75 +1,33 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const testimonials = [
-  {
-    quote: 'Alffy redesigned our website from scratch. Within 6 weeks of launch, our inbound enquiries went from 4 a month to 23. The SEO work they layered on top has kept those numbers growing.',
-    author: 'Nakato Brenda', title: 'CEO, Savannah Foods Uganda', service: 'Website Design',
-    initials: 'NB', color: '#2C6FED', bg: 'linear-gradient(135deg, #0D1E3D, #0A1628)',
-  },
-  {
-    quote: 'They delivered a complete brand identity — logo, guidelines, packaging templates, and social kit — in under two weeks. Our Jumia store conversions improved by 40% after the rebrand.',
-    author: 'Ssekito Daniel', title: 'Founder, Kampala Honey Co.', service: 'Branding',
-    initials: 'SD', color: '#D4A843', bg: 'linear-gradient(135deg, #2A1E08, #1C1408)',
-  },
-  {
-    quote: 'We hired Alffy for an SEO audit and ended up engaging them for 3 months. We went from page 3 to position 4 on Google for our main search term. Real, measurable difference.',
-    author: 'Achieng Faith', title: 'Marketing Manager, Pearl Clinics Kampala', service: 'SEO',
-    initials: 'AF', color: '#2C6FED', bg: 'linear-gradient(135deg, #0C1435, #080E28)',
-  },
+const T = [
+  { quote:'Alffy redesigned our website from scratch. Within 6 weeks of launch, our inbound enquiries went from 4 a month to 23. The SEO work they layered on top has kept those numbers growing.', name:'Nakato Brenda', title:'CEO, Savannah Foods Uganda', svc:'Web Design', init:'NB', c:'#2C6FED' },
+  { quote:'They delivered a complete brand identity — logo, guidelines, packaging templates, and social kit — in under two weeks. Our Jumia store conversions improved by 40% after the rebrand.', name:'Ssekito Daniel', title:'Founder, Kampala Honey Co.', svc:'Branding', init:'SD', c:'#D4A843' },
+  { quote:'We hired Alffy for an SEO audit and ended up engaging them for 3 months. We went from page 3 to position 4 on Google for our main search term. Real, measurable difference.', name:'Achieng Faith', title:'Marketing Manager, Pearl Clinics Kampala', svc:'SEO', init:'AF', c:'#2C6FED' },
 ]
 
-function StarRating() {
+function Card({ t }: { t: typeof T[0] }) {
   return (
-    <div className="flex gap-1 mb-4" aria-label="5 star rating">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="13" height="13" viewBox="0 0 12 12" fill="#D4A843" aria-hidden="true">
-          <path d="M6 1l1.39 2.81L10.5 4.27 8.25 6.47l.53 3.07L6 8.03l-2.78 1.51.53-3.07L1.5 4.27l3.11-.46L6 1z" />
-        </svg>
-      ))}
-    </div>
-  )
-}
-
-function Avatar({ initials, color, bg }: { initials: string; color: string; bg: string }) {
-  return (
-    <div className="shrink-0 relative" style={{ width: 44, height: 44 }} aria-hidden="true">
-      <div className="absolute inset-0 rounded-full" style={{ border: `2px solid ${color}`, opacity: 0.35 }} />
-      <div className="absolute inset-[3px] rounded-full flex items-center justify-center" style={{ background: bg, border: `1px solid ${color}30` }}>
-        <span className="font-syne font-extrabold select-none tracking-tight" style={{ fontSize: 13, color, letterSpacing: '0.05em' }}>{initials}</span>
-      </div>
-      <div className="absolute inset-0 rounded-full" style={{ boxShadow: `0 0 10px ${color}30` }} />
-    </div>
-  )
-}
-
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
-  return (
-    <article
-      className="shrink-0 w-[340px] md:w-[400px] p-7 border rounded-2xl mr-4 flex flex-col justify-between"
-      style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
-    >
+    <article style={{ flexShrink:0, width:380, padding:'28px 28px 24px', border:'1px solid #1C1C34', borderRadius:16, background:'#0A0A16', marginRight:14, display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
       <div>
-        <StarRating />
-        <blockquote className="font-outfit text-sm leading-[1.8]" style={{ color: 'var(--text-muted)' }}>
-          &ldquo;{t.quote}&rdquo;
-        </blockquote>
+        <div style={{ display:'flex', gap:3, marginBottom:14 }}>
+          {Array.from({length:5}).map((_,i) => <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill="#D4A843"><path d="M6 1l1.39 2.81L10.5 4.27 8.25 6.47l.53 3.07L6 8.03l-2.78 1.51.53-3.07L1.5 4.27l3.11-.46L6 1z"/></svg>)}
+        </div>
+        <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#9A9ABB', lineHeight:1.8 }}>&ldquo;{t.quote}&rdquo;</p>
       </div>
-      <div className="mt-5 pt-5 border-t flex items-center justify-between gap-3" style={{ borderColor: 'var(--border)' }}>
-        <div className="flex items-center gap-3">
-          <Avatar initials={t.initials} color={t.color} bg={t.bg} />
+      <div style={{ marginTop:20, paddingTop:16, borderTop:'1px solid #1C1C34', display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+          <div style={{ width:38, height:38, borderRadius:'50%', border:`2px solid ${t.c}`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+            <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:12, color:t.c }}>{t.init}</span>
+          </div>
           <div>
-            <p className="font-syne font-semibold text-sm leading-tight" style={{ color: 'var(--text)' }}>{t.author}</p>
-            <p className="font-mono text-[10px] uppercase tracking-wide mt-0.5" style={{ color: 'var(--text-faint)' }}>{t.title}</p>
+            <p style={{ fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:13, color:'#E4E4F0', lineHeight:1.3 }}>{t.name}</p>
+            <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.05em' }}>{t.title}</p>
           </div>
         </div>
-        <span
-          className="shrink-0 inline-flex items-center px-3 py-1 rounded-full text-[9px] font-mono font-medium uppercase tracking-wide"
-          style={{ border: `1px solid ${t.color}30`, color: t.color, background: `${t.color}0D` }}
-        >
-          {t.service}
-        </span>
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, padding:'4px 10px', borderRadius:100, border:`1px solid ${t.c}40`, color:t.c, whiteSpace:'nowrap', flexShrink:0 }}>{t.svc}</span>
       </div>
     </article>
   )
@@ -77,60 +35,37 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 
 export default function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement>(null)
-  const [paused, setPaused] = useState(false)
   const posRef   = useRef(0)
-  const rafRef   = useRef<number | undefined>(undefined)
+  const [paused, setPaused] = useState(false)
 
   useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const speed = 0.5
-    const animate = () => {
-      if (!paused) {
-        posRef.current += speed
-        const halfW = track.scrollWidth / 2
-        if (posRef.current >= halfW) posRef.current = 0
-        track.style.transform = `translateX(-${posRef.current}px)`
+    let raf: number
+    const tick = () => {
+      if (!paused && trackRef.current) {
+        posRef.current += 0.5
+        const half = trackRef.current.scrollWidth / 2
+        if (posRef.current >= half) posRef.current = 0
+        trackRef.current.style.transform = `translateX(-${posRef.current}px)`
       }
-      rafRef.current = requestAnimationFrame(animate)
+      raf = requestAnimationFrame(tick)
     }
-    rafRef.current = requestAnimationFrame(animate)
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
   }, [paused])
 
   return (
-    <section className="py-20 md:py-28 overflow-x-hidden" aria-label="Client testimonials">
-      <div className="px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto mb-12">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            <span className="font-mono text-[11px] uppercase tracking-widest mb-3 block" style={{ color: 'var(--text-faint)' }}>Client Feedback</span>
-            <h2 className="font-syne font-extrabold" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', color: 'var(--text)' }}>
-              What clients say.
-            </h2>
-          </div>
-          <div className="flex gap-8">
-            {[{ v: '5★', l: 'Standard', c: '#D4A843' }, { v: '50+', l: '2026 Goal' }, { v: '95%', l: 'Target' }].map(({ v, l, c }) => (
-              <div key={l} className="text-center">
-                <p className="font-syne font-bold text-2xl" style={{ color: c || 'var(--text)' }}>{v}</p>
-                <p className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>{l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section style={{ padding:'80px 0', overflow:'hidden' }}>
+      <div style={{ maxWidth:1440, margin:'0 auto', padding:'0 40px 40px' }}>
+        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:12 }}>Client Feedback</p>
+        <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,4vw,3.5rem)', lineHeight:0.95, letterSpacing:'-0.02em', color:'#E4E4F0' }}>What clients say.</h2>
       </div>
-
       <div
-        className="marquee-wrapper cursor-pointer select-none"
+        style={{ overflow:'hidden', cursor:'pointer' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-        onTouchEnd={() => setPaused(false)}
       >
-        <div ref={trackRef} className="flex will-change-transform">
-          {testimonials.map((t, i) => <TestimonialCard key={`a${i}`} t={t} />)}
-          {testimonials.map((t, i) => (
-            <div key={`b${i}`} aria-hidden="true"><TestimonialCard t={t} /></div>
-          ))}
+        <div ref={trackRef} style={{ display:'flex', willChange:'transform' }}>
+          {[...T,...T].map((t,i) => <Card key={i} t={t} />)}
         </div>
       </div>
     </section>

@@ -1,67 +1,37 @@
 @import 'tailwindcss';
 
-/* ─── Design tokens ──────────────────────────────────────────────────────────
-   Single source of truth. @theme registers tokens as Tailwind utility classes.
-   :root exposes them as CSS variables for inline style="" use throughout the app.
-   Values are identical in both blocks — never drift between them.
-──────────────────────────────────────────────────────────────────────────── */
-
 @theme {
-  /* Font families → generates font-syne, font-outfit, font-mono utilities */
-  --font-syne:   'Syne', sans-serif;
+  --font-syne: 'Syne', sans-serif;
   --font-outfit: 'Outfit', sans-serif;
-  --font-mono:   'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Brand colours → generates bg-blue, text-blue, border-blue, etc. */
-  --color-blue:       #2C6FED;
-  --color-blue-dim:   #1A52C4;
-  --color-gold:       #D4A843;
+  --color-blue: #2C6FED;
+  --color-blue-dim: #1A52C4;
+  --color-gold: #D4A843;
+  --color-surface: #0A0A16;
+  --color-surface-2: #10101E;
+  --color-border: #1C1C34;
 
-  /* Keyframe animations (registered for Tailwind animate-* utilities) */
-  --animate-fade-up:    fadeUp   0.7s ease forwards;
-  --animate-fade-in:    fadeIn   0.5s ease forwards;
-  --animate-marquee:    marquee 40s linear infinite;
-  --animate-spin-slow:  spin    12s linear infinite;
+  --animate-fade-up: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fadeIn 0.6s ease forwards;
+  --animate-marquee: marquee 40s linear infinite;
 }
 
-/* CSS custom properties — used in style="" attributes and custom utility classes */
 :root {
-  /* Backgrounds */
-  --bg:        #04040C;
-  --bg-nav:    rgba(4, 4, 12, 0.92);
-
-  /* Surfaces */
-  --surface:   #0A0A16;
+  --bg: #04040C;
+  --bg-nav: rgba(4, 4, 12, 0.88);
+  --surface: #0A0A16;
   --surface-2: #10101E;
-  --surface-3: rgba(7, 7, 18, 0.5);
-
-  /* Borders */
-  --border:    #1C1C34;
-  --border-2:  #111120;
-
-  /* Text scale */
-  --text:        #E4E4F0;
-  --text-muted:  #CCCCEE;
-  --text-faint:  #8A8AAA;
-  --text-dimmer: #7A7A9A;
-
-  /* Brand */
-  --blue:      #2C6FED;
-  --blue-dim:  #1A52C4;
-  --gold:      #D4A843;
-
-  /* Tag component */
-  --tag-bg:     transparent;
-  --tag-border: #2A2A4A;
-  --tag-color:  #9090B8;
-
-  /* Font families (for style="" fallback) */
-  --font-syne:   'Syne', sans-serif;
-  --font-outfit: 'Outfit', sans-serif;
-  --font-mono:   'JetBrains Mono', monospace;
+  --border: #1C1C34;
+  --border-subtle: #111120;
+  --text: #E4E4F0;
+  --text-muted: #CCCCEE;
+  --text-faint: #8A8AAA;
+  --text-dimmer: #6A6A8A;
+  --blue: #2C6FED;
+  --blue-dim: #1A52C4;
+  --gold: #D4A843;
 }
-
-/* ─── Reset & base ──────────────────────────────────────────────────────────── */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -70,121 +40,41 @@
 }
 
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 15%   0%, rgba(44, 111, 237, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 85% 100%, rgba(44, 111, 237, 0.05) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 50%  50%, rgba(44, 111, 237, 0.03) 0%, transparent 70%);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--text);
-  font-family: var(--font-outfit);
+  font-family: 'Outfit', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1C1C34; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
-::-webkit-scrollbar              { width: 4px; }
-::-webkit-scrollbar-track        { background: var(--bg); }
-::-webkit-scrollbar-thumb        { background: #141428; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover  { background: var(--blue); }
+/* Selection */
+::selection { background: var(--blue); color: #fff; }
 
-/* ─── Selection & focus ─────────────────────────────────────────────────────── */
+/* Focus */
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
-::selection   { background: var(--blue); color: #fff; }
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
-
-/* ─── Utility classes ───────────────────────────────────────────────────────── */
-
-/* Subtle blueprint grid overlay */
-.grid-lines {
-  background-image:
-    linear-gradient(rgba(44, 111, 237, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(44, 111, 237, 0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
-/* Film-grain noise texture via inline SVG pseudo-element */
-.noise::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Glow text effects */
-.blue-glow { text-shadow: 0 0 40px rgba(44, 111, 237, 0.5); }
-.gold-glow { text-shadow: 0 0 30px rgba(212, 168, 67, 0.4); }
-
-/* Card hover lift */
-.card-hover {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: var(--blue) !important;
-}
-
-/* Horizontal rule */
-hr.rule {
-  border: none;
-  border-top: 1px solid var(--border);
-}
-
-/* Tag pill component */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border: 1px solid var(--tag-border);
-  color: var(--tag-color);
-  background: var(--tag-bg);
-}
-.tag.active { border-color: var(--blue); color: var(--blue); }
-.tag.gold   { border-color: var(--gold); color: var(--gold); }
-
-/* Stat number (hero counters) */
-.stat-number {
-  font-family: var(--font-syne);
-  font-weight: 800;
-  color: var(--blue);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Marquee container */
-.marquee-wrapper { overflow: hidden; }
-
-/* ─── Keyframes ─────────────────────────────────────────────────────────────── */
-
+/* Keyframes */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { clip-path: inset(0 0 100% 0); transform: translateY(20px); }
-  to   { clip-path: inset(0 0 0% 0);   transform: translateY(0); }
 }
 
 @keyframes marquee {
@@ -197,6 +87,42 @@ hr.rule {
   to   { transform: scaleX(1); }
 }
 
-.text-reveal {
-  animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
+
+/* Utilities */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(44,111,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(44,111,237,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.blue-glow { text-shadow: 0 0 48px rgba(44,111,237,0.55); }
+.gold-glow { text-shadow: 0 0 32px rgba(212,168,67,0.45); }
+
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(44,111,237,0.45) !important;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid #2A2A4A;
+  color: #9090B8;
+}
+.tag-blue { border-color: rgba(44,111,237,0.4); color: #2C6FED; }
+.tag-gold { border-color: rgba(212,168,67,0.4); color: #D4A843; }

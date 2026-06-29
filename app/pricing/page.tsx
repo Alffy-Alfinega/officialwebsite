@@ -1,322 +1,104 @@
-// ============================================================
-// Pricing Page — Shows transparent pricing for all services
-// Displays three categories of packages: Website, SEO, and
-// Design & Branding. Each package has a pricing card, features
-// list, and a call-to-action. Also includes a FAQ section.
-// Route: /pricing
-// ============================================================
-
-// Import Metadata for setting the page title and SEO description
 import type { Metadata } from 'next'
-
-// Import Link for client-side navigation
 import Link from 'next/link'
-
-// Import the PricingFAQ component — renders common pricing questions
 import PricingFAQ from '@/components/ui/PricingFAQ'
 
-// Import the 3D Babylon.js scene component for background decoration
-import { BabylonScene } from '@/components/3d/BabylonScene'
-
-// Metadata for SEO
 export const metadata: Metadata = {
-  title: 'Pricing — Web Design, SEO & Branding Packages | Alffy Kampala',
-  description: 'Transparent, fixed pricing for web design, SEO, branding, and digital services from Alffy (Alfinega), Kampala Uganda. Starter websites from UGX 850,000.',
+  title: 'Pricing',
+  description: 'Transparent UGX pricing for web design, SEO, and branding services. No hidden fees.',
 }
 
-// Array of website packages shown as large pricing cards
-const webPackages = [
-  {
-    name: 'Starter',
-    price: '850,000',
-    currency: 'UGX',
-    period: 'one-time',
-    tagline: 'For small businesses launching online.',
-    features: [
-      'Up to 5 pages',
-      'Responsive mobile-first design',
-      'Contact form',
-      'Basic SEO setup',
-      'CMS integration',
-      '30-day post-launch support',
-    ],
-    cta: 'Get Started',
-    highlight: false, // whether this card is visually emphasized
-  },
-  {
-    name: 'Growth',
-    price: '2,200,000',
-    currency: 'UGX',
-    period: 'one-time',
-    tagline: 'For growing businesses serious about converting.',
-    features: [
-      'Up to 15 pages',
-      'Custom UI/UX design',
-      'E-commerce ready',
-      'Advanced SEO setup',
-      'Analytics + conversion tracking',
-      'Speed optimisation',
-      '90-day post-launch support',
-    ],
-    cta: 'Most Popular — Get Started',
-    highlight: true, // This card is highlighted as the recommended option
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    currency: '',
-    period: 'quote',
-    tagline: 'For large organisations with complex needs.',
-    features: [
-      'Unlimited pages & sections',
-      'Fully custom architecture',
-      'API & third-party integrations',
-      'Ongoing SEO retainer included',
-      'Priority support SLA',
-      'Dedicated account manager',
-    ],
-    cta: 'Request a Quote',
-    highlight: false,
-  },
+const WEB = [
+  { tier:'Starter', price:'850,000', note:'One-time', features:['5-page website','Mobile responsive','Basic SEO setup','Contact form','1 revision round','Delivered in 7 days'], cta:'Get Started', featured:false },
+  { tier:'Growth', price:'2,200,000', note:'One-time', features:['15-page website','Advanced SEO setup','Blog system','Analytics integration','2 revision rounds','Priority support','Delivered in 14 days'], cta:'Most Popular', featured:true },
+  { tier:'Enterprise', price:'Custom', note:'One-time', features:['Unlimited pages','Custom functionality','E-commerce capable','Full SEO strategy','Dedicated project manager','Unlimited revisions','Priority delivery'], cta:'Contact Us', featured:false },
 ]
 
-// Array of SEO packages shown as smaller cards
-const seoPackages = [
-  {
-    name: 'Local SEO',
-    price: '450,000',
-    description: 'Dominate Kampala and Uganda search results.',
-    features: ['Google Business Profile optimisation', 'Local citation building', 'On-page optimisation', 'Monthly ranking report'],
-  },
-  {
-    name: 'Growth SEO',
-    price: '900,000',
-    description: 'Comprehensive SEO for competitive markets.',
-    features: ['Technical SEO audit', 'Keyword strategy', 'Content optimisation', 'Link building', 'Bi-weekly reports'],
-  },
-  {
-    name: 'Authority SEO',
-    price: '1,800,000',
-    description: 'Full-scale SEO for national and global brands.',
-    features: ['All Growth features', 'Advanced link acquisition', '4 content pieces per month', 'Competitor tracking', 'Weekly strategy calls'],
-  },
+const SEO = [
+  { tier:'Local SEO', price:'450,000', features:['Google Business optimisation','5 target keywords','Monthly ranking report','On-page optimisation'] },
+  { tier:'Growth SEO', price:'900,000', features:['15 target keywords','Content strategy','Technical SEO audit','Link building','Bi-weekly reports'] },
+  { tier:'Authority SEO', price:'1,800,000', features:['Unlimited keywords','Full content production','Advanced link building','Competitor monitoring','Weekly reports'] },
 ]
 
-// Array of design & branding packages shown as smaller cards
-const designPackages = [
-  {
-    name: 'Brand Starter',
-    price: '600,000',
-    period: 'one-time',
-    description: 'Logo + essential brand identity.',
-    features: ['3 logo concepts', 'Brand colour palette', 'Typography selection', 'All logo file formats'],
-  },
-  {
-    name: 'Full Brand',
-    price: '1,400,000',
-    period: 'one-time',
-    description: 'Complete brand identity system.',
-    features: ['All Starter features', 'Brand guidelines document', 'Stationery design', 'Social media kit', 'Icon set'],
-  },
-  {
-    name: 'Brand + Web',
-    price: '3,200,000',
-    period: 'one-time',
-    description: 'Unified brand identity and website.',
-    features: ['Full Brand package', 'Growth website package', 'Matching visual system', 'Launch campaign assets'],
-  },
+const BRAND = [
+  { tier:'Brand Starter', price:'600,000', features:['Logo design (3 concepts)','Brand colour palette','Typography system','PNG/SVG files'] },
+  { tier:'Full Brand', price:'1,400,000', features:['Everything in Starter','Brand guidelines PDF','Social media kit','Business card design','Email signature'] },
+  { tier:'Brand + Web', price:'3,200,000', features:['Full Brand package','10-page website','Brand applied throughout','SEO setup','Best value bundle'] },
 ]
 
-// WebCard Component — renders a single large pricing card for
-// website packages. Accepts a package object and displays its
-// name, price, features, and a CTA button.
-function WebCard({ pkg }: { pkg: typeof webPackages[0] }) {
-  return (
-    <div className={`relative flex flex-col p-8 rounded-2xl border transition-all ${pkg.highlight ? 'border-[#2C6FED] bg-[#2C6FED]/5' : 'border-[#1C1C34] bg-[#0A0A16]'}`}>
-      {pkg.highlight && (
-        <span className="absolute -top-px left-6 font-mono text-[10px] uppercase tracking-widest bg-[#2C6FED] text-white px-3 py-1 rounded-b-lg">
-          Recommended
-        </span>
-      )}
-      {/* Card header — name, tagline, and price */}
-      <div className="mb-6">
-        <h3 className={`font-syne font-bold text-xl mb-1 ${pkg.highlight ? 'text-[#2C6FED]' : 'text-white'}`}>{pkg.name}</h3>
-        <p className="font-outfit text-xs text-[#8A8AAA] mb-4">{pkg.tagline}</p>
-        {/* Price display — currency symbol + amount + period */}
-        <div className="flex items-end gap-1.5">
-          {pkg.currency && <span className="font-mono text-xs text-[#8A8AAA] mb-1.5">{pkg.currency}</span>}
-          <span className="font-syne font-extrabold text-3xl text-white">{pkg.price}</span>
-          {pkg.period !== 'quote' && <span className="font-mono text-[11px] text-[#8A8AAA] mb-1">/ {pkg.period}</span>}
-        </div>
-      </div>
-      {/* Features list with checkmark icons */}
-      <ul className="space-y-2.5 flex-1 mb-8">
-        {pkg.features.map((f) => (
-          <li key={f} className="flex items-center gap-3 font-outfit text-sm text-[#BBBBDD]">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={pkg.highlight ? 'text-[#2C6FED]' : 'text-[#7A7A9A]'}>
-              <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {f}
-          </li>
-        ))}
-      </ul>
-      {/* Call-to-action button linking to contact page */}
-      <Link href="/contact" className={`block text-center px-6 py-3.5 font-syne font-semibold text-sm rounded-full transition-all ${pkg.highlight ? 'bg-[#2C6FED] text-white hover:opacity-90' : 'border border-[#333] text-[#ccc] hover:border-[#2C6FED] hover:text-[#2C6FED]'}`}>
-        {pkg.cta}
-      </Link>
-    </div>
-  )
-}
+const S: React.CSSProperties = { fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(1.6rem,3vw,2.2rem)', lineHeight:0.95, letterSpacing:'-0.02em', color:'#E4E4F0', marginBottom:32 }
 
-// SmallCard Component — renders a smaller pricing card used for
-// SEO and Design packages. Takes a package object with optional
-// period field.
-function SmallCard({ pkg }: { pkg: typeof seoPackages[0] & { period?: string } }) {
-  const periodLabel = pkg.period === 'one-time' ? 'one-time' : '/ mo'
-  return (
-    <div className="p-6 border border-[#1C1C34] rounded-2xl hover:border-[#2C6FED]/25 transition-all card-hover group flex flex-col">
-      <h3 className="font-syne font-bold text-lg text-white mb-0.5 group-hover:text-[#2C6FED] transition-colors">{pkg.name}</h3>
-      {/* Price row */}
-      <div className="flex items-end gap-1 mb-3">
-        <span className="font-mono text-[10px] text-[#8A8AAA] mb-1">UGX</span>
-        <span className="font-syne font-extrabold text-2xl text-[#2C6FED]">{pkg.price}</span>
-        <span className="font-mono text-[10px] text-[#8A8AAA] mb-0.5">{periodLabel}</span>
-      </div>
-      <p className="font-outfit text-xs text-[#9A9ABB] mb-4 leading-relaxed">{pkg.description}</p>
-      {/* Features list */}
-      <ul className="space-y-1.5 flex-1">
-        {pkg.features.map((f) => (
-          <li key={f} className="flex items-start gap-2 font-outfit text-xs text-[#AAAACC]">
-            <span className="text-[#2C6FED] mt-0.5 shrink-0">✓</span> {f}
-          </li>
-        ))}
-      </ul>
-      <Link href="/contact" className="mt-5 block text-center px-4 py-2.5 font-syne font-semibold text-xs border border-[#222] text-[#9A9ABB] rounded-full hover:border-[#2C6FED] hover:text-[#2C6FED] transition-colors">
-        Get Started
-      </Link>
-    </div>
-  )
-}
-
-// Main component for the Pricing page. Default export.
 export default function PricingPage() {
   return (
-    <div className="pt-[68px]">
-      {/* Hero + All Pricing Sections */}
-      <section className="relative py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto overflow-hidden">
-        {/* 3D background scene */}
-        <div className="absolute right-0 top-0 w-1/3 h-64 opacity-100 pointer-events-none">
-          <BabylonScene variant="pricing" className="w-full h-full" />
-        </div>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 50% 80% at 90% 20%, transparent 0%, var(--bg) 70%)' }} />
-        <div className="relative z-10">
-        {/* Header */}
-        <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Pricing</span>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-4">
-          <h1 className="font-syne font-extrabold text-white leading-none" style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', letterSpacing: '-0.03em' }}>
-            Transparent.<br /><span style={{ color: '#2C6FED' }}>Fair. Clear.</span>
+    <div style={{ paddingTop:68, minHeight:'100vh' }}>
+      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px' }}>
+
+        <div style={{ marginBottom:64 }}>
+          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Transparent Pricing</p>
+          <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
+            No hidden fees.<br /><span style={{ color:'#2C6FED' }}>Ever.</span>
           </h1>
-          <div className="max-w-xs">
-            <p className="font-outfit text-[#9A9ABB] text-sm leading-relaxed mb-3">
-              All prices shown in Ugandan Shillings. Fixed-price projects — no hourly billing, no surprises.
-            </p>
-            {/* Status indicator */}
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#2C6FED] animate-pulse" />
-              <span className="font-outfit text-xs text-[#8A8AAA]">Currently accepting new clients</span>
+          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:480, lineHeight:1.7 }}>
+            Every price is in Uganda Shillings (UGX). Fixed quotes, no hourly billing, no surprise invoices.
+          </p>
+        </div>
+
+        {/* Web */}
+        <h2 style={S}>Website Design & Development</h2>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:16, marginBottom:72 }}>
+          {WEB.map(p => (
+            <div key={p.tier} style={{ padding:'28px 28px 32px', border:`1px solid ${p.featured ? '#2C6FED' : '#1C1C34'}`, borderRadius:16, background: p.featured ? 'rgba(44,111,237,0.05)' : '#0A0A16', position:'relative' }}>
+              {p.featured && <span style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'#2C6FED', color:'#fff', fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:11, padding:'4px 14px', borderRadius:100 }}>RECOMMENDED</span>}
+              <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:10 }}>{p.tier}</p>
+              <div style={{ marginBottom:4 }}>
+                <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:p.price==='Custom'?32:28, color: p.featured ? '#2C6FED' : '#E4E4F0' }}>{p.price==='Custom' ? 'Custom' : `UGX ${p.price}`}</span>
+              </div>
+              <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:12, color:'#6A6A8A', marginBottom:20 }}>{p.note}</p>
+              <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:8, marginBottom:24 }}>
+                {p.features.map(f => <li key={f} style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#9A9ABB', display:'flex', alignItems:'center', gap:8 }}>
+                  <span style={{ color:'#2C6FED', fontSize:14 }}>✓</span>{f}
+                </li>)}
+              </ul>
+              <Link href="/contact" style={{ display:'block', textAlign:'center', padding:'12px 0', borderRadius:100, textDecoration:'none', background: p.featured ? 'linear-gradient(135deg,#2C6FED,#1A52C4)' : 'transparent', color: p.featured ? '#fff' : '#2C6FED', fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:13, border: p.featured ? 'none' : '1px solid #2C6FED' }}>{p.cta}</Link>
             </div>
-          </div>
+          ))}
         </div>
 
-        <div className="h-px bg-[#1C1C34] mb-20" />
-
-        {/* Website Packages Section — 3 cards in a row */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="font-syne font-bold text-2xl text-white mb-1">Website Packages</h2>
-              <p className="font-outfit text-sm text-[#9A9ABB]">One-time investment — you own everything at delivery.</p>
+        {/* SEO */}
+        <h2 style={S}>SEO & Digital Marketing <span style={{ fontFamily:"'Outfit',sans-serif", fontWeight:400, fontSize:14, color:'#6A6A8A' }}>monthly retainer</span></h2>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:14, marginBottom:72 }}>
+          {SEO.map(p => (
+            <div key={p.tier} style={{ padding:'24px 24px 28px', border:'1px solid #1C1C34', borderRadius:14, background:'#0A0A16' }}>
+              <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:10 }}>{p.tier}</p>
+              <p style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:26, color:'#E4E4F0', marginBottom:4 }}>UGX {p.price}</p>
+              <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:12, color:'#6A6A8A', marginBottom:18 }}>per month · 3-month minimum</p>
+              <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:7 }}>
+                {p.features.map(f => <li key={f} style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#9A9ABB', display:'flex', alignItems:'center', gap:8 }}>
+                  <span style={{ color:'#2C6FED' }}>✓</span>{f}
+                </li>)}
+              </ul>
             </div>
-            <Link href="/services/web-design" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
-              Web Design service →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {webPackages.map((pkg) => <WebCard key={pkg.name} pkg={pkg} />)}
-          </div>
+          ))}
         </div>
 
-        {/* SEO Packages Section */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="font-syne font-bold text-2xl text-white mb-1">SEO Packages</h2>
-              <p className="font-outfit text-sm text-[#9A9ABB]">Monthly retainers — minimum 3 months, cancel anytime after.</p>
+        {/* Branding */}
+        <h2 style={S}>Branding & Graphic Design</h2>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:14, marginBottom:72 }}>
+          {BRAND.map(p => (
+            <div key={p.tier} style={{ padding:'24px 24px 28px', border:'1px solid #1C1C34', borderRadius:14, background:'#0A0A16' }}>
+              <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:10 }}>{p.tier}</p>
+              <p style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:26, color:'#E4E4F0', marginBottom:4 }}>UGX {p.price}</p>
+              <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:12, color:'#6A6A8A', marginBottom:18 }}>one-time</p>
+              <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:7 }}>
+                {p.features.map(f => <li key={f} style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#9A9ABB', display:'flex', alignItems:'center', gap:8 }}>
+                  <span style={{ color:'#D4A843' }}>✓</span>{f}
+                </li>)}
+              </ul>
             </div>
-            <Link href="/services/seo-marketing" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
-              SEO service →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {seoPackages.map((pkg) => <SmallCard key={pkg.name} pkg={pkg} />)}
-          </div>
+          ))}
         </div>
 
-        {/* Design & Branding Packages Section */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="font-syne font-bold text-2xl text-white mb-1">Design & Branding Packages</h2>
-              <p className="font-outfit text-sm text-[#9A9ABB]">One-time project fees. Revisions included.</p>
-            </div>
-            <Link href="/services/branding-design" className="font-mono text-[11px] text-[#8A8AAA] hover:text-[#2C6FED] uppercase tracking-widest transition-colors">
-              Branding service →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {designPackages.map((pkg) => <SmallCard key={pkg.name} pkg={pkg} />)}
-          </div>
-        </div>
-
-        {/* Custom Quote Banner — for services without fixed packages
-            (video, animation, architectural design, etc.) */}
-        <div className="mb-20 relative rounded-3xl border border-[#2C6FED]/20 bg-[#2C6FED]/5 p-10 md:p-14 overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full pointer-events-none"
-            style={{ background: 'radial-gradient(circle, rgba(44,111,237,0.08) 0%, transparent 70%)' }} />
-          <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div>
-              <span className="font-mono text-[11px] text-[#2C6FED]/60 uppercase tracking-widest block mb-2">Other Services</span>
-              <h3 className="font-syne font-bold text-2xl md:text-3xl text-white mb-2">Video, Animation & More</h3>
-              <p className="font-outfit text-sm text-[#AAAACC] max-w-md">
-                Video editing, 2D/3D animation, architectural visualisation, image editing, content creation, and digital marketing campaigns are all priced per project. Get in touch to discuss scope and receive a tailored quote.
-              </p>
-            </div>
-            <Link href="/contact" className="shrink-0 px-8 py-4 font-syne font-semibold text-sm text-white rounded-full hover:opacity-90 transition-all text-center" style={{ background: 'linear-gradient(135deg, #2C6FED, #1A52C4)' }}>
-              Request a Custom Quote
-            </Link>
-          </div>
-        </div>
-
-        {/* FAQ Section — left side has heading, right side renders the
-            PricingFAQ component */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div>
-            <span className="font-mono text-[11px] text-[#8A8AAA] uppercase tracking-widest mb-4 block">Have questions?</span>
-            <h2 className="font-syne font-extrabold text-white leading-none mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.025em' }}>
-              Everything you<br />need to know.
-            </h2>
-            <p className="font-outfit text-sm text-[#9A9ABB] leading-relaxed mb-6">
-              Can&apos;t find your answer here? Email us at{' '}
-               <a href="mailto:contact@alfinega.com" className="text-[#2C6FED] hover:underline">
-                contact@alfinega.com
-              </a>{' '}
-              — we reply within 24 hours.
-            </p>
-          </div>
-          <PricingFAQ />
-        </div>
-        </div>
-      </section>
+        <PricingFAQ />
+      </div>
     </div>
   )
 }

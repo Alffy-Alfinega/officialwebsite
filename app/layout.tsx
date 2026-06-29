@@ -1,107 +1,55 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
-import Navbar                from '@/components/nav/Navbar'
-import Footer                from '@/components/layout/Footer'
-import SmoothScrollProvider  from '@/components/layout/SmoothScrollProvider'
-import CookieBanner          from '@/components/ui/CookieBanner'
-import PagePreloader         from '@/components/ui/PagePreloader'
-import { Analytics }         from '@vercel/analytics/next'
-import { SpeedInsights }     from '@vercel/speed-insights/next'
+import Navbar        from '@/components/nav/Navbar'
+import Footer        from '@/components/layout/Footer'
+import LenisProvider from '@/components/layout/LenisProvider'
+import Preloader     from '@/components/ui/Preloader'
+import CookieBanner  from '@/components/ui/CookieBanner'
+import { Analytics }    from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
+const GA = 'G-5EKJN7MWHC'
+const BASE = 'https://alffy.alfinega.com'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://alffy.alfinega.com'),
+  metadataBase: new URL(BASE),
   title: {
     default:  'Alffy (Alfinega) — Web Design, SEO & Digital Agency | Kampala, Uganda',
-    template: '%s | Alffy (Alfinega) — Kampala, Uganda',
+    template: '%s | Alffy (Alfinega)',
   },
-  description: 'Alffy (Alfinega) is a digital agency in Kampala, Uganda delivering web design, SEO, branding, animation, and digital marketing across East Africa.',
+  description: 'Alffy (Alfinega) is a full-service digital agency in Kampala, Uganda — web design, SEO, branding, animation, and digital marketing across East Africa.',
   keywords: [
-    'web design Uganda', 'web design Kampala', 'SEO agency Kampala', 'SEO Uganda',
-    'digital agency Uganda', 'digital agency Kampala', 'branding Kampala', 'branding Uganda',
-    '3D animation Uganda', 'digital marketing East Africa', 'digital marketing Uganda',
-    'graphic design Kampala', 'video editing Uganda', 'website design Uganda',
-    'Alfinega', 'Alffy', 'Makindye Kampala agency', 'content creation Uganda',
-    'architectural design Uganda', 'image editing Uganda',
+    'web design Uganda','web design Kampala','SEO agency Uganda','digital agency Kampala',
+    'branding Uganda','digital marketing East Africa','Alfinega','Alffy',
+    'graphic design Kampala','video editing Uganda','website design Uganda',
   ],
   openGraph: {
     title: 'Alffy (Alfinega) — Web Design, SEO & Digital Agency | Kampala, Uganda',
-    description: 'Full-service digital agency in Kampala, Uganda — web design, SEO, branding, animation, and digital marketing for businesses across East Africa.',
-    url: 'https://alffy.alfinega.com',
-    siteName: 'Alffy (Alfinega)',
-    locale: 'en_UG',
-    type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Alffy (Alfinega) Digital Agency — Kampala, Uganda' }],
+    description: 'Full-service digital agency in Kampala, Uganda.',
+    url: BASE, siteName: 'Alffy (Alfinega)', locale: 'en_UG', type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Alffy (Alfinega) — Web Design, SEO & Digital Agency | Kampala, Uganda',
-    description: 'Full-service digital agency in Kampala, Uganda — web design, SEO, branding, animation, and digital marketing.',
-    images: ['/og-image.png'],
-    site: '@alfinega',
-    creator: '@alfinega',
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico',       sizes: '48x48 32x32 16x16', type: 'image/x-icon' },
-      { url: '/favicon-32x32.png', sizes: '32x32',             type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16',             type: 'image/png' },
-    ],
-    shortcut: '/favicon-32x32.png',
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-  },
+  twitter: { card:'summary_large_image', site:'@Alffy_Alfinega', images:['/og-image.png'] },
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
   manifest: '/manifest.json',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
-  },
-  alternates: { canonical: 'https://alffy.alfinega.com' },
+  robots: { index: true, follow: true },
+  alternates: { canonical: BASE },
 }
 
-const GA_ID = 'G-5EKJN7MWHC'
-
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://alffy.alfinega.com',
-  name: 'Alffy (Alfinega)',
-  alternateName: ['Alffy', 'Alfinega'],
-  description: 'Full-service digital agency in Kampala, Uganda — web design, SEO, branding, 3D animation, video editing, graphic design, and digital marketing.',
-  url: 'https://alffy.alfinega.com',
-  telephone: '+256747113059',
-  email: 'contact@alfinega.com',
-  foundingDate: '2025-01-01',
-  image: 'https://alffy.alfinega.com/og-image.png',
-  logo: 'https://alffy.alfinega.com/logo.png',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Makindye',
-    addressLocality: 'Kampala',
-    addressCountry: 'UG',
-  },
-  geo: { '@type': 'GeoCoordinates', latitude: 0.2886, longitude: 32.5825 },
-  openingHours: 'Mo-Su 00:00-23:59',
-  priceRange: '$$',
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Digital Agency Services',
-    itemListElement: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Design & Development' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SEO & Digital Marketing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Branding & Graphic Design' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Video, Animation & Image Editing' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Architectural Visualisation' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cybersecurity & Data Services' } },
-    ],
-  },
-  sameAs: [
-    'https://www.facebook.com/alffyalfinega',
+const ld = {
+  '@context':'https://schema.org','@type':'LocalBusiness',
+  name:'Alffy (Alfinega)', url: BASE,
+  telephone:'+256747113059', email:'contact@alfinega.com',
+  foundingDate:'2025-01-01',
+  address:{ '@type':'PostalAddress', streetAddress:'Makindye', addressLocality:'Kampala', addressCountry:'UG' },
+  logo:`${BASE}/logo.png`, image:`${BASE}/og-image.png`,
+  priceRange:'$$',
+  sameAs:[
     'https://www.instagram.com/alffy.alfinega',
+    'https://www.facebook.com/alffyalfinega',
     'https://x.com/Alffy_Alfinega',
-    'https://www.tiktok.com/@alffy.alfinega',
     'https://www.linkedin.com/company/alfinega',
-    'https://wa.me/256747113059',
   ],
 }
 
@@ -111,35 +59,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#04040C" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       </head>
       <body>
-        {/* GA4 consent defaults to denied until user accepts cookie banner */}
-        <Script id="ga-consent-default" strategy="beforeInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});`}
-        </Script>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-        <Script id="ga-config" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',{page_location:window.location.href});`}
-        </Script>
+        {/* GA4 consent — denied by default, CookieBanner grants on accept */}
+        <Script id="ga-consent-default" strategy="beforeInteractive">{`
+          window.dataLayer=window.dataLayer||[];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied'});
+        `}</Script>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA}`} strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive">{`
+          window.dataLayer=window.dataLayer||[];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js',new Date());
+          gtag('config','${GA}');
+        `}</Script>
 
-        <PagePreloader />
-
-        <SmoothScrollProvider>
+        <Preloader />
+        <LenisProvider>
           <Navbar />
           <main id="main">{children}</main>
           <Footer />
           <CookieBanner />
-        </SmoothScrollProvider>
-
+        </LenisProvider>
         <Analytics />
         <SpeedInsights />
       </body>

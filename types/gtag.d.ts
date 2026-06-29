@@ -1,5 +1,1 @@
-interface GtagCommand {
-  (...args: any[]): void
-}
-
-declare var gtag: GtagCommand
+declare function gtag(...args: unknown[]): void

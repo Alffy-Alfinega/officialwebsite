@@ -1,73 +1,53 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 export default function CookieBanner() {
-  const [visible, setVisible] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     try {
-      const status = localStorage.getItem('alffy-cookies')
-      if (status === 'accepted') {
-        gtag('consent', 'update', { analytics_storage: 'granted' })
-      } else if (!status) {
-        setVisible(true)
-      }
-    } catch {
-      setVisible(false)
-    }
+      const v = localStorage.getItem('alffy-cookies')
+      if (v === 'accepted') { gtag('consent', 'update', { analytics_storage: 'granted' }); return }
+      if (!v) setShow(true)
+    } catch { setShow(false) }
   }, [])
 
   const accept = () => {
     try { localStorage.setItem('alffy-cookies', 'accepted') } catch {}
     gtag('consent', 'update', { analytics_storage: 'granted' })
-    setVisible(false)
+    setShow(false)
   }
 
   const decline = () => {
     try { localStorage.setItem('alffy-cookies', 'declined') } catch {}
-    setVisible(false)
+    setShow(false)
   }
 
-  if (!visible) return null
+  if (!show) return null
 
   return (
-    <div
-      role="dialog"
-      aria-label="Cookie consent"
-      aria-describedby="cookie-desc"
-      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-sm z-9999"
-      style={{
-        background: '#0F0F1E',
-        border: '1px solid #1C1C34',
-        borderRadius: '16px',
-        padding: '20px',
-        boxShadow: '0 8px 40px rgba(0, 0, 0, 0.6)',
-      }}
-    >
-      <p id="cookie-desc" className="font-outfit text-sm text-[#AAA] leading-relaxed mb-4">
-        We use cookies for analytics and to improve your experience. See our{' '}
-        <Link
-          href="/privacy-policy"
-          className="text-[#2C6FED] hover:text-white underline underline-offset-2 transition-colors"
-        >
-          Privacy Policy
-        </Link>.
+    <div style={{
+      position: 'fixed', bottom: 24, right: 24, zIndex: 9000,
+      background: '#0F0F1E', border: '1px solid #1C1C34',
+      borderRadius: 16, padding: 20, maxWidth: 340,
+      boxShadow: '0 8px 40px rgba(0,0,0,0.7)',
+    }}>
+      <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#9A9ABB', lineHeight: 1.6, marginBottom: 14 }}>
+        We use analytics cookies to improve your experience.{' '}
+        <Link href="/privacy-policy" style={{ color: '#2C6FED' }}>Privacy Policy</Link>.
       </p>
-      <div className="flex gap-2">
-        <button
-          onClick={accept}
-          className="flex-1 py-2 px-4 rounded-lg font-syne font-semibold text-sm bg-[#2C6FED] text-white hover:bg-[#1A52C4] transition-colors"
-        >
-          Accept
-        </button>
-        <button
-          onClick={decline}
-          className="flex-1 py-2 px-4 rounded-lg font-syne font-semibold text-sm border border-[#1C1C34] text-[#9A9ABB] hover:text-white hover:border-[#333] transition-colors"
-        >
-          Decline
-        </button>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button onClick={accept} style={{
+          flex: 1, padding: '8px 0', borderRadius: 8, border: 'none', cursor: 'pointer',
+          background: '#2C6FED', color: '#fff', fontFamily: "'Syne',sans-serif", fontWeight: 600, fontSize: 13,
+        }}>Accept</button>
+        <button onClick={decline} style={{
+          flex: 1, padding: '8px 0', borderRadius: 8, cursor: 'pointer',
+          background: 'transparent', border: '1px solid #1C1C34', color: '#9A9ABB',
+          fontFamily: "'Syne',sans-serif", fontWeight: 600, fontSize: 13,
+        }}>Decline</button>
       </div>
     </div>
   )

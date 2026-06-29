@@ -1,22 +1,10 @@
-// ============================================================
-// Portfolio Web Design Sub-page — Placeholder that redirects
-// This page is a stub that immediately redirects visitors back
-// to the main /portfolio page. It exists as a potential future
-// URL for a filtered "Web Design" portfolio view.
-// Route: /portfolio/web-design
-// ============================================================
-
-// Import Metadata for setting page-level meta tags
 import type { Metadata } from 'next'
-
-// Import redirect from Next.js navigation — tells the browser
-// to go to a different URL immediately
-import { redirect } from 'next/navigation'
-
-// Metadata: tell search engines not to index this page
-export const metadata: Metadata = {
-  robots: { index: false, follow: false },
+export const metadata: Metadata = { title: 'Web Design Portfolio' }
+export default function Page() {
+  return (
+    <div style={{ paddingTop:68, minHeight:'100vh', maxWidth:1100, margin:'0 auto', padding:'100px 40px 80px' }}>
+      <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,5vw,4rem)', lineHeight:0.95, letterSpacing:'-0.025em', color:'#E4E4F0', marginBottom:20 }}>Web Design Portfolio</h1>
+      <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.7 }}>Content coming soon.</p>
+    </div>
+  )
 }
-
-// The page component — immediately redirects to /portfolio
-export default function Page() { redirect('/portfolio') }

@@ -1,62 +1,51 @@
 'use client'
 
 import Link from 'next/link'
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const services = [
-  { slug: 'web-design',              number: '01', title: 'Web Design & Development',        tagline: 'Websites that convert visitors into customers' },
-  { slug: 'seo-marketing',           number: '02', title: 'SEO & Digital Marketing',         tagline: 'Rank higher. Reach further. Grow faster.' },
-  { slug: 'branding-design',         number: '03', title: 'Branding & Graphic Design',       tagline: 'Visual identity that sticks' },
-  { slug: 'media-production',        number: '04', title: 'Video, Animation & Image Editing', tagline: 'Moving stories. Static perfection.' },
-  { slug: 'architectural-visualisation', number: '05', title: 'Architectural Visualisation', tagline: "See it before it's built" },
-  { slug: 'cybersecurity-data',      number: '06', title: 'Cybersecurity & Data Services',   tagline: 'Protect your data. Manage your scale.' },
+const SERVICES = [
+  { n:'01', title:'Web Design & Development',        slug:'web-design',                tagline:'Websites that convert visitors into customers' },
+  { n:'02', title:'SEO & Digital Marketing',         slug:'seo-marketing',             tagline:'Rank higher. Reach further. Grow faster.' },
+  { n:'03', title:'Branding & Graphic Design',       slug:'branding-design',           tagline:'Visual identity that sticks' },
+  { n:'04', title:'Video, Animation & Image Editing',slug:'media-production',          tagline:'Moving stories. Static perfection.' },
+  { n:'05', title:'Architectural Visualisation',     slug:'architectural-visualisation',tagline:"See it before it's built" },
+  { n:'06', title:'Cybersecurity & Data Services',   slug:'cybersecurity-data',        tagline:'Protect your data. Manage your scale.' },
 ]
 
-type Service = typeof services[0]
-
-function ServiceRow({ service, index }: { service: Service; index: number }) {
-  const ref     = useRef<HTMLAnchorElement>(null)
-  const [visible, setVisible] = useState(false)
+function Row({ s, i }: { s: typeof SERVICES[0]; i: number }) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const [vis, setVis] = useState(false)
+  const [hov, setHov] = useState(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.1 },
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
+    const el = ref.current; if (!el) return
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.1 })
+    obs.observe(el); return () => obs.disconnect()
   }, [])
 
   return (
-    <Link
-      ref={ref}
-      href={`/services/${service.slug}`}
-      className="group flex items-center justify-between py-5 md:py-6 border-b hover:border-[#2C6FED]/30 transition-all duration-300"
+    <Link ref={ref} href={`/services/${s.slug}`}
       style={{
-        borderColor: 'var(--border)',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateX(0)' : 'translateX(-20px)',
-        transition: `opacity 0.5s ease ${index * 0.06}s, transform 0.5s ease ${index * 0.06}s, border-color 0.3s ease`,
+        display:'flex', alignItems:'center', justifyContent:'space-between',
+        padding:'20px 0', borderBottom:'1px solid #1C1C34', textDecoration:'none',
+        opacity: vis ? 1 : 0, transform: vis ? 'translateX(0)' : 'translateX(-24px)',
+        transition: `opacity 0.55s ease ${i*0.07}s, transform 0.55s ease ${i*0.07}s, border-color 0.3s`,
+        borderColor: hov ? 'rgba(44,111,237,0.3)' : '#1C1C34',
       }}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
     >
-      <div className="flex items-center gap-6">
-        <span className="font-mono text-[11px] w-6 shrink-0" style={{ color: 'var(--text-dimmer)' }}>{service.number}</span>
-        <p className="font-syne font-semibold text-xl md:text-2xl group-hover:text-[#2C6FED] transition-colors duration-200" style={{ color: 'var(--text)' }}>
-          {service.title}
-        </p>
+      <div style={{ display:'flex', alignItems:'center', gap:20 }}>
+        <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', width:24, flexShrink:0 }}>{s.n}</span>
+        <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:'clamp(1.1rem,2.5vw,1.6rem)', color: hov ? '#2C6FED' : '#E4E4F0', transition:'color 0.2s' }}>{s.title}</span>
       </div>
-      <div className="flex items-center gap-6">
-        <span className="hidden md:block font-outfit text-sm group-hover:text-[#BBBBDD] transition-colors" style={{ color: 'var(--text-faint)' }}>
-          {service.tagline}
-        </span>
-        <span className="w-8 h-8 rounded-full border group-hover:border-[#2C6FED] group-hover:bg-[#2C6FED]/10 flex items-center justify-center transition-all duration-300" style={{ borderColor: 'var(--border)' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:20 }}>
+        <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#6A6A8A', display:'none' }} className="md:block">{s.tagline}</span>
+        <div style={{ width:32, height:32, borderRadius:'50%', border:`1px solid ${hov ? '#2C6FED' : '#1C1C34'}`, display:'flex', alignItems:'center', justifyContent:'center', transition:'all 0.3s', background: hov ? 'rgba(44,111,237,0.1)' : 'transparent', flexShrink:0 }}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="#2C6FED" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" strokeOpacity={0} className="group-hover:[stroke-opacity:1] transition-all" />
-            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="#666" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:opacity-0 transition-opacity" />
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke={hov ? '#2C6FED' : '#666'} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-        </span>
+        </div>
       </div>
     </Link>
   )
@@ -64,38 +53,25 @@ function ServiceRow({ service, index }: { service: Service; index: number }) {
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
+    <section style={{ maxWidth:1440, margin:'0 auto', padding:'100px 40px' }}>
+      <div style={{ display:'flex', flexWrap:'wrap', alignItems:'flex-end', justifyContent:'space-between', gap:24, marginBottom:56 }}>
         <div>
-          <span className="font-mono text-[11px] uppercase tracking-widest mb-3 block" style={{ color: 'var(--text-faint)' }}>02 / What We Do</span>
-          <h2
-            className="font-syne font-extrabold leading-none"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}
-          >
-            6 services.<br />
-            <span style={{ color: '#2C6FED' }}>One team.</span>
+          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:12 }}>02 / What We Do</p>
+          <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.2rem,5vw,4.5rem)', lineHeight:0.95, letterSpacing:'-0.025em', color:'#E4E4F0' }}>
+            6 services.<br /><span style={{ color:'#2C6FED' }}>One team.</span>
           </h2>
         </div>
-        <div className="max-w-sm">
-          <p className="font-outfit text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            Comprehensive digital solutions from a single expert agency. No outsourcing, no middlemen — just craft.
+        <div style={{ maxWidth:340 }}>
+          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.7, marginBottom:16 }}>
+            Comprehensive digital solutions from one expert agency. No outsourcing, no middlemen — just craft.
           </p>
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 mt-4 font-syne font-semibold text-sm text-[#2C6FED] hover:gap-3 transition-all"
-          >
+          <Link href="/services" style={{ fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:13, color:'#2C6FED', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:6 }}>
             View all services
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </Link>
         </div>
       </div>
-      <div>
-        {services.map((s, i) => (
-          <ServiceRow key={s.slug} service={s} index={i} />
-        ))}
-      </div>
+      <div>{SERVICES.map((s, i) => <Row key={s.slug} s={s} i={i} />)}</div>
     </section>
   )
 }

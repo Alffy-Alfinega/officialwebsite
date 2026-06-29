@@ -2,44 +2,28 @@ import Link from 'next/link'
 
 export default function CTASection() {
   return (
-    <section className="py-24 md:py-36 px-6 md:px-16 lg:px-24 max-w-[1440px] mx-auto">
-      <div
-        className="relative rounded-3xl overflow-hidden border p-12 md:p-20"
-        style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
-      >
-        <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
-        <div
-          className="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(44,111,237,0.08) 0%, transparent 70%)' }}
-        />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10">
+    <section style={{ maxWidth:1440, margin:'0 auto', padding:'40px 40px 100px' }}>
+      <div className="grid-bg" style={{ position:'relative', border:'1px solid #1C1C34', borderRadius:24, padding:'72px 56px', background:'#0A0A16', overflow:'hidden' }}>
+        <div style={{ position:'absolute', top:-80, right:-80, width:320, height:320, borderRadius:'50%', background:'radial-gradient(circle,rgba(44,111,237,0.07) 0%,transparent 70%)', pointerEvents:'none' }} />
+        <div style={{ position:'relative', zIndex:1, display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between', gap:40 }}>
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-widest mb-4 block" style={{ color: 'var(--text-faint)' }}>
-              Ready to start?
-            </span>
-            <h2
-              className="font-syne font-extrabold leading-none"
-              style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', letterSpacing: '-0.025em', color: 'var(--text)' }}
-            >
-              Let&apos;s build something<br />
-              <span style={{ color: '#2C6FED' }}>extraordinary.</span>
+            <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Ready to start?</p>
+            <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,4.5vw,3.8rem)', lineHeight:0.95, letterSpacing:'-0.025em', color:'#E4E4F0' }}>
+              Let&apos;s build something<br /><span style={{ color:'#2C6FED' }}>extraordinary.</span>
             </h2>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link
-              href="/contact"
-              className="px-8 py-4 font-syne font-semibold text-sm text-white rounded-full hover:opacity-90 transition-all duration-200 text-center"
-              style={{ background: 'linear-gradient(135deg, #2C6FED, #1A52C4)' }}
-            >
-              Start Your Project
-            </Link>
-            <Link
-              href="/pricing"
-              className="px-8 py-4 font-syne font-semibold text-sm rounded-full hover:border-[#2C6FED] hover:text-[#2C6FED] transition-colors duration-200 text-center border"
-              style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}
-            >
-              See Pricing
-            </Link>
+          <div style={{ display:'flex', flexWrap:'wrap', gap:12 }}>
+            <Link href="/contact" style={{
+              padding:'15px 36px', borderRadius:100, textDecoration:'none',
+              background:'linear-gradient(135deg,#2C6FED,#1A52C4)', color:'#fff',
+              fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:14,
+              boxShadow:'0 0 28px rgba(44,111,237,0.35)',
+            }}>Start Your Project</Link>
+            <Link href="/pricing" style={{
+              padding:'15px 36px', borderRadius:100, textDecoration:'none',
+              border:'1px solid #1C1C34', color:'#CCCCEE',
+              fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:14,
+            }}>See Pricing</Link>
           </div>
         </div>
       </div>
