@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const TIMELINE = [
-  { year: 'Jan 2025', title: 'Alfinega incorporated', body: 'Mr. Mullo Nashiifu registers Alfinega in Uganda with a single mission: build world-class digital services at local prices. He brings on Mr. Musoke Joshua Prosper as CTO and Mrs. Mwawule Christiana as Managing Director. The first months are spent building systems, processes, and infrastructure before taking on clients.' },
+  { year: 'Jan 2025', title: 'Alfinega incorporated', body: 'Mr. Mullo Nashiifu registers Alfinega in Uganda with a single mission: build world-class digital services at local prices. He brings on Mr. Musoke Joshua Prosper as Lead Developer and Mrs. Mwawule Christiana as Managing Director. The first months are spent building systems, processes, and infrastructure before taking on clients.' },
   { year: 'Mid 2025', title: 'First client projects', body: 'We take on our first web design projects — Makindye Junior Academy and Makindye Secondary School. These projects test our process and prove we can deliver professional, fast-loading websites that schools and their communities are proud of.' },
   { year: 'Late 2025', title: 'Service expansion', body: 'Client demand pushes us to formalise all six service lines: web design, SEO, branding, media production, architectural visualisation, and cybersecurity. We build out our tooling and workflows for each.' },
   { year: 'Jan 2026', title: 'Alffy brand launches publicly', body: 'We launch the Alffy brand publicly — the consumer-facing name for Alfinega\'s agency services. The new website goes live at alffy.alfinega.com and we begin active marketing across Uganda.' },

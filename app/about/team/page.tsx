@@ -5,47 +5,48 @@ import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'The Team',
-  description: 'Meet the leadership team at Alffy (Alfinega) — Mr. Mullo Nashiifu (CEO & Founder), Mr. Musoke Joshua Prosper (CTO), and Mrs. Mwawule Christiana (MD).',
+  description: 'Meet the leadership team at Alffy (Alfinega) — Mr. Mullo Nashiifu (CEO & Founder), Mr. Musoke Joshua Prosper (Lead Developer), and Mrs. Mwawule Christiana (Managing Director).',
 }
 
-const TEAM = [
+const CEO = {
+  name: 'Mullo Nashiifu',
+  role: 'CEO & Founder',
+  category: 'Leadership',
+  photo: '/team/mullo-nashiifu.jpg',
+  bio: 'Founded Alffy to bridge the gap between world-class digital craft and the East African market. Leads company vision, client strategy, and hands-on development — because the best agency founders never stop building.',
+  tags: ['Strategy', 'Full-Stack Development', 'Business Growth'],
+}
+
+const LEADS = [
   {
-    name: 'Mr. Mullo Nashiifu',
-    role: 'CEO & Founder',
-    photo: '/team/mullo-nashiifu.jpg',
-    color: '#D4A843',
-    bio: [
-      'Mr. Mullo Nashiifu founded Alffy (Alfinega) in January 2025 with a single conviction: Ugandan businesses deserve the same quality of digital work that global companies receive, at prices that reflect the local market.',
-      'As CEO, Mr. Mullo sets the strategic direction of the agency — which services to offer, which markets to serve, and what quality standards are non-negotiable. He is the person ultimately responsible for every deliverable that leaves Alffy.',
-      'His vision is to build the most trusted digital agency in East Africa — one that is known for honesty, measurable results, and craft that holds up anywhere in the world.',
-    ],
-    skills: ['Business Strategy', 'Agency Leadership', 'Client Relations', 'East Africa Markets', 'Digital Strategy'],
-  },
-  {
-    name: 'Mr. Musoke Joshua Prosper',
-    role: 'Chief Technology Officer',
+    name: 'Musoke Joshua Prosper',
+    role: 'Lead Developer',
+    category: 'Technology',
     photo: '/team/musoke-joshua.jpg',
-    color: '#2C6FED',
-    bio: [
-      'Mr. Musoke Joshua Prosper leads all technical work at Alffy — web architecture, development, 3D visualisation, and cybersecurity. He is the person who decides how things are built and ensures they are built to the highest technical standard.',
-      'His background spans full-stack web development on Next.js, Babylon.js 3D scene engineering, and network security. The website you are viewing right now was built by Mr. Musoke from scratch.',
-      'Mr. Musoke believes that Ugandan developers are as capable as any in the world. His job is to prove it, one project at a time.',
-    ],
-    skills: ['Next.js', 'TypeScript', 'Babylon.js', 'Cybersecurity', 'UI/UX Design', 'System Architecture'],
+    bio: 'Leads all technical strategy, architecture, and engineering across Alffy. Oversees every build from stack selection to deployment — ensuring performance, scalability, and clean code ship on every project.',
+    tags: ['Technical Leadership', 'Full-Stack Engineering', 'System Architecture'],
   },
   {
-    name: 'Mrs. Mwawule Christiana',
+    name: 'Mwawule Christiana',
     role: 'Managing Director',
+    category: 'Operations',
     photo: '/team/mwawule-christiana.jpg',
-    color: '#2C6FED',
-    bio: [
-      'Mrs. Mwawule Christiana manages the operational and commercial side of Alffy — client relationships, project delivery, brand strategy, and the day-to-day decisions that keep the agency running at its best.',
-      'She is the first point of contact for most clients and the person who ensures every project stays on scope, on time, and on brief. Her approach is direct and practical: understand the goal, build a plan, follow through.',
-      'Mrs. Mwawule leads SEO strategy, content direction, and the branding process from initial brief to final handover.',
-    ],
-    skills: ['Project Management', 'SEO Strategy', 'Brand Direction', 'Client Relations', 'Content Strategy', 'Operations'],
+    bio: 'Runs day-to-day operations, client relationships, and project delivery across Alffy. Keeps every project on scope, on budget, and on deadline — while making sure the team has what it needs to do its best work.',
+    tags: ['Operations', 'Client Management', 'Project Delivery'],
   },
 ]
+
+const labelStyle: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#6A6A8A',
+  textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 8,
+}
+const tagStyle = (active = false): React.CSSProperties => ({
+  fontFamily: "'JetBrains Mono',monospace", fontSize: 9,
+  padding: '4px 11px', borderRadius: 100,
+  border: `1px solid ${active ? 'rgba(212,168,67,0.35)' : '#1C1C34'}`,
+  color: active ? '#D4A843' : '#6A6A8A',
+  textTransform: 'uppercase', letterSpacing: '0.06em',
+})
 
 export default function TeamPage() {
   return (
@@ -58,55 +59,60 @@ export default function TeamPage() {
         height="46vh"
       />
 
-      {/* Team cards */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 40px 80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
-          {TEAM.map(m => (
-            <article key={m.name} style={{ border: '1px solid #1C1C34', borderRadius: 20, overflow: 'hidden', background: '#0A0A16' }}>
 
-              {/* Photo */}
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', background: '#10101E' }}>
-                <Image
-                  src={m.photo}
-                  alt={m.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  style={{ objectFit: 'cover' }}
-                />
-                {/* Role badge overlay */}
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0,
-                  background: 'linear-gradient(to top, rgba(4,4,12,0.95) 0%, transparent 100%)',
-                  padding: '40px 24px 20px',
-                }}>
-                  <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: m.color, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>
-                    {m.role}
-                  </p>
-                  <h2 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 20, color: '#E4E4F0', lineHeight: 1.2 }}>
-                    {m.name}
-                  </h2>
+        {/* CEO — featured, full-width, separate class from the leads below */}
+        <article style={{
+          border: '1px solid rgba(212,168,67,0.25)', borderRadius: 24,
+          background: 'linear-gradient(135deg, rgba(212,168,67,0.05), rgba(10,10,22,1) 60%)',
+          padding: '36px 40px', marginBottom: 24,
+          display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'flex-start',
+        }}>
+          <div style={{
+            position: 'relative', width: 140, height: 140, borderRadius: 18,
+            overflow: 'hidden', flexShrink: 0, background: '#10101E',
+            border: '1px solid rgba(212,168,67,0.3)',
+          }}>
+            <Image src={CEO.photo} alt={CEO.name} fill sizes="140px" style={{ objectFit: 'cover' }} />
+          </div>
+
+          <div style={{ flex: 1, minWidth: 260 }}>
+            <p style={{ ...labelStyle, color: '#D4A843' }}>{CEO.category}</p>
+            <h2 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 'clamp(1.7rem,3vw,2.3rem)', color: '#E4E4F0', marginBottom: 4, letterSpacing: '-0.02em' }}>
+              {CEO.name}
+            </h2>
+            <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 12, color: '#2C6FED', marginBottom: 16 }}>{CEO.role}</p>
+            <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 14, color: '#9A9ABB', lineHeight: 1.8, maxWidth: 620, marginBottom: 18 }}>
+              {CEO.bio}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {CEO.tags.map(t => <span key={t} style={tagStyle(true)}>{t}</span>)}
+            </div>
+          </div>
+        </article>
+
+        {/* Leads — Lead Developer + Managing Director, equal-weight pair */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+          {LEADS.map(m => (
+            <article key={m.name} style={{ border: '1px solid #1C1C34', borderRadius: 20, background: '#0A0A16', padding: '28px 28px 30px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
+                <div style={{ position: 'relative', width: 56, height: 56, borderRadius: 12, overflow: 'hidden', flexShrink: 0, background: '#10101E' }}>
+                  <Image src={m.photo} alt={m.name} fill sizes="56px" style={{ objectFit: 'cover' }} />
+                </div>
+                <div>
+                  <p style={labelStyle}>{m.category}</p>
                 </div>
               </div>
 
-              {/* Bio */}
-              <div style={{ padding: '24px 26px 28px' }}>
-                {m.bio.map((p, i) => (
-                  <p key={i} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 14, color: '#8A8AAA', lineHeight: 1.8, marginBottom: i < m.bio.length - 1 ? 12 : 0 }}>{p}</p>
-                ))}
-
-                {/* Skills */}
-                <div style={{ marginTop: 20, display: 'flex', flexWrap: 'wrap', gap: 7 }}>
-                  {m.skills.map(s => (
-                    <span key={s} style={{
-                      fontFamily: "'JetBrains Mono',monospace", fontSize: 9,
-                      padding: '4px 10px', borderRadius: 100,
-                      border: `1px solid ${m.color}30`, color: m.color === '#D4A843' ? '#D4A843' : '#6A6A8A',
-                      textTransform: 'uppercase', letterSpacing: '0.06em',
-                    }}>
-                      {s}
-                    </span>
-                  ))}
-                </div>
+              <h2 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 19, color: '#E4E4F0', marginBottom: 4 }}>
+                {m.name}
+              </h2>
+              <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#2C6FED', marginBottom: 14 }}>{m.role}</p>
+              <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#8A8AAA', lineHeight: 1.8, marginBottom: 18 }}>
+                {m.bio}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
+                {m.tags.map(t => <span key={t} style={tagStyle()}>{t}</span>)}
               </div>
             </article>
           ))}

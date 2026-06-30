@@ -23,7 +23,7 @@
 | Name | Role |
 |---|---|
 | Mr. Mullo Nashiifu | CEO & Founder |
-| Mr. Musoke Joshua Prosper | Chief Technology Officer |
+| Mr. Musoke Joshua Prosper | Lead Developer |
 | Mrs. Mwawule Christiana | Managing Director |
 
 Team members are always addressed with Mr./Mrs. titles in all written content.
@@ -338,7 +338,7 @@ New 1:1 mapping:
 | / | home (default) | Assembling agency disciplines — panel/orb/ring/block orbiting with sweep ring |
 | /about | about-hub | Leadership constellation — 3 orbiting spheres |
 | /about/story | about-story | Rising spiral timeline — 5 ascending markers |
-| /about/team | about-team | Fixed triangle formation — CEO + CTO + MD |
+| /about/team | about-team | Fixed triangle formation — CEO + Lead Dev + MD |
 | /about/why | about-why | Jagged vs smooth shape duel |
 | /services | services-hub | Six distinct shapes in a ring, one per discipline |
 | /services/web-design | svc-web | Stacked angled browser panels |

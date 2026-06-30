@@ -46,7 +46,7 @@ export default function AboutPage() {
             <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Who We Are</p>
             <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(1.8rem,3.5vw,3rem)', lineHeight:1, letterSpacing:'-0.025em', color:'#E4E4F0', marginBottom:20 }}>Small team.<br />Big output.</h2>
             <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:16 }}>
-              Alffy was founded in January 2025 by Mr. Mullo Nashiifu under the parent company Alfinega. He leads the agency alongside Mr. Musoke Joshua Prosper (CTO) and Mrs. Mwawule Christiana (Managing Director). We launched publicly in January 2026 with a clear mission: give Ugandan businesses access to agency-grade digital work at fair local prices.
+              Alffy was founded in January 2025 by Mr. Mullo Nashiifu under the parent company Alfinega. He leads the agency alongside Mr. Musoke Joshua Prosper (Lead Developer) and Mrs. Mwawule Christiana (Managing Director). We launched publicly in January 2026 with a clear mission: give Ugandan businesses access to agency-grade digital work at fair local prices.
             </p>
             <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:28 }}>
               We are based in Makindye, Kampala. Everything — web design, SEO, branding, video, animation, cybersecurity — is handled in-house. No outsourcing, no corners cut.

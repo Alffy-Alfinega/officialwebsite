@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const ROLES = [
-  { title:'Junior Web Developer', type:'Full-time', location:'Kampala, Uganda', tags:['React','Next.js','TypeScript'], desc:'Join our dev team building websites and web apps for clients across Uganda and East Africa. You will work closely with our CTO on real client projects from day one.' },
+  { title:'Junior Web Developer', type:'Full-time', location:'Kampala, Uganda', tags:['React','Next.js','TypeScript'], desc:'Join our dev team building websites and web apps for clients across Uganda and East Africa. You will work closely with our Lead Developer on real client projects from day one.' },
   { title:'Graphic Designer', type:'Full-time', location:'Kampala, Uganda', tags:['Figma','Illustrator','Photoshop'], desc:'Create logos, brand identities, marketing materials, and social media graphics for a diverse portfolio of Ugandan businesses.' },
   { title:'SEO & Content Specialist', type:'Full-time', location:'Kampala, Uganda', tags:['SEO','Content Writing','Analytics'], desc:'Own the SEO and content strategy for our clients. Research keywords, write blog posts, optimise on-page elements, and track rankings.' },
 ]
