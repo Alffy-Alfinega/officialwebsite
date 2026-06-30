@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PricingFAQ from '@/components/ui/PricingFAQ'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -29,18 +30,14 @@ const S: React.CSSProperties = { fontFamily:"'Syne',sans-serif", fontWeight:800,
 
 export default function PricingPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px' }}>
-
-        <div style={{ marginBottom:64 }}>
-          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Transparent Pricing</p>
-          <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-            No hidden fees.<br /><span style={{ color:'#2C6FED' }}>Ever.</span>
-          </h1>
-          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:480, lineHeight:1.7 }}>
-            Every price is in Uganda Shillings (UGX). Fixed quotes, no hourly billing, no surprise invoices.
-          </p>
-        </div>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Transparent Pricing"
+        title={<>No hidden fees.<br /><span style={{ color:'#2C6FED' }}>Ever.</span></>}
+        subtitle="Every price is in Uganda Shillings (UGX). Fixed quotes, no hourly billing, no surprise invoices."
+        variant="pricing"
+      />
+      <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
 
         {/* Web */}
         <h2 style={S}>Website Design & Development</h2>

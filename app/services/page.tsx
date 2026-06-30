@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { HoverServiceRow } from '@/components/ui/HoverCard'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -18,15 +19,14 @@ const SERVICES = [
 
 export default function ServicesPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>What We Do</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-          6 services.<br /><span style={{ color:'#2C6FED' }}>All in-house.</span>
-        </h1>
-        <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:520, lineHeight:1.75, marginBottom:56 }}>
-          Every service is delivered entirely in-house by our team in Kampala. No outsourcing, no subcontractors. You get direct access to the people doing the actual work.
-        </p>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="What We Do"
+        title={<>6 services.<br /><span style={{ color:'#2C6FED' }}>All in-house.</span></>}
+        subtitle="Every service is delivered entirely in-house by our team in Kampala. No outsourcing, no subcontractors. You get direct access to the people doing the actual work."
+        variant="services"
+      />
+      <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
           {SERVICES.map(s => (
             <HoverServiceRow key={s.slug} href={`/services/${s.slug}`} n={s.n} title={s.title} desc={s.desc} price={s.price} icon={s.icon} />

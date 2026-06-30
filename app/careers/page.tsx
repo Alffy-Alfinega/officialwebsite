@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -14,17 +15,14 @@ const ROLES = [
 
 export default function CareersPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1100, margin:'0 auto', padding:'80px 40px' }}>
-        <div style={{ marginBottom:56 }}>
-          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Careers at Alffy</p>
-          <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-            Build your career<br /><span style={{ color:'#2C6FED' }}>in Kampala.</span>
-          </h1>
-          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:520, lineHeight:1.7 }}>
-            We are a small, ambitious team growing fast. If you are talented, curious, and want to do real work on real projects — we want to hear from you.
-          </p>
-        </div>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Careers at Alffy"
+        title={<>Build your career<br /><span style={{ color:'#2C6FED' }}>in Kampala.</span></>}
+        subtitle="We are a small, ambitious team growing fast. If you are talented, curious, and want to do real work on real projects, we want to hear from you."
+        variant="careers"
+      />
+      <div style={{ maxWidth:1100, margin:'0 auto', padding:'56px 40px 80px' }}>
 
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
           {ROLES.map(r => (

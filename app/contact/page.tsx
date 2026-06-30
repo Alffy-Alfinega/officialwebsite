@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ContactForm from '@/components/ui/ContactForm'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -15,17 +16,14 @@ const INFO = [
 
 export default function ContactPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px' }}>
-        <div style={{ marginBottom:56 }}>
-          <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Get In Touch</p>
-          <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-            {"Let's build something"}<br /><span style={{ color:'#2C6FED' }}>great together.</span>
-          </h1>
-          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:480, lineHeight:1.7 }}>
-            Tell us about your project. We will get back to you within 24 hours with a clear next step.
-          </p>
-        </div>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Get In Touch"
+        title={<>{"Let's build something"}<br /><span style={{ color:'#2C6FED' }}>great together.</span></>}
+        subtitle="Tell us about your project. We will get back to you within 24 hours with a clear next step."
+        variant="contact"
+      />
+      <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))', gap:64 }}>
           <ContactForm />
           <div>

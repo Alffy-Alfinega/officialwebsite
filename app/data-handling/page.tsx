@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
+import PageHero from '@/components/sections/PageHero'
 export const metadata: Metadata = { title: 'Data Handling Policy' }
 export default function Page() {
   const S = { fontFamily:"'Syne',sans-serif", fontWeight:700 as const, fontSize:20, color:'#E4E4F0', marginTop:32, marginBottom:10 }
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:800, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', marginBottom:14 }}>Last updated: June 2026</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,4vw,3.5rem)', color:'#E4E4F0', marginBottom:32 }}>Data Handling Policy</h1>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero eyebrow="Last updated: June 2026" title="Data Handling Policy" variant="legal" height="36vh" />
+      <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>This policy applies specifically to clients engaging Alffy (Alfinega) for data entry, database management, or any service involving the handling of third-party data.</p>
         <h2 style={S}>Confidentiality</h2>
         <p style={P}>All client data shared with Alffy (Alfinega) for the purpose of data entry or processing is treated as strictly confidential. We do not share, sell, or disclose client data to any third party under any circumstances. Staff who handle client data sign confidentiality agreements before beginning work.</p>

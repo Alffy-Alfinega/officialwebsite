@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { HoverCard } from '@/components/ui/HoverCard'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -20,16 +21,13 @@ const VALUES = [
 
 export default function AboutPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <section style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px 60px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>About Alffy</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:24 }}>
-          A digital agency<br /><span style={{ color:'#2C6FED' }}>built in Kampala.</span>
-        </h1>
-        <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:17, color:'#8A8AAA', maxWidth:560, lineHeight:1.75 }}>
-          We started Alffy because we saw Ugandan businesses being underserved — paying for mediocre websites, locked into bloated retainers, working with agencies that outsourced everything. We decided to do it differently.
-        </p>
-      </section>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="About Alffy"
+        title={<>A digital agency<br /><span style={{ color:'#2C6FED' }}>built in Kampala.</span></>}
+        subtitle="We started Alffy because we saw Ugandan businesses being underserved. We decided to do it differently."
+        variant="about"
+      />
 
       <section style={{ borderTop:'1px solid #1C1C34', borderBottom:'1px solid #1C1C34', background:'#0A0A16' }}>
         <div style={{ maxWidth:1200, margin:'0 auto', padding:'32px 40px', display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))', gap:24 }}>
@@ -48,7 +46,7 @@ export default function AboutPage() {
             <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Who We Are</p>
             <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(1.8rem,3.5vw,3rem)', lineHeight:1, letterSpacing:'-0.025em', color:'#E4E4F0', marginBottom:20 }}>Small team.<br />Big output.</h2>
             <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:16 }}>
-              Alffy was founded in January 2025 by Musoke Joshua Prosper and Mwawule Christiana under the parent company Alfinega. We launched publicly in January 2026 with a clear mission: give Ugandan businesses access to agency-grade digital work at fair local prices.
+              Alffy was founded in January 2025 by Mr. Mullo Nashiifu under the parent company Alfinega. He leads the agency alongside Mr. Musoke Joshua Prosper (CTO) and Mrs. Mwawule Christiana (Managing Director). We launched publicly in January 2026 with a clear mission: give Ugandan businesses access to agency-grade digital work at fair local prices.
             </p>
             <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:28 }}>
               We are based in Makindye, Kampala. Everything — web design, SEO, branding, video, animation, cybersecurity — is handled in-house. No outsourcing, no corners cut.
@@ -72,7 +70,7 @@ export default function AboutPage() {
       <section style={{ maxWidth:1200, margin:'0 auto', padding:'0 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))', gap:14 }}>
           <HoverCard href="/about/story" title="Our Story"  desc="How Alffy started and where we are going." />
-          <HoverCard href="/about/team"  title="The Team"   desc="Meet the two people behind the work." />
+          <HoverCard href="/about/team"  title="The Team"   desc="Meet the leadership behind the work." />
           <HoverCard href="/about/why"   title="Why Alffy"  desc="What makes us different from every other agency." />
         </div>
       </section>

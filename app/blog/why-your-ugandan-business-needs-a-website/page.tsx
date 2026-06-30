@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Why Your Ugandan Business Needs a Website in 2026',
@@ -8,14 +9,15 @@ export const metadata: Metadata = {
 
 export default function Post() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:760, margin:'0 auto', padding:'80px 40px' }}>
-        <Link href="/blog" style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:6, marginBottom:40 }}>← Blog</Link>
-        <div style={{ display:'flex', gap:10, marginBottom:20 }}>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, padding:'3px 10px', borderRadius:100, border:'1px solid rgba(44,111,237,0.4)', color:'#2C6FED' }}>Web Design</span>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:10, color:'#6A6A8A' }}>5 min read · June 2026</span>
-        </div>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(1.8rem,4vw,3rem)', lineHeight:1.1, letterSpacing:'-0.025em', color:'#E4E4F0', marginBottom:32 }}>Why Your Ugandan Business Needs a Website in 2026</h1>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Web Design · 5 min read"
+        title="Why Your Ugandan Business Needs a Website in 2026"
+        variant="blog"
+        height="40vh"
+      />
+      <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>
+        <Link href="/blog" style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:6, marginBottom:32 }}>← Blog</Link>
 
         <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#9A9ABB', lineHeight:1.9, display:'flex', flexDirection:'column', gap:20 }}>
           <p>Many Ugandan business owners ask the same question: <em style={{color:'#CCCCEE'}}>"I already have a Facebook page and a WhatsApp Business number. Why do I need a website?"</em></p>

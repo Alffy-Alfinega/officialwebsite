@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
+import PageHero from '@/components/sections/PageHero'
 export const metadata: Metadata = { title: 'Terms of Service' }
 export default function Page() {
   const S = { fontFamily:"'Syne',sans-serif", fontWeight:700 as const, fontSize:20, color:'#E4E4F0', marginTop:32, marginBottom:10 }
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:800, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', marginBottom:14 }}>Last updated: June 2026</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,4vw,3.5rem)', color:'#E4E4F0', marginBottom:32 }}>Terms of Service</h1>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero eyebrow="Last updated: June 2026" title="Terms of Service" variant="legal" height="36vh" />
+      <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>By engaging Alffy (Alfinega) for any service, you agree to the following terms. These terms govern the relationship between Alffy (Alfinega) and any client ("you").</p>
         <h2 style={S}>Scope of work</h2>
         <p style={P}>All projects begin with a written proposal that defines the scope, deliverables, timeline, and fixed price. Work begins only after written approval of the proposal and receipt of the agreed deposit. Any changes to scope after approval are subject to a written change order and may affect price and timeline.</p>

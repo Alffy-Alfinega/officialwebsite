@@ -1,26 +1,32 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Branding & Graphic Design',
   description: 'Brand identity, logos, and visual design for Ugandan businesses. Based in Kampala, Uganda.',
 }
 
+const DELIVERABLES = [
+  'Logo design', 'Brand colour palettes', 'Typography systems', 'Brand guidelines',
+  'Social media kits', 'Business card and stationery design', 'Packaging design mockups', 'Presentation templates',
+]
+
 export default function Page() {
-  const deliverables = "Logo design, brand colour palettes, typography systems, brand guidelines, social media kits, business card and stationery design, packaging design mockups, and presentation templates.".split(', ')
   return (
-    <div style={{ paddingTop: 68, minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px' }}>
-        <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>Service 03</p>
-        <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 'clamp(2.2rem,5vw,4.5rem)', lineHeight: 0.92, letterSpacing: '-0.03em', color: '#E4E4F0', marginBottom: 16 }}>
-          Branding & Graphic Design
-        </h1>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 16, color: '#8A8AAA', maxWidth: 540, lineHeight: 1.8, marginBottom: 48 }}>Brand identity, logos, and visual design for Ugandan businesses.</p>
+    <div style={{ minHeight: '100vh' }}>
+      <PageHero
+        eyebrow="Service 03"
+        title={<>Branding &<br /><span style={{ color: '#2C6FED' }}>Graphic Design.</span></>}
+        subtitle="Brand identity, logos, and visual design for Ugandan businesses that need to look professional and consistent everywhere."
+        variant="branding-design"
+      />
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 
         <section style={{ marginBottom: 56 }}>
           <h2 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 700, fontSize: 22, color: '#E4E4F0', marginBottom: 24 }}>What we deliver</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 10 }}>
-            {deliverables.map((d: string) => (
+            {DELIVERABLES.map((d) => (
               <div key={d} style={{ display: 'flex', gap: 10, padding: '14px 16px', border: '1px solid #1C1C34', borderRadius: 10, background: '#0A0A16' }}>
                 <span style={{ color: '#2C6FED', flexShrink: 0 }}>✓</span>
                 <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#9A9ABB', lineHeight: 1.6 }}>{d}</span>

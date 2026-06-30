@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Why Alffy',
@@ -19,16 +20,14 @@ const REASONS = [
 
 export default function WhyPage() {
   return (
-    <div style={{ paddingTop: 68, minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px' }}>
-
-        <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>Why Alffy</p>
-        <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 'clamp(2.2rem,5vw,4rem)', lineHeight: 0.92, letterSpacing: '-0.03em', color: '#E4E4F0', marginBottom: 16 }}>
-          Why agencies fail.<br /><span style={{ color: '#2C6FED' }}>Why we do not.</span>
-        </h1>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 16, color: '#8A8AAA', maxWidth: 540, lineHeight: 1.75, marginBottom: 64 }}>
-          Most agency failures come from the same three places: overpromising, outsourcing, and disappearing after payment. We have built Alffy around avoiding all three.
-        </p>
+    <div style={{ minHeight: '100vh' }}>
+      <PageHero
+        eyebrow="Why Alffy"
+        title={<>Why agencies fail.<br /><span style={{ color: '#2C6FED' }}>Why we do not.</span></>}
+        subtitle="Most agency failures come from the same three places: overpromising, outsourcing, and disappearing after payment. We have built Alffy around avoiding all three."
+        variant="about"
+      />
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 14, marginBottom: 64 }}>
           {REASONS.map(r => (

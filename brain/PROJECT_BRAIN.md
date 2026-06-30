@@ -22,8 +22,12 @@
 ## 2. TEAM
 | Name | Role |
 |---|---|
-| Musoke Joshua Prosper | Chief Technology Officer |
-| Mwawule Christiana | Managing Director |
+| Mr. Mullo Nashiifu | CEO & Founder |
+| Mr. Musoke Joshua Prosper | Chief Technology Officer |
+| Mrs. Mwawule Christiana | Managing Director |
+
+Team members are always addressed with Mr./Mrs. titles in all written content.
+Photos: /public/team/mullo-nashiifu.jpg, musoke-joshua.jpg, mwawule-christiana.jpg
 
 ---
 
@@ -307,4 +311,17 @@ POST /api/indexnow
 6. Blog page CTA sent users to /contact instead of newsletter inline capture
 7. Testimonials had no external verification (no Google/LinkedIn links)
 
-All 7 issues are fixed in this rebuild.
+## 14. SESSION LOG — 2026-06-30 CEO/Navbar/3D-Headers Update
+1. Added Mr. Mullo Nashiifu as CEO & Founder — team page, about page, story timeline updated
+2. All team members now addressed with Mr./Mrs. titles throughout site copy
+3. Real team photos wired in from /public/team/*.jpg via next/image on team page
+4. Navbar rewritten — JS-based isMobile state (window.innerWidth < 768) replaces
+   reliance on Tailwind className responsive utilities, which were not reliably
+   compiling. Desktop nav and hamburger now correctly toggle based on measured
+   viewport width. Mobile overlay has staggered fadeUp entrance per nav item.
+5. Built reusable PageHero component (components/sections/PageHero.tsx) — a
+   compact 3D-backed header using the same BabylonHero/height-fix pattern as the
+   homepage, with eyebrow/title/subtitle slots. Applied to all 28 non-home pages
+   (was previously home-only). Each page passes an appropriate SceneVariant.
+6. Confirmed via grep: 29/29 page.tsx files use either PageHero or the home
+   HeroSection — zero pages without a 3D header.

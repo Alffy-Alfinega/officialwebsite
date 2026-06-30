@@ -1,26 +1,32 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Architectural Visualisation',
-  description: 'Photorealistic 3D renders and architectural visualisations for developers and architects in Uganda. Based in Kampala, Uganda.',
+  description: 'Photorealistic 3D renders and architectural visualisations for developers and architects in Uganda.',
 }
 
+const DELIVERABLES = [
+  'Photorealistic exterior renders', 'Photorealistic interior renders', '3D floor plan visualisation',
+  'Virtual walkthrough animations', 'Construction presentation decks', 'Real estate marketing visuals', 'Before-and-after renovation renders',
+]
+
 export default function Page() {
-  const deliverables = "Photorealistic exterior and interior renders, 3D floor plan visualisation, virtual walkthrough animations, construction presentation decks, real estate marketing visuals, before-and-after renovation renders.".split(', ')
   return (
-    <div style={{ paddingTop: 68, minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px' }}>
-        <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>Service 05</p>
-        <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 'clamp(2.2rem,5vw,4.5rem)', lineHeight: 0.92, letterSpacing: '-0.03em', color: '#E4E4F0', marginBottom: 16 }}>
-          Architectural Visualisation
-        </h1>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 16, color: '#8A8AAA', maxWidth: 540, lineHeight: 1.8, marginBottom: 48 }}>Photorealistic 3D renders and architectural visualisations for developers and architects in Uganda.</p>
+    <div style={{ minHeight: '100vh' }}>
+      <PageHero
+        eyebrow="Service 05"
+        title={<>Architectural<br /><span style={{ color: '#2C6FED' }}>Visualisation.</span></>}
+        subtitle="See it before it is built. Photorealistic 3D renders and architectural visualisations for developers and architects in Uganda."
+        variant="arch-vis"
+      />
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 
         <section style={{ marginBottom: 56 }}>
           <h2 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 700, fontSize: 22, color: '#E4E4F0', marginBottom: 24 }}>What we deliver</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 10 }}>
-            {deliverables.map((d: string) => (
+            {DELIVERABLES.map((d) => (
               <div key={d} style={{ display: 'flex', gap: 10, padding: '14px 16px', border: '1px solid #1C1C34', borderRadius: 10, background: '#0A0A16' }}>
                 <span style={{ color: '#2C6FED', flexShrink: 0 }}>✓</span>
                 <span style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#9A9ABB', lineHeight: 1.6 }}>{d}</span>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'SEO & Digital Marketing',
@@ -25,16 +26,15 @@ const TIERS = [
 
 export default function SeoPage() {
   return (
-    <div style={{ paddingTop: 68, minHeight: '100vh' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '80px 40px' }}>
+    <div style={{ minHeight: '100vh' }}>
+      <PageHero
+        eyebrow="Service 02"
+        title={<>SEO & Digital<br /><span style={{ color: '#2C6FED' }}>Marketing.</span></>}
+        subtitle="Getting found on Google is not magic. It is a technical and content discipline. We do the research, fix the technical problems, produce the content, and track the results every month, in plain language."
+        variant="seo-marketing"
+      />
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 
-        <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 14 }}>Service 02</p>
-        <h1 style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 'clamp(2.2rem,5vw,4.5rem)', lineHeight: 0.92, letterSpacing: '-0.03em', color: '#E4E4F0', marginBottom: 16 }}>
-          SEO & Digital<br /><span style={{ color: '#2C6FED' }}>Marketing.</span>
-        </h1>
-        <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 16, color: '#8A8AAA', maxWidth: 540, lineHeight: 1.8, marginBottom: 20 }}>
-          Getting found on Google is not magic. It is a technical and content discipline. We do the research, fix the technical problems, produce the content, and track the results — every month, in plain language.
-        </p>
         <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 14, color: '#6A6A8A', marginBottom: 56, padding: '12px 16px', border: '1px solid #1C1C34', borderRadius: 10, display: 'inline-block' }}>
           ⏱ SEO takes time. We require a minimum 3-month engagement so strategies have room to produce measurable results.
         </p>

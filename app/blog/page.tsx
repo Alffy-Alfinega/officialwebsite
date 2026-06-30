@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { HoverBlogCard } from '@/components/ui/HoverCard'
 import NewsletterForm from '@/components/ui/NewsletterForm'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -18,15 +19,14 @@ const POSTS = [
 
 export default function BlogPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1100, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Alffy Blog</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.2rem,5vw,4rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-          Insights from<br /><span style={{ color:'#2C6FED' }}>Kampala.</span>
-        </h1>
-        <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:480, lineHeight:1.75, marginBottom:56 }}>
-          Practical articles on web design, SEO, branding, and digital marketing — written for Ugandan and East African businesses.
-        </p>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Alffy Blog"
+        title={<>Insights from<br /><span style={{ color:'#2C6FED' }}>Kampala.</span></>}
+        subtitle="Practical articles on web design, SEO, branding, and digital marketing, written for Ugandan and East African businesses."
+        variant="blog"
+      />
+      <div style={{ maxWidth:1100, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))', gap:16, marginBottom:64 }}>
           {POSTS.map(p => (
             <HoverBlogCard key={p.slug} href={`/blog/${p.slug}`} tag={p.tag} tagColor={p.tagColor} tagBorder={p.tagBorder} readtime={p.read} title={p.title} desc={p.desc} date={p.date} />

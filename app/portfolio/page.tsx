@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Portfolio',
@@ -24,15 +25,14 @@ const TAG_COLORS: Record<string,string> = {
 
 export default function PortfolioPage() {
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:14 }}>Our Work</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2.5rem,6vw,5rem)', lineHeight:0.92, letterSpacing:'-0.03em', color:'#E4E4F0', marginBottom:16 }}>
-          8 projects.<br /><span style={{ color:'#2C6FED' }}>All live.</span>
-        </h1>
-        <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:16, color:'#8A8AAA', maxWidth:520, lineHeight:1.75, marginBottom:56 }}>
-          Every project below is live on the internet right now. Click any link to see the real site — not a mockup, not a screenshot.
-        </p>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero
+        eyebrow="Our Work"
+        title={<>8 projects.<br /><span style={{ color:'#2C6FED' }}>All live.</span></>}
+        subtitle="Every project below is live on the internet right now. Click any link to see the real site, not a mockup, not a screenshot."
+        variant="portfolio"
+      />
+      <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))', gap:16 }}>
           {PROJECTS.map((p, i) => (
             <div key={p.name} style={{ border:'1px solid #1C1C34', borderRadius:18, overflow:'hidden', background:'#0A0A16', display:'flex', flexDirection:'column' }}>

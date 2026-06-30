@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
+import PageHero from '@/components/sections/PageHero'
 export const metadata: Metadata = { title: 'Privacy Policy' }
 export default function Page() {
   const S = { fontFamily:"'Syne',sans-serif", fontWeight:700 as const, fontSize:20, color:'#E4E4F0', marginTop:32, marginBottom:10 }
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
-    <div style={{ paddingTop:68, minHeight:'100vh' }}>
-      <div style={{ maxWidth:800, margin:'0 auto', padding:'80px 40px' }}>
-        <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', marginBottom:14 }}>Last updated: June 2026</p>
-        <h1 style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:'clamp(2rem,4vw,3.5rem)', color:'#E4E4F0', marginBottom:32 }}>Privacy Policy</h1>
+    <div style={{ minHeight:'100vh' }}>
+      <PageHero eyebrow="Last updated: June 2026" title="Privacy Policy" variant="legal" height="36vh" />
+      <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>This Privacy Policy describes how Alffy (Alfinega) ("we", "us") collects, uses, and protects information when you visit alffy.alfinega.com or use our services.</p>
         <h2 style={S}>What we collect</h2>
         <p style={P}>We collect information you provide directly: your name, email address, and message when you use our contact form or newsletter signup. We also collect analytics data through Google Analytics 4, including pages visited, time on site, and general geographic location (city level). No personally identifiable information is sent to Google without your consent.</p>
