@@ -35,12 +35,14 @@ export default function HeroSection() {
   return (
     /*
       HEIGHT FIX:
-      height: 100vh gives a concrete pixel value.
-      The absolute child div inherits it via height: 100%.
-      Engine's canvas (width:100%, height:100%) then fills correctly.
-      DO NOT change to min-h-screen — that breaks the 3D canvas.
+      height uses min(100vh, 880px) so it has a concrete pixel value at all
+      times (satisfying the Engine canvas height chain) while never ballooning
+      on tall/narrow viewports — e.g. desktop-mode mobile browsers, ultra-tall
+      phone screens, or any aspect ratio where 100vh alone produces a huge
+      section with mostly empty 3D space and the headline pushed off-screen.
+      DO NOT change to min-h-screen — that breaks the 3D canvas entirely.
     */
-    <section style={{ height: '100vh', position: 'relative', overflow: 'hidden', background: '#04040C' }}>
+    <section style={{ height: 'min(100vh, 880px)', minHeight: 560, position: 'relative', overflow: 'hidden', background: '#04040C' }}>
 
       {/* 3D background — absolute fill */}
       <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>

@@ -1,8 +1,9 @@
 'use client'
 
 // PageHero — shared 3D header component for all non-home pages.
-// Uses the correct height: 50vh with explicit pixel chain so react-babylonjs
-// Engine canvas renders correctly. Never use min-h-* here.
+// Height is capped via min(Xvh, Ypx) so the Engine canvas height chain stays
+// valid (always a concrete pixel value) while never ballooning into a huge
+// mostly-empty section on tall/narrow viewports. Never use min-h-* here.
 
 import dynamic from 'next/dynamic'
 import type { SceneVariant } from '@/components/3d/BabylonHero'
@@ -21,7 +22,7 @@ export default function PageHero({ eyebrow, title, subtitle, variant = 'home', h
   return (
     <section
       style={{
-        height,
+        height: `min(${height}, 560px)`,
         minHeight: 320,
         position: 'relative',
         overflow: 'hidden',
