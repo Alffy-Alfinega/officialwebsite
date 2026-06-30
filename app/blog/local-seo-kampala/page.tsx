@@ -13,7 +13,7 @@ export default function Post() {
       <PageHero
         eyebrow="SEO · 7 min read"
         title="Local SEO in Kampala: How to Rank When Customers Are Searching Near You"
-        variant="blog"
+        variant="blog-seo"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

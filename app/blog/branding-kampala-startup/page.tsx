@@ -8,7 +8,7 @@ export default function Post() {
       <PageHero
         eyebrow="Branding · 6 min read"
         title="Branding for Kampala Startups: What to Invest In First"
-        variant="blog"
+        variant="blog-branding"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

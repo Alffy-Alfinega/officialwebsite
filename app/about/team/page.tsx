@@ -54,7 +54,7 @@ export default function TeamPage() {
         eyebrow="Leadership Team"
         title={<>The people<br /><span style={{ color: '#2C6FED' }}>behind the work.</span></>}
         subtitle="Three leaders. Every project handled directly, no junior staff, no outsourcing, no account managers who barely know your brief."
-        variant="about"
+        variant="about-team"
         height="46vh"
       />
 

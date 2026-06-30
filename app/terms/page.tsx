@@ -6,7 +6,7 @@ export default function Page() {
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
     <div style={{ minHeight:'100vh' }}>
-      <PageHero eyebrow="Last updated: June 2026" title="Terms of Service" variant="legal" height="36vh" />
+      <PageHero eyebrow="Last updated: June 2026" title="Terms of Service" variant="legal-terms" height="36vh" />
       <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>By engaging Alffy (Alfinega) for any service, you agree to the following terms. These terms govern the relationship between Alffy (Alfinega) and any client ("you").</p>
         <h2 style={S}>Scope of work</h2>

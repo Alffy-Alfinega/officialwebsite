@@ -19,7 +19,7 @@ export default function Page() {
         eyebrow="Service 03"
         title={<>Branding &<br /><span style={{ color: '#2C6FED' }}>Graphic Design.</span></>}
         subtitle="Brand identity, logos, and visual design for Ugandan businesses that need to look professional and consistent everywhere."
-        variant="branding-design"
+        variant="svc-branding"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

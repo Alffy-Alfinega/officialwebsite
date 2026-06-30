@@ -13,7 +13,7 @@ export default function Post() {
       <PageHero
         eyebrow="Web Design · 5 min read"
         title="Why Your Ugandan Business Needs a Website in 2026"
-        variant="blog"
+        variant="blog-website"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

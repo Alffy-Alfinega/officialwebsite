@@ -31,7 +31,7 @@ export default function SeoPage() {
         eyebrow="Service 02"
         title={<>SEO & Digital<br /><span style={{ color: '#2C6FED' }}>Marketing.</span></>}
         subtitle="Getting found on Google is not magic. It is a technical and content discipline. We do the research, fix the technical problems, produce the content, and track the results every month, in plain language."
-        variant="seo-marketing"
+        variant="svc-seo"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

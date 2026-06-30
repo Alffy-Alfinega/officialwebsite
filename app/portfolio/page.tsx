@@ -30,7 +30,7 @@ export default function PortfolioPage() {
         eyebrow="Our Work"
         title={<>8 projects.<br /><span style={{ color:'#2C6FED' }}>All live.</span></>}
         subtitle="Every project below is live on the internet right now. Click any link to see the real site, not a mockup, not a screenshot."
-        variant="portfolio"
+        variant="portfolio-hub"
       />
       <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))', gap:16 }}>

@@ -323,5 +323,49 @@ POST /api/indexnow
    compact 3D-backed header using the same BabylonHero/height-fix pattern as the
    homepage, with eyebrow/title/subtitle slots. Applied to all 28 non-home pages
    (was previously home-only). Each page passes an appropriate SceneVariant.
-6. Confirmed via grep: 29/29 page.tsx files use either PageHero or the home
-   HeroSection — zero pages without a 3D header.
+## 15. SESSION LOG — 2026-06-30 Unique 3D Scene Per Page
+Every page now has its own distinct, non-shared Babylon.js scene — 29 total
+(28 unique PageHero variants + home's own HeroScene). No two pages reuse the
+same SceneVariant, even within the same category (e.g. each of the 6 service
+pages has its own scene; each of the 6 blog posts has its own scene).
+
+SceneVariant union fully replaced — old shared variants ('about', 'blog',
+'web-design', 'branding-design', 'media-production', 'legal', etc.) are gone.
+New 1:1 mapping:
+
+| Page | Variant | Concept |
+|---|---|---|
+| / | home (default) | Assembling agency disciplines — panel/orb/ring/block orbiting with sweep ring |
+| /about | about-hub | Leadership constellation — 3 orbiting spheres |
+| /about/story | about-story | Rising spiral timeline — 5 ascending markers |
+| /about/team | about-team | Fixed triangle formation — CEO + CTO + MD |
+| /about/why | about-why | Jagged vs smooth shape duel |
+| /services | services-hub | Six distinct shapes in a ring, one per discipline |
+| /services/web-design | svc-web | Stacked angled browser panels |
+| /services/seo-marketing | svc-seo | Bar chart cluster + search ring |
+| /services/branding-design | svc-branding | 4 irregular polyhedra, brand colors |
+| /services/media-production | svc-media | Film reel + drifting play marker |
+| /services/architectural-visualisation | svc-archviz | Low-poly wireframe skyline |
+| /services/cybersecurity-data | svc-security | Shield + orbiting security nodes |
+| /portfolio | portfolio-hub | 4x2 grid of floating frames |
+| /portfolio/web-design | portfolio-web | Single large rotating wireframe panel |
+| /portfolio/branding | portfolio-branding | 3 blending color swatch spheres |
+| /portfolio/video | portfolio-video | Spinning reel + trailing frames |
+| /blog | blog-hub | Fanned arc of 6 article panels |
+| /blog/why-your-ugandan-business-needs-a-website | blog-website | Flat panel + orbiting cursor dot |
+| /blog/local-seo-kampala | blog-seo | Map pin + expanding ping rings |
+| /blog/branding-kampala-startup | blog-branding | 3 spheres merging/separating |
+| /blog/meta-ads-east-africa-2026 | blog-ads | Pulsing ad unit + orbiting particles |
+| /blog/nextjs-vs-wordpress-africa | blog-nextjs | Sharp wireframe cube vs smooth sphere duel |
+| /blog/core-web-vitals-guide | blog-vitals | 3 spheres bouncing at different speeds (LCP/INP/CLS) |
+| /pricing | pricing | 3-tier gem cluster (unchanged) |
+| /careers | careers | Ascending staggered platforms + climbing marker (unchanged) |
+| /contact | contact | Hub + 4 orbiting satellites (unchanged) |
+| /privacy-policy | legal-privacy | Calm rotating lock |
+| /terms | legal-terms | Calm rotating document tablet |
+| /data-handling | legal-data | Orbiting data block cluster |
+
+All scenes share the same `useAnimation` hook and palette constants (BLUE,
+GOLD, GREEN, PURPLE, CYAN, RED, WHITE, GREY) for visual cohesion while being
+structurally and conceptually distinct. BabylonHero/height-fix architecture
+unchanged — purely additive to the scene layer.

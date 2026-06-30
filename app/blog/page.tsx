@@ -24,7 +24,7 @@ export default function BlogPage() {
         eyebrow="Alffy Blog"
         title={<>Insights from<br /><span style={{ color:'#2C6FED' }}>Kampala.</span></>}
         subtitle="Practical articles on web design, SEO, branding, and digital marketing, written for Ugandan and East African businesses."
-        variant="blog"
+        variant="blog-hub"
       />
       <div style={{ maxWidth:1100, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(320px,1fr))', gap:16, marginBottom:64 }}>

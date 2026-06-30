@@ -8,7 +8,7 @@ export default function Post() {
       <PageHero
         eyebrow="SEO · 5 min read"
         title="Core Web Vitals for Ugandan Websites: A Plain-Language Guide"
-        variant="blog"
+        variant="blog-vitals"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

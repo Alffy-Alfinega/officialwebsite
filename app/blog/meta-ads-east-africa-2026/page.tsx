@@ -8,7 +8,7 @@ export default function Post() {
       <PageHero
         eyebrow="Marketing · 8 min read"
         title="Meta Ads in East Africa 2026: What Is Working Right Now"
-        variant="blog"
+        variant="blog-ads"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

@@ -19,7 +19,7 @@ export default function Page() {
         eyebrow="Service 04"
         title={<>Video, Animation &<br /><span style={{ color: '#2C6FED' }}>Image Editing.</span></>}
         subtitle="Content that moves people. Video editing, 2D and 3D animation, and image editing for businesses across East Africa."
-        variant="media-production"
+        variant="svc-media"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

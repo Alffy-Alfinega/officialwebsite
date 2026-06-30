@@ -11,7 +11,7 @@ export default function Page() {
         eyebrow="Portfolio"
         title="Web Design Portfolio"
         subtitle="Websites we have designed and built for clients across Uganda and East Africa."
-        variant="web-design"
+        variant="portfolio-web"
         height="42vh"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px 80px' }}>

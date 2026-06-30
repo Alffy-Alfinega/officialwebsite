@@ -21,7 +21,7 @@ export default function StoryPage() {
       <PageHero
         eyebrow="Our Story"
         title={<>Why we started<br /><span style={{ color: '#2C6FED' }}>Alffy.</span></>}
-        variant="about"
+        variant="about-story"
         height="44vh"
       />
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '56px 40px 80px' }}>

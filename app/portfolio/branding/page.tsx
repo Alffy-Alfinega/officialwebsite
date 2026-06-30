@@ -11,7 +11,7 @@ export default function Page() {
         eyebrow="Portfolio"
         title="Branding Portfolio"
         subtitle="Brand identities and visual systems we have created for businesses across Uganda."
-        variant="branding-design"
+        variant="portfolio-branding"
         height="42vh"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px 80px' }}>

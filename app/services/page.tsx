@@ -24,7 +24,7 @@ export default function ServicesPage() {
         eyebrow="What We Do"
         title={<>6 services.<br /><span style={{ color:'#2C6FED' }}>All in-house.</span></>}
         subtitle="Every service is delivered entirely in-house by our team in Kampala. No outsourcing, no subcontractors. You get direct access to the people doing the actual work."
-        variant="services"
+        variant="services-hub"
       />
       <div style={{ maxWidth:1200, margin:'0 auto', padding:'56px 40px 80px' }}>
         <div style={{ display:'flex', flexDirection:'column', gap:12 }}>

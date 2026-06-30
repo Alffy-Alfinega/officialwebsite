@@ -39,7 +39,7 @@ export default function WebDesignPage() {
         eyebrow="Service 01"
         title={<>Web Design &<br /><span style={{ color: '#2C6FED' }}>Development.</span></>}
         subtitle="Websites built on Next.js, not WordPress, not Wix, not a template. Fast-loading, mobile-first, properly coded sites that rank on Google and convert visitors into customers."
-        variant="web-design"
+        variant="svc-web"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

@@ -26,7 +26,7 @@ export default function AboutPage() {
         eyebrow="About Alffy"
         title={<>A digital agency<br /><span style={{ color:'#2C6FED' }}>built in Kampala.</span></>}
         subtitle="We started Alffy because we saw Ugandan businesses being underserved. We decided to do it differently."
-        variant="about"
+        variant="about-hub"
       />
 
       <section style={{ borderTop:'1px solid #1C1C34', borderBottom:'1px solid #1C1C34', background:'#0A0A16' }}>

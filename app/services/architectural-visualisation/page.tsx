@@ -19,7 +19,7 @@ export default function Page() {
         eyebrow="Service 05"
         title={<>Architectural<br /><span style={{ color: '#2C6FED' }}>Visualisation.</span></>}
         subtitle="See it before it is built. Photorealistic 3D renders and architectural visualisations for developers and architects in Uganda."
-        variant="arch-vis"
+        variant="svc-archviz"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

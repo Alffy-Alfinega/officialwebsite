@@ -6,7 +6,7 @@ export default function Page() {
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
     <div style={{ minHeight:'100vh' }}>
-      <PageHero eyebrow="Last updated: June 2026" title="Privacy Policy" variant="legal" height="36vh" />
+      <PageHero eyebrow="Last updated: June 2026" title="Privacy Policy" variant="legal-privacy" height="36vh" />
       <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>This Privacy Policy describes how Alffy (Alfinega) ("we", "us") collects, uses, and protects information when you visit alffy.alfinega.com or use our services.</p>
         <h2 style={S}>What we collect</h2>

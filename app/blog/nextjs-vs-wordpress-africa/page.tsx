@@ -8,7 +8,7 @@ export default function Post() {
       <PageHero
         eyebrow="Web Design · 6 min read"
         title="Next.js vs WordPress for African Business Websites"
-        variant="blog"
+        variant="blog-nextjs"
         height="40vh"
       />
       <div style={{ maxWidth:760, margin:'0 auto', padding:'48px 40px 80px' }}>

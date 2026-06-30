@@ -11,7 +11,7 @@ export default function Page() {
         eyebrow="Portfolio"
         title="Video & Animation Portfolio"
         subtitle="Video, motion graphics, and animation work produced for clients across East Africa."
-        variant="media-production"
+        variant="portfolio-video"
         height="42vh"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px 80px' }}>

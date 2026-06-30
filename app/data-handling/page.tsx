@@ -6,7 +6,7 @@ export default function Page() {
   const P = { fontFamily:"'Outfit',sans-serif", fontSize:15, color:'#8A8AAA', lineHeight:1.8, marginBottom:12 }
   return (
     <div style={{ minHeight:'100vh' }}>
-      <PageHero eyebrow="Last updated: June 2026" title="Data Handling Policy" variant="legal" height="36vh" />
+      <PageHero eyebrow="Last updated: June 2026" title="Data Handling Policy" variant="legal-data" height="36vh" />
       <div style={{ maxWidth:800, margin:'0 auto', padding:'48px 40px 80px' }}>
         <p style={P}>This policy applies specifically to clients engaging Alffy (Alfinega) for data entry, database management, or any service involving the handling of third-party data.</p>
         <h2 style={S}>Confidentiality</h2>

@@ -25,7 +25,7 @@ export default function WhyPage() {
         eyebrow="Why Alffy"
         title={<>Why agencies fail.<br /><span style={{ color: '#2C6FED' }}>Why we do not.</span></>}
         subtitle="Most agency failures come from the same three places: overpromising, outsourcing, and disappearing after payment. We have built Alffy around avoiding all three."
-        variant="about"
+        variant="about-why"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 

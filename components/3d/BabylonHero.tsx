@@ -21,10 +21,13 @@ const BabylonSceneInner = dynamic(() => import('./BabylonSceneInner'), {
 })
 
 export type SceneVariant =
-  | 'home' | 'about' | 'contact' | 'services'
-  | 'web-design' | 'seo-marketing' | 'branding-design'
-  | 'media-production' | 'arch-vis' | 'cybersecurity'
-  | 'blog' | 'portfolio' | 'pricing' | 'careers' | 'legal'
+  | 'home'
+  | 'about-hub' | 'about-story' | 'about-team' | 'about-why'
+  | 'services-hub' | 'svc-web' | 'svc-seo' | 'svc-branding' | 'svc-media' | 'svc-archviz' | 'svc-security'
+  | 'portfolio-hub' | 'portfolio-web' | 'portfolio-branding' | 'portfolio-video'
+  | 'blog-hub' | 'blog-website' | 'blog-seo' | 'blog-branding' | 'blog-ads' | 'blog-nextjs' | 'blog-vitals'
+  | 'pricing' | 'careers' | 'contact'
+  | 'legal-privacy' | 'legal-terms' | 'legal-data'
 
 interface BabylonHeroProps {
   variant?: SceneVariant

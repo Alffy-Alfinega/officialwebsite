@@ -19,7 +19,7 @@ export default function Page() {
         eyebrow="Service 06"
         title={<>Cybersecurity &<br /><span style={{ color: '#2C6FED' }}>Data Services.</span></>}
         subtitle="Protect what matters. Cybersecurity assessments and mass data services for businesses in Uganda and East Africa."
-        variant="cybersecurity"
+        variant="svc-security"
       />
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 40px 80px' }}>
 
