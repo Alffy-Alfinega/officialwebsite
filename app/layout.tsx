@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Syne, Outfit, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import Navbar        from '@/components/nav/Navbar'
@@ -6,10 +7,32 @@ import Footer        from '@/components/layout/Footer'
 import LenisProvider from '@/components/layout/LenisProvider'
 import Preloader     from '@/components/ui/Preloader'
 import CookieBanner  from '@/components/ui/CookieBanner'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 import { Analytics }    from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const GA = 'G-5EKJN7MWHC'
+// ─── Self-hosted fonts via next/font ──────────────────────────────────────────
+// Eliminates the external Google Fonts request, improves LCP, removes GDPR risk.
+const syne = Syne({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-syne',
+  display: 'swap',
+})
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-outfit',
+  display: 'swap',
+})
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const GA   = 'G-5EKJN7MWHC'
 const BASE = 'https://alffy.alfinega.com'
 
 export const metadata: Metadata = {
@@ -55,11 +78,8 @@ const ld = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" className={`${syne.variable} ${outfit.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#04040C" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       </head>
@@ -84,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
           <CookieBanner />
+          <WhatsAppButton />
         </LenisProvider>
         <Analytics />
         <SpeedInsights />
