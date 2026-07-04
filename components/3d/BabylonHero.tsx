@@ -1,7 +1,7 @@
 'use client'
 
 // ─────────────────────────────────────────────────────────────────────────────
-// BabylonHero — declarative react-babylonjs scene
+// BabylonHero — declarative react-babylonjs scene with ErrorBoundary
 //
 // HEIGHT FIX (critical):
 // The <Engine> component renders <canvas style={{width:'100%', height:'100%'}} />
@@ -9,10 +9,16 @@
 // We receive a containerStyle prop and apply it to the outer wrapper.
 // The caller (HeroSection) must pass height: '100vh' or an explicit pixel value.
 // NEVER rely on min-h-screen — it does not propagate into absolute children.
+//
+// ERROR HANDLING:
+// BabylonErrorBoundary catches WebGL failures (blocked hardware, old Android
+// WebViews, restrictive enterprise browsers). Falls back to null — the parent
+// section's CSS gradient background remains visible.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import dynamic from 'next/dynamic'
 import type { CSSProperties } from 'react'
+import { BabylonErrorBoundary } from './BabylonErrorBoundary'
 
 // SSR-safe: Babylon.js uses WebGL/window — cannot run server-side
 const BabylonSceneInner = dynamic(() => import('./BabylonSceneInner'), {
@@ -42,11 +48,13 @@ export default function BabylonHero({
   className,
 }: BabylonHeroProps) {
   return (
-    <div
-      className={className}
-      style={{ width: '100%', height: '100%', ...containerStyle }}
-    >
-      <BabylonSceneInner variant={variant} />
-    </div>
+    <BabylonErrorBoundary>
+      <div
+        className={className}
+        style={{ width: '100%', height: '100%', ...containerStyle }}
+      >
+        <BabylonSceneInner variant={variant} />
+      </div>
+    </BabylonErrorBoundary>
   )
 }
