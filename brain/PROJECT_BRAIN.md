@@ -1,5 +1,5 @@
 # ALFFY (ALFINEGA) — PROJECT BRAIN
-*Ground-up rebuild — 2026-06-29*
+*Ground-up rebuild — 2026-06-29 | Last analysis: 2026-07-04*
 
 ---
 
@@ -192,6 +192,10 @@ POST /api/indexnow
 | 7 | Alffy (Alfinega) | https://alffy.alfinega.com | Web, Agency |
 | 8 | NAGABA Association | https://nagaba.proj.alfinega.com | Web, NGO |
 
+⚠️ FLAGGED: All portfolio URLs use dev.alfinega.com / proj.alfinega.com subdomains.
+These appear to be staging/development environments. Move to production domains before
+using in sales conversations or publishing in case studies.
+
 ---
 
 ## 9. PRICING
@@ -278,7 +282,7 @@ POST /api/indexnow
 │   │   ├── MarqueeTicker.tsx
 │   │   ├── ServicesSection.tsx
 │   │   ├── WhySection.tsx
-│   │   ├── PortfolioPreview.tsx
+│   │   ├── PortfolioPreview.tsx   ⚠️ MISSING — listed here but not in repo
 │   │   ├── TestimonialsSection.tsx
 │   │   ├── ProcessSection.tsx
 │   │   └── CTASection.tsx
@@ -323,6 +327,7 @@ POST /api/indexnow
    compact 3D-backed header using the same BabylonHero/height-fix pattern as the
    homepage, with eyebrow/title/subtitle slots. Applied to all 28 non-home pages
    (was previously home-only). Each page passes an appropriate SceneVariant.
+
 ## 15. SESSION LOG — 2026-06-30 Unique 3D Scene Per Page
 Every page now has its own distinct, non-shared Babylon.js scene — 29 total
 (28 unique PageHero variants + home's own HeroScene). No two pages reuse the
@@ -369,3 +374,208 @@ All scenes share the same `useAnimation` hook and palette constants (BLUE,
 GOLD, GREEN, PURPLE, CYAN, RED, WHITE, GREY) for visual cohesion while being
 structurally and conceptually distinct. BabylonHero/height-fix architecture
 unchanged — purely additive to the scene layer.
+
+---
+
+## 16. CRITICAL TECHNICAL DEBT — 2026-07-04 Analysis
+
+### 🔴 P0 — Fix Immediately
+
+#### 1. BabylonSceneInner.tsx — Monolith Bundle (1,055 lines, 30 scenes, one file)
+All 30 scene components are bundled together. Every page route loads the entire
+Babylon scene library even though only one scene is ever used per page.
+The correct fix is dynamic imports per scene file, or at minimum lazy loading
+of the SceneContent switch using React.lazy().
+
+**Impact**: Significant JS bundle bloat on every page. Users on slow connections
+(common in Uganda/East Africa) pay the cost of 29 unused scenes on every visit.
+
+**Fix**:
+```ts
+// Split each scene into its own file, load lazily:
+const HomeScene = dynamic(() => import('./scenes/HomeScene'), { ssr: false })
+```
+Or use React.lazy() + Suspense per variant.
+
+#### 2. Hero Stats Are Aspirational, Not Real
+The home hero grid shows: "50+ 2026 Projects Goal", "95% Satisfaction Target".
+These are openly labeled as *goals*, not achievements. This signals to any
+discerning visitor that the company is too young to have real numbers.
+
+**Options**:
+- Remove the stat grid entirely until real numbers exist
+- Replace with meaningful signals: "Founded 2025 · 8 live client sites · Uganda-based"
+- Show real project count (8 portfolio entries currently)
+
+#### 3. Portfolio URLs Are Development Subdomains
+All 7 client portfolio links use `.dev.alfinega.com` or `.proj.alfinega.com`.
+These look like staging environments. Potential clients clicking through will
+arrive at development builds, not production sites. This is a trust killer.
+
+**Fix**: Either move clients to production domains or build a screenshot-based
+portfolio that doesn't link out to live dev URLs.
+
+#### 4. No WhatsApp Floating CTA
+WhatsApp is the primary business communication channel in Uganda and across
+East Africa. The number exists in socials but there is no persistent floating
+WhatsApp button on the site. This is a significant conversion gap for the
+local market.
+
+**Fix**: Add a fixed bottom-right WhatsApp button site-wide.
+```tsx
+<a href="https://wa.me/256747113059" style={{ position:'fixed', bottom:24, right:24, zIndex:999 }}>
+```
+
+#### 5. No Error Boundary Around Babylon Scenes
+If WebGL is unavailable (blocked by hardware, browser settings, or low-end
+device), the entire page can fail silently or crash. There is no fallback UI.
+This affects a non-trivial percentage of East African mobile devices.
+
+**Fix**: Wrap BabylonHero in an ErrorBoundary with a static gradient fallback.
+
+---
+
+### 🟡 P1 — Fix This Sprint
+
+#### 6. Blog Is Static TSX — No CMS
+Adding a new blog post requires a developer to write a `.tsx` file and commit.
+The company literally sells SEO services — content velocity is the product
+promise — yet the content pipeline requires engineering involvement for every post.
+
+**Fix options (ranked)**:
+1. Contentlayer or MDX files (developer writes markdown, not TSX)
+2. Sanity or Payload CMS headless integration
+3. Minimum: extract blog posts to a shared data file array
+
+#### 7. No Portfolio Preview on Homepage
+The brain's target file structure lists `PortfolioPreview.tsx` in sections/.
+This component does not exist in the repo. The homepage (page.tsx) does not
+show portfolio work. Visitors who land on the homepage never see the 8 client
+projects without clicking to /portfolio.
+
+**Fix**: Build PortfolioPreview — 3-4 featured client cards on the homepage.
+
+#### 8. Testimonials Have No External Verification
+The brain audit flagged this on 2026-06-29 (finding #7). It has not been fixed.
+Anonymous testimonials on an agency site carry near-zero persuasion weight.
+
+**Fix**: Link each testimonial to a Google Business review or LinkedIn post.
+If real external reviews don't exist yet, remove the section until they do.
+A missing section is less damaging than clearly unverifiable claims.
+
+#### 9. Mixed Styling Paradigm
+globals.css defines Tailwind tokens and @theme variables. Components use
+almost exclusively inline styles (not Tailwind utilities). This creates:
+- Maintenance inconsistency (two systems to update when tokens change)
+- Larger-than-necessary style attributes in the DOM
+- No benefit from Tailwind's JIT purging since utilities aren't used
+
+**Fix decision needed**: Either commit to Tailwind utilities in components,
+or commit to CSS variables + inline styles and remove the Tailwind dependency.
+The current hybrid is the worst of both worlds.
+
+#### 10. useRef<any> in BabylonSceneInner
+Multiple `useRef<any>(null)` throughout BabylonSceneInner.tsx. This bypasses
+TypeScript's type safety entirely for the most complex and bug-prone part of
+the codebase.
+
+**Fix**: Type refs to `AbstractMesh | null` from @babylonjs/core.
+
+---
+
+### 🟢 P2 — Plan for Next Sprint
+
+#### 11. No Case Studies
+The portfolio shows client names and links. There is no "Problem → Approach →
+Result" narrative for any project. Case studies are the #1 sales tool for an
+agency — they answer the buyer's actual question: "can they solve my problem?"
+
+#### 12. Cybersecurity Service — Credibility Risk
+A team of 3 offering cybersecurity services with no listed certifications,
+credentials, or specific offerings is a credibility liability, not an asset.
+Every competitor who *is* credentialed will use this against Alffy in a sales
+conversation.
+
+**Options**:
+- List specific offerings + certifications prominently
+- Partner with a cybersecurity specialist and white-label
+- Remove the service until the credibility case is built
+
+#### 13. No Article Schema on Blog Posts
+The layout.tsx has a LocalBusiness schema. Individual blog pages have no
+Article schema (author, datePublished, dateModified, headline). This is a
+missed SEO opportunity, especially since the company sells SEO.
+
+#### 14. Google Fonts External Dependency
+Three font families loaded from fonts.googleapis.com. This adds:
+- A DNS lookup and external request on every page load
+- Potential GDPR exposure for EU visitors
+- Render-blocking risk if Google's CDN has issues
+
+**Fix**: Self-host fonts using `next/font/google` (built into Next.js).
+```ts
+import { Syne, Outfit, JetBrains_Mono } from 'next/font/google'
+```
+This eliminates the external request, enables font subsetting, and is zero-config.
+
+#### 15. No Lead Capture on Homepage
+The homepage CTAs go directly to /contact. Cold traffic rarely converts to a
+contact form without an intermediate capture. The newsletter form exists but is
+not prominently placed on the homepage.
+
+**Fix**: Add an inline newsletter capture or "free audit" offer to the homepage
+between ServicesSection and CTASection.
+
+---
+
+## 17. STRENGTHS — What Is Working
+
+1. **Tech stack is genuinely impressive** — Next.js 16, React 19, Babylon.js 9,
+   TypeScript 6, Tailwind v4. This is a legitimately modern stack. The 3D scenes
+   are a strong visual differentiator in the Kampala agency market.
+
+2. **SEO foundations are solid** — schema.org LocalBusiness, OG meta, Twitter
+   cards, sitemap.ts, robots.ts, IndexNow integration, GA4 with proper consent
+   management. This is better SEO infrastructure than most agencies anywhere.
+
+3. **Security headers** — vercel.json includes X-Content-Type-Options, X-Frame-
+   Options, X-XSS-Protection, Referrer-Policy, Permissions-Policy. Most agency
+   sites don't bother. This signals professionalism.
+
+4. **Brain documentation** — The brain/PROJECT_BRAIN.md file is a genuine asset.
+   Session logs, architectural decisions, and known issues are all recorded.
+   This is rare and valuable for a project of this age.
+
+5. **Transparent pricing in UGX** — Publishing prices in local currency qualifies
+   leads automatically and signals confidence in the product value.
+
+6. **GA4 consent-first implementation** — Defaulting to `analytics_storage: denied`
+   and gating on CookieBanner acceptance is GDPR-aware even for a Uganda-based
+   company. Shows forward thinking.
+
+7. **29 unique 3D scenes** — The conceptual differentiation per page (e.g. the
+   about-team scene mirrors the actual team structure: triangle of 3) is creative
+   and reinforces brand personality throughout the site.
+
+---
+
+## 18. OPEN ISSUES TRACKER
+
+| ID | Severity | Issue | Status |
+|---|---|---|---|
+| OI-001 | 🔴 P0 | BabylonSceneInner monolith bundle | Open |
+| OI-002 | 🔴 P0 | Hero stats are aspirational not real | Open |
+| OI-003 | 🔴 P0 | Portfolio URLs are dev subdomains | Open |
+| OI-004 | 🔴 P0 | No WhatsApp floating CTA | Open |
+| OI-005 | 🔴 P0 | No error boundary on Babylon scenes | Open |
+| OI-006 | 🟡 P1 | Blog is static TSX — no CMS | Open |
+| OI-007 | 🟡 P1 | PortfolioPreview missing from homepage | Open |
+| OI-008 | 🟡 P1 | Testimonials unverified | Open |
+| OI-009 | 🟡 P1 | Mixed styling paradigm | Open |
+| OI-010 | 🟡 P1 | useRef<any> throughout BabylonSceneInner | Open |
+| OI-011 | 🟢 P2 | No case studies | Open |
+| OI-012 | 🟢 P2 | Cybersecurity service — credibility gap | Open |
+| OI-013 | 🟢 P2 | No Article schema on blog posts | Open |
+| OI-014 | 🟢 P2 | Google Fonts external — use next/font/google | Open |
+| OI-015 | 🟢 P2 | No lead capture on homepage | Open |
+
