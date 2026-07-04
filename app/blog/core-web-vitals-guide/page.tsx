@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import BlogSchema from '@/components/ui/BlogSchema'
 export const metadata: Metadata = { title: 'Core Web Vitals for Ugandan Websites: A Plain-Language Guide' }
 export default function Post() {
   return (
     <div style={{ minHeight:'100vh' }}>
+      <BlogSchema
+        title="Core Web Vitals Explained: A Practical Guide for Ugandan Business Owners"
+        description="What LCP, INP, and CLS mean for your website and why they affect your Google ranking in Uganda."
+        slug="core-web-vitals-guide"
+        datePublished="2026-06-28"
+        dateModified="2026-06-30"
+      />
       <PageHero
         eyebrow="SEO · 5 min read"
         title="Core Web Vitals for Ugandan Websites: A Plain-Language Guide"
@@ -37,3 +45,4 @@ export default function Post() {
     </div>
   )
 }
+
