@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import BlogSchema from '@/components/ui/BlogSchema'
 export const metadata: Metadata = { title: 'Next.js vs WordPress for African Business Websites' }
 export default function Post() {
   return (
     <div style={{ minHeight:'100vh' }}>
+      <BlogSchema
+        title="Next.js vs WordPress for African Businesses: An Honest Comparison"
+        description="Choosing between Next.js and WordPress for your African business website — performance, cost, and long-term fit."
+        slug="nextjs-vs-wordpress-africa"
+        datePublished="2026-06-25"
+        dateModified="2026-06-30"
+      />
       <PageHero
         eyebrow="Web Design · 6 min read"
         title="Next.js vs WordPress for African Business Websites"
@@ -37,3 +45,4 @@ export default function Post() {
     </div>
   )
 }
+
