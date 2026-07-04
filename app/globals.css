@@ -1,9 +1,34 @@
 @import 'tailwindcss';
 
+/*
+ * ─── STYLING PARADIGM DECISION (2026-07-04) ────────────────────────────────
+ *
+ * Decision: CSS variables + inline styles in components; Tailwind for base layer.
+ *
+ * Rationale: All components in this codebase use inline style objects (React's
+ * `style` prop) with CSS custom properties from :root. This gives us:
+ *   - Zero dependency on Tailwind's JIT at runtime
+ *   - CSS variables that update globally from one place
+ *   - Simpler mental model (no class name ↔ value lookup needed)
+ *
+ * Tailwind is kept for:
+ *   - CSS normalisation/reset (@import 'tailwindcss')
+ *   - The @theme block below (design token definitions for tooling)
+ *   - Utility classes in globals.css itself
+ *   - Occasional responsive utilities (.md:block etc.) where needed
+ *
+ * What NOT to do:
+ *   - Do not add Tailwind utility classes to component TSX files
+ *   - Do not duplicate a token in both @theme and :root — :root is canonical
+ *   - Do not remove the @import 'tailwindcss' — the CSS reset is relied upon
+ *
+ * ────────────────────────────────────────────────────────────────────────────
+ */
+
 @theme {
-  --font-syne: 'Syne', sans-serif;
-  --font-outfit: 'Outfit', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-syne: var(--font-syne), 'Syne', sans-serif;
+  --font-outfit: var(--font-outfit), 'Outfit', sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
 
   --color-blue: #2C6FED;
   --color-blue-dim: #1A52C4;
@@ -47,7 +72,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -116,7 +141,7 @@ body {
   align-items: center;
   padding: 4px 14px;
   border-radius: 100px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
