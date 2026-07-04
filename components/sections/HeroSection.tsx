@@ -1,50 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
 import BabylonHero from '@/components/3d/BabylonHero'
-
-function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0)
-  const ref     = useRef<HTMLSpanElement>(null)
-  const started = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !started.current) {
-        started.current = true
-        let v = 0
-        const step = target / 55
-        const t = setInterval(() => {
-          v = Math.min(v + step, target)
-          setCount(Math.floor(v))
-          if (v >= target) clearInterval(t)
-        }, 22)
-      }
-    }, { threshold: 0.1 })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [target])
-
-  return <span ref={ref}>{count}{suffix}</span>
-}
 
 export default function HeroSection() {
   return (
-    /*
-      HEIGHT FIX:
-      height uses min(100vh, 880px) so it has a concrete pixel value at all
-      times (satisfying the Engine canvas height chain) while never ballooning
-      on tall/narrow viewports — e.g. desktop-mode mobile browsers, ultra-tall
-      phone screens, or any aspect ratio where 100vh alone produces a huge
-      section with mostly empty 3D space and the headline pushed off-screen.
-      DO NOT change to min-h-screen — that breaks the 3D canvas entirely.
-    */
     <section style={{ height: 'min(100vh, 880px)', minHeight: 560, position: 'relative', overflow: 'hidden', background: '#04040C' }}>
 
-      {/* 3D background — absolute fill */}
+      {/* 3D background */}
       <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
         <BabylonHero variant="home" />
       </div>
@@ -77,7 +40,7 @@ export default function HeroSection() {
         </div>
 
         <h1 style={{
-          fontFamily: "'Syne', sans-serif",
+          fontFamily: "var(--font-syne, 'Syne', sans-serif)",
           fontSize: 'clamp(2.8rem, 8vw, 6rem)',
           fontWeight: 800,
           lineHeight: 0.92,
@@ -98,40 +61,40 @@ export default function HeroSection() {
           opacity: 0, animation: 'fadeUp 1.1s 0.65s cubic-bezier(0.16,1,0.3,1) forwards',
         }}>
           <div style={{ maxWidth: 420 }}>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: 17, color: '#CCCCEE', lineHeight: 1.65, marginBottom: 24, fontWeight: 300 }}>
+            <p style={{ fontFamily: "var(--font-outfit, 'Outfit', sans-serif)", fontSize: 17, color: '#CCCCEE', lineHeight: 1.65, marginBottom: 24, fontWeight: 300 }}>
               We build websites, grow search rankings, define brand identities, and produce compelling media — all in-house from Kampala.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Link href="/contact" style={{
                 padding: '14px 32px', borderRadius: 100, textDecoration: 'none',
                 background: 'linear-gradient(135deg,#2C6FED,#1A52C4)', color: '#fff',
-                fontFamily: "'Syne',sans-serif", fontWeight: 600, fontSize: 14,
+                fontFamily: "var(--font-syne, 'Syne', sans-serif)", fontWeight: 600, fontSize: 14,
                 boxShadow: '0 0 30px rgba(44,111,237,0.35)',
               }}>Start a Project</Link>
               <Link href="/services" style={{
                 padding: '14px 32px', borderRadius: 100, textDecoration: 'none',
                 border: '1px solid #1C1C34', color: '#CCCCEE',
-                fontFamily: "'Syne',sans-serif", fontWeight: 600, fontSize: 14,
+                fontFamily: "var(--font-syne, 'Syne', sans-serif)", fontWeight: 600, fontSize: 14,
               }}>Our Services</Link>
             </div>
           </div>
 
-          {/* Stats */}
+          {/* Stats — real facts only */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px 40px' }}>
             {[
-              { target: 50, suffix: '+', label: '2026 Projects Goal' },
-              { target: 95, suffix: '%', label: 'Satisfaction Target' },
-              { raw: '24/7', label: 'Support Available' },
-              { raw: '5★',  label: 'Service Standard', gold: true },
+              { value: '8',   label: 'Live Client Sites' },
+              { value: '6',   label: 'Services In-House' },
+              { value: '24/7', label: 'Support Available' },
+              { value: '5★',  label: 'Service Standard', gold: true },
             ].map((s, i) => (
               <div key={i}>
                 <div style={{
-                  fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 36,
+                  fontFamily: "var(--font-syne, 'Syne', sans-serif)", fontWeight: 800, fontSize: 36,
                   color: s.gold ? '#D4A843' : '#2C6FED', lineHeight: 1,
                 }}>
-                  {s.raw ? s.raw : <Counter target={s.target!} suffix={s.suffix} />}
+                  {s.value}
                 </div>
-                <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: 4 }}>
+                <p style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: 10, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: 4 }}>
                   {s.label}
                 </p>
               </div>
@@ -142,7 +105,7 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <div style={{ position: 'absolute', bottom: 28, right: 40, zIndex: 10, display: 'flex', alignItems: 'center', gap: 8, opacity: 0.4 }}>
-        <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: '#9A9ABB', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Scroll</span>
+        <span style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)", fontSize: 10, color: '#9A9ABB', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Scroll</span>
         <div style={{ width: 1, height: 40, background: '#1C1C34', overflow: 'hidden', position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '40%', background: '#2C6FED', animation: 'scrollDrop 2s ease-in-out infinite' }} />
         </div>
