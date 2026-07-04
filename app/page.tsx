@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import HeroSection         from '@/components/sections/HeroSection'
 import MarqueeTicker       from '@/components/sections/MarqueeTicker'
 import ServicesSection     from '@/components/sections/ServicesSection'
+import PortfolioPreview    from '@/components/sections/PortfolioPreview'
+import LeadCaptureSection  from '@/components/sections/LeadCaptureSection'
 import WhySection          from '@/components/sections/WhySection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import ProcessSection      from '@/components/sections/ProcessSection'
@@ -18,6 +20,8 @@ export default function Home() {
       <HeroSection />
       <MarqueeTicker />
       <ServicesSection />
+      <PortfolioPreview />
+      <LeadCaptureSection />
       <WhySection />
       <TestimonialsSection />
       <ProcessSection />
