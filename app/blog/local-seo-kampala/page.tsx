@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import BlogSchema from '@/components/ui/BlogSchema'
 
 export const metadata: Metadata = {
   title: 'Local SEO in Kampala: How to Rank When Customers Search Near You',
@@ -10,6 +11,13 @@ export const metadata: Metadata = {
 export default function Post() {
   return (
     <div style={{ minHeight:'100vh' }}>
+      <BlogSchema
+        title="Local SEO in Kampala: How to Rank Your Business on Google Uganda"
+        description="A practical guide to local SEO for businesses in Kampala and Uganda — Google Business, keywords, and citations."
+        slug="local-seo-kampala"
+        datePublished="2026-06-18"
+        dateModified="2026-06-30"
+      />
       <PageHero
         eyebrow="SEO · 7 min read"
         title="Local SEO in Kampala: How to Rank When Customers Are Searching Near You"
@@ -52,3 +60,4 @@ export default function Post() {
     </div>
   )
 }
+
