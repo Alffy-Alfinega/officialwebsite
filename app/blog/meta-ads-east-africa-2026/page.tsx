@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import BlogSchema from '@/components/ui/BlogSchema'
 export const metadata: Metadata = { title: 'Meta Ads in East Africa 2026: What Is Working Right Now' }
 export default function Post() {
   return (
     <div style={{ minHeight:'100vh' }}>
+      <BlogSchema
+        title="Meta Ads in East Africa 2026: What Actually Works"
+        description="Practical guidance on running Facebook and Instagram ads for East African audiences in 2026."
+        slug="meta-ads-east-africa-2026"
+        datePublished="2026-06-22"
+        dateModified="2026-06-30"
+      />
       <PageHero
         eyebrow="Marketing · 8 min read"
         title="Meta Ads in East Africa 2026: What Is Working Right Now"
@@ -36,3 +44,4 @@ export default function Post() {
     </div>
   )
 }
+
