@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '@/components/sections/PageHero'
+import BlogSchema from '@/components/ui/BlogSchema'
 export const metadata: Metadata = { title: 'Branding for Kampala Startups: What to Invest In First' }
 export default function Post() {
   return (
     <div style={{ minHeight:'100vh' }}>
+      <BlogSchema
+        title="Why Branding Matters for Kampala Startups in 2026"
+        description="How strong brand identity separates successful Kampala startups from those that stay invisible."
+        slug="branding-kampala-startup"
+        datePublished="2026-06-20"
+        dateModified="2026-06-30"
+      />
       <PageHero
         eyebrow="Branding · 6 min read"
         title="Branding for Kampala Startups: What to Invest In First"
@@ -34,3 +42,4 @@ export default function Post() {
     </div>
   )
 }
+
