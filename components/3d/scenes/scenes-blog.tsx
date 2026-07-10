@@ -1,12 +1,12 @@
 'use client'
 import { useRef } from 'react'
 import { Vector3 } from '@babylonjs/core/Maths/math'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { useAnimation, BLUE, GOLD, GREEN, CYAN, RED, WHITE, stdCam, stdLight } from '../babylon-shared'
 import type { SceneVariant } from '../BabylonHero'
 
 function BlogHubScene() {
-  const refs = Array.from({ length: 6 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 6 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => { refs.forEach((r, i) => { if (r.current) r.current.position.y = Math.sin(t * 0.5 + i * 0.8) * 0.12 }) })
   return (
     <>{stdLight()}{stdCam(6)}{refs.map((r, i) => {
@@ -23,8 +23,8 @@ function BlogHubScene() {
 }
 
 function BlogWebsiteScene() {
-  const panelRef = useRef<AbstractMesh | null>(null)
-  const cursorRef = useRef<AbstractMesh | null>(null)
+  const panelRef = useRef<Mesh | null>(null)
+  const cursorRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (panelRef.current) panelRef.current.rotation.y = Math.sin(t * 0.25) * 0.15
     if (cursorRef.current) { cursorRef.current.position.x = Math.sin(t * 0.8) * 0.6; cursorRef.current.position.y = Math.cos(t * 1.1) * 0.4 }
@@ -38,9 +38,9 @@ function BlogWebsiteScene() {
 }
 
 function BlogSeoScene() {
-  const pinRef = useRef<AbstractMesh | null>(null)
-  const ring1Ref = useRef<AbstractMesh | null>(null)
-  const ring2Ref = useRef<AbstractMesh | null>(null)
+  const pinRef = useRef<Mesh | null>(null)
+  const ring1Ref = useRef<Mesh | null>(null)
+  const ring2Ref = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (pinRef.current) pinRef.current.position.y = Math.sin(t * 0.7) * 0.1
     const p1 = (t * 0.4) % 1, p2 = ((t * 0.4) + 0.5) % 1
@@ -57,7 +57,7 @@ function BlogSeoScene() {
 }
 
 function BlogBrandingScene() {
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   const colors = [BLUE, GOLD, WHITE]
   useAnimation((t) => {
     const merge = (Math.sin(t * 0.4) + 1) / 2
@@ -73,8 +73,8 @@ function BlogBrandingScene() {
 }
 
 function BlogAdsScene() {
-  const adRef = useRef<AbstractMesh | null>(null)
-  const particleRefs = Array.from({ length: 4 }, () => useRef<AbstractMesh | null>(null))
+  const adRef = useRef<Mesh | null>(null)
+  const particleRefs = Array.from({ length: 4 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     if (adRef.current) adRef.current.scaling.setAll(1 + Math.sin(t * 1.4) * 0.08)
     particleRefs.forEach((r, i) => {
@@ -87,8 +87,8 @@ function BlogAdsScene() {
 }
 
 function BlogNextjsScene() {
-  const sharpRef = useRef<AbstractMesh | null>(null)
-  const roundRef = useRef<AbstractMesh | null>(null)
+  const sharpRef = useRef<Mesh | null>(null)
+  const roundRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (sharpRef.current) { const a = t * 0.5; sharpRef.current.position.x = Math.cos(a) * 0.9; sharpRef.current.rotation.y += 0.012; sharpRef.current.rotation.x += 0.006 }
     if (roundRef.current) { const a = t * 0.5 + Math.PI; roundRef.current.position.x = Math.cos(a) * 0.9; roundRef.current.rotation.y += 0.006 }
@@ -97,7 +97,7 @@ function BlogNextjsScene() {
 }
 
 function BlogVitalsScene() {
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   const speeds = [1.6, 1.0, 2.2], colors = [BLUE, GOLD, GREEN], xs = [-0.9, 0, 0.9]
   useAnimation((t) => { refs.forEach((r, i) => { if (r.current) { r.current.position.y = -0.3 + Math.abs(Math.sin(t * speeds[i])) * 0.6; r.current.rotation.y += 0.01 } }) })
   return (<>{stdLight()}{stdCam(4.5)}{refs.map((r, i) => (<sphere ref={r} key={i} name={`v${i}`} diameter={0.36} position={new Vector3(xs[i], 0, 0)}><standardMaterial name={`vm${i}`} diffuseColor={colors[i]} alpha={0.85} /></sphere>))}</>)

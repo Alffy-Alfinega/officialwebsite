@@ -1,14 +1,14 @@
 'use client'
 import { useRef } from 'react'
 import { useAnimation, useMeshRef, BLUE, GOLD, GREEN, PURPLE, stdCam, stdLight } from '../babylon-shared'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 
 export default function HomeScene() {
-  const panelRef = useRef<AbstractMesh | null>(null)
-  const orbRef   = useRef<AbstractMesh | null>(null)
-  const ringRef  = useRef<AbstractMesh | null>(null)
-  const blockRef = useRef<AbstractMesh | null>(null)
-  const scanRef  = useRef<AbstractMesh | null>(null)
+  const panelRef = useRef<Mesh | null>(null)
+  const orbRef   = useRef<Mesh | null>(null)
+  const ringRef  = useRef<Mesh | null>(null)
+  const blockRef = useRef<Mesh | null>(null)
+  const scanRef  = useRef<Mesh | null>(null)
 
   useAnimation((t) => {
     if (panelRef.current) {

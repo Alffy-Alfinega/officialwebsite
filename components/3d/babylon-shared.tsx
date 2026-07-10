@@ -3,7 +3,7 @@
 import { Vector3, Color3 } from '@babylonjs/core/Maths/math'
 import { useScene } from 'react-babylonjs'
 import { useEffect, useRef } from 'react'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 
 // ─── Animation hook ────────────────────────────────────────────────────────────
 
@@ -24,7 +24,7 @@ export function useAnimation(fn: (t: number) => void) {
 // ─── Typed mesh ref ────────────────────────────────────────────────────────────
 
 export function useMeshRef() {
-  return useRef<AbstractMesh | null>(null)
+  return useRef<Mesh | null>(null)
 }
 
 // ─── Shared palette ────────────────────────────────────────────────────────────

@@ -1,12 +1,12 @@
 'use client'
 import { useRef } from 'react'
 import { Vector3 } from '@babylonjs/core/Maths/math'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { useAnimation, BLUE, GOLD, RED, stdCam, stdLight } from '../babylon-shared'
 import type { SceneVariant } from '../BabylonHero'
 
 function AboutHubScene() {
-  const refs = [useRef<AbstractMesh | null>(null), useRef<AbstractMesh | null>(null), useRef<AbstractMesh | null>(null)]
+  const refs = [useRef<Mesh | null>(null), useRef<Mesh | null>(null), useRef<Mesh | null>(null)]
   const sizes = [0.5, 0.4, 0.4]
   const colors = [GOLD, BLUE, BLUE]
   const radii = [0, 1.4, 1.9]
@@ -37,7 +37,7 @@ function AboutHubScene() {
 }
 
 function AboutStoryScene() {
-  const markerRefs = Array.from({ length: 5 }, () => useRef<AbstractMesh | null>(null))
+  const markerRefs = Array.from({ length: 5 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     markerRefs.forEach((r, i) => {
       if (!r.current) return
@@ -62,9 +62,9 @@ function AboutStoryScene() {
 }
 
 function AboutTeamScene() {
-  const ceoRef = useRef<AbstractMesh | null>(null)
-  const ctoRef = useRef<AbstractMesh | null>(null)
-  const mdRef  = useRef<AbstractMesh | null>(null)
+  const ceoRef = useRef<Mesh | null>(null)
+  const ctoRef = useRef<Mesh | null>(null)
+  const mdRef  = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (ceoRef.current) { ceoRef.current.position.y = 0.55 + Math.sin(t * 0.5) * 0.1; ceoRef.current.rotation.y += 0.006 }
     if (ctoRef.current) { ctoRef.current.position.y = -0.35 + Math.sin(t * 0.55 + 1.3) * 0.1; ctoRef.current.rotation.y += 0.007 }
@@ -87,8 +87,8 @@ function AboutTeamScene() {
 }
 
 function AboutWhyScene() {
-  const jaggedRef = useRef<AbstractMesh | null>(null)
-  const smoothRef = useRef<AbstractMesh | null>(null)
+  const jaggedRef = useRef<Mesh | null>(null)
+  const smoothRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (jaggedRef.current) {
       const a = t * 0.6

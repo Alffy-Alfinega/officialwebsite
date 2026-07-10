@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * WhatsAppButton — persistent floating CTA (bottom-right, site-wide)
  *

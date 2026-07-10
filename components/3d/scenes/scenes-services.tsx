@@ -1,12 +1,12 @@
 'use client'
 import { useRef } from 'react'
 import { Vector3, Color3 } from '@babylonjs/core/Maths/math'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { useAnimation, BLUE, GOLD, GREEN, PURPLE, CYAN, RED, WHITE, stdCam, stdLight } from '../babylon-shared'
 import type { SceneVariant } from '../BabylonHero'
 
 function ServicesHubScene() {
-  const refs = Array.from({ length: 6 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 6 }, () => useRef<Mesh | null>(null))
   const colors = [BLUE, GREEN, GOLD, RED, PURPLE, CYAN]
   useAnimation((t) => {
     refs.forEach((r, i) => {
@@ -32,7 +32,7 @@ function ServicesHubScene() {
 
 function SvcWebScene() {
   const cfg = [{ pos: new Vector3(-1.0, 0.15, 0.2), ry: -0.35 }, { pos: new Vector3(0.1, 0, -0.3), ry: 0.05 }, { pos: new Vector3(1.0, -0.15, 0.15), ry: 0.4 }]
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     refs.forEach((r, i) => {
       if (!r.current) return
@@ -54,8 +54,8 @@ function SvcWebScene() {
 
 function SvcSeoScene() {
   const barData = [{ h: 0.6, x: -1.0 }, { h: 1.0, x: -0.4 }, { h: 1.5, x: 0.2 }, { h: 0.85, x: 0.8 }]
-  const barRefs = Array.from({ length: 4 }, () => useRef<AbstractMesh | null>(null))
-  const ringRef = useRef<AbstractMesh | null>(null)
+  const barRefs = Array.from({ length: 4 }, () => useRef<Mesh | null>(null))
+  const ringRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     barRefs.forEach((r, i) => { if (r.current) r.current.scaling.y = 1 + Math.sin(t * 0.5 + i * 0.8) * 0.05 })
     if (ringRef.current) { ringRef.current.rotation.z += 0.012; ringRef.current.position.x = 0.9 + Math.cos(t * 0.4) * 0.3 }
@@ -76,7 +76,7 @@ function SvcSeoScene() {
 }
 
 function SvcBrandingScene() {
-  const refs = Array.from({ length: 4 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 4 }, () => useRef<Mesh | null>(null))
   const cfgs = [{ pos: new Vector3(-0.8, 0.15, -0.3), c: BLUE }, { pos: new Vector3(0.85, -0.1, 0.4), c: GOLD }, { pos: new Vector3(0.05, 0.5, -0.8), c: WHITE }, { pos: new Vector3(0.4, -0.45, 0.8), c: PURPLE }]
   useAnimation((t) => {
     refs.forEach((r, i) => {
@@ -99,9 +99,9 @@ function SvcBrandingScene() {
 }
 
 function SvcMediaScene() {
-  const reelRef = useRef<AbstractMesh | null>(null)
-  const reel2Ref = useRef<AbstractMesh | null>(null)
-  const playRef = useRef<AbstractMesh | null>(null)
+  const reelRef = useRef<Mesh | null>(null)
+  const reel2Ref = useRef<Mesh | null>(null)
+  const playRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (reelRef.current)  reelRef.current.rotation.y += 0.012
     if (reel2Ref.current) { reel2Ref.current.rotation.y -= 0.018; reel2Ref.current.rotation.z += 0.006 }
@@ -125,7 +125,7 @@ function SvcMediaScene() {
 
 function SvcArchVizScene() {
   const bldgs = [{ w:0.5, h:1.3, d:0.5, x:-1.1, z:0.3 }, { w:0.65, h:1.9, d:0.6, x:0, z:-0.3 }, { w:0.4, h:0.85, d:0.45, x:1.1, z:0.2 }]
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   useAnimation(() => { if (refs[1].current) refs[1].current.rotation.y += 0.003 })
   return (
     <>
@@ -143,10 +143,10 @@ function SvcArchVizScene() {
 }
 
 function SvcSecurityScene() {
-  const shieldRef = useRef<AbstractMesh | null>(null)
-  const orbit1Ref = useRef<AbstractMesh | null>(null)
-  const orbit2Ref = useRef<AbstractMesh | null>(null)
-  const nodeRefs  = Array.from({ length: 6 }, () => useRef<AbstractMesh | null>(null))
+  const shieldRef = useRef<Mesh | null>(null)
+  const orbit1Ref = useRef<Mesh | null>(null)
+  const orbit2Ref = useRef<Mesh | null>(null)
+  const nodeRefs  = Array.from({ length: 6 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     if (shieldRef.current) { shieldRef.current.rotation.x += 0.004; shieldRef.current.rotation.y += 0.007; shieldRef.current.scaling.setAll(1 + Math.sin(t * 1.5) * 0.03) }
     if (orbit1Ref.current) orbit1Ref.current.rotation.y += 0.006

@@ -1,12 +1,12 @@
 'use client'
 import { useRef } from 'react'
 import { Vector3 } from '@babylonjs/core/Maths/math'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { useAnimation, BLUE, GOLD, PURPLE, WHITE, RED, stdCam, stdLight } from '../babylon-shared'
 import type { SceneVariant } from '../BabylonHero'
 
 function PortfolioHubScene() {
-  const refs = Array.from({ length: 8 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 8 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     refs.forEach((r, i) => {
       if (!r.current) return
@@ -31,7 +31,7 @@ function PortfolioHubScene() {
 }
 
 function PortfolioWebScene() {
-  const panelRef = useRef<AbstractMesh | null>(null)
+  const panelRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (panelRef.current) { panelRef.current.rotation.y = t * 0.5; panelRef.current.position.y = Math.sin(t * 0.5) * 0.15 }
   })
@@ -41,7 +41,7 @@ function PortfolioWebScene() {
 }
 
 function PortfolioBrandingScene() {
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   const colors = [BLUE, GOLD, PURPLE]
   useAnimation((t) => {
     refs.forEach((r, i) => {
@@ -60,8 +60,8 @@ function PortfolioBrandingScene() {
 }
 
 function PortfolioVideoScene() {
-  const reelRef = useRef<AbstractMesh | null>(null)
-  const frameRefs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const reelRef = useRef<Mesh | null>(null)
+  const frameRefs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     if (reelRef.current) reelRef.current.rotation.y += 0.015
     frameRefs.forEach((r, i) => {

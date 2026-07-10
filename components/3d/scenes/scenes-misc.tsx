@@ -1,12 +1,12 @@
 'use client'
 import { useRef } from 'react'
 import { Vector3, Color3 } from '@babylonjs/core/Maths/math'
-import type { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh'
+import type { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { useAnimation, BLUE, GOLD, GREEN, PURPLE, WHITE, GREY, stdCam, stdLight } from '../babylon-shared'
 import type { SceneVariant } from '../BabylonHero'
 
 function PricingScene() {
-  const refs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const refs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   const cfg = [{ d:0.42, x:-1.2, y:-0.1, c:PURPLE }, { d:0.62, x:0, y:0.2, c:BLUE }, { d:0.48, x:1.2, y:0, c:GOLD }]
   useAnimation((t) => {
     refs.forEach((r, i) => {
@@ -21,8 +21,8 @@ function PricingScene() {
 
 function CareersScene() {
   const levels = [0.4, 0.7, 1.05, 1.45, 1.9], xPos = [-1.6, -0.8, 0, 0.8, 1.6]
-  const barRefs = Array.from({ length: 5 }, () => useRef<AbstractMesh | null>(null))
-  const starRef = useRef<AbstractMesh | null>(null)
+  const barRefs = Array.from({ length: 5 }, () => useRef<Mesh | null>(null))
+  const starRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     barRefs.forEach((r, i) => { if (r.current) { r.current.rotation.y += 0.004 + i * 0.002; r.current.scaling.y = 1 + Math.sin(t * 0.5 + i * 0.7) * 0.03 } })
     if (starRef.current) { starRef.current.rotation.x += 0.01; starRef.current.rotation.y += 0.015; starRef.current.position.y = -1.0 + levels[4] + 0.2 + Math.sin(t * 1.8) * 0.1 }
@@ -36,9 +36,9 @@ function CareersScene() {
 }
 
 function ContactScene() {
-  const hubRef  = useRef<AbstractMesh | null>(null)
-  const satRefs = Array.from({ length: 4 }, () => useRef<AbstractMesh | null>(null))
-  const ringRef = useRef<AbstractMesh | null>(null)
+  const hubRef  = useRef<Mesh | null>(null)
+  const satRefs = Array.from({ length: 4 }, () => useRef<Mesh | null>(null))
+  const ringRef = useRef<Mesh | null>(null)
   useAnimation((t) => {
     if (hubRef.current) { hubRef.current.scaling.setAll(1 + Math.sin(t * 1.5) * 0.05); hubRef.current.rotation.y += 0.007 }
     if (ringRef.current) ringRef.current.rotation.z += 0.003
@@ -60,8 +60,8 @@ function ContactScene() {
 }
 
 function LegalPrivacyScene() {
-  const bodyRef = useRef<AbstractMesh | null>(null)
-  const shackleRef = useRef<AbstractMesh | null>(null)
+  const bodyRef = useRef<Mesh | null>(null)
+  const shackleRef = useRef<Mesh | null>(null)
   useAnimation(() => { if (bodyRef.current) bodyRef.current.rotation.y += 0.004; if (shackleRef.current) shackleRef.current.rotation.y += 0.004 })
   return (<>{stdLight()}{stdCam(4.5)}
   <box ref={bodyRef} name="body" width={0.5} height={0.42} depth={0.3}><standardMaterial name="bm" diffuseColor={BLUE} alpha={0.78} /></box>
@@ -70,8 +70,8 @@ function LegalPrivacyScene() {
 }
 
 function LegalTermsScene() {
-  const docRef = useRef<AbstractMesh | null>(null)
-  const lineRefs = Array.from({ length: 3 }, () => useRef<AbstractMesh | null>(null))
+  const docRef = useRef<Mesh | null>(null)
+  const lineRefs = Array.from({ length: 3 }, () => useRef<Mesh | null>(null))
   useAnimation(() => { if (docRef.current) docRef.current.rotation.y += 0.0035 })
   return (<>{stdLight()}{stdCam(4.5)}
   <box ref={docRef} name="doc" width={0.55} height={0.72} depth={0.03}><standardMaterial name="dm" diffuseColor={WHITE} alpha={0.18} /></box>
@@ -80,8 +80,8 @@ function LegalTermsScene() {
 }
 
 function LegalDataScene() {
-  const coreRef = useRef<AbstractMesh | null>(null)
-  const blockRefs = Array.from({ length: 4 }, () => useRef<AbstractMesh | null>(null))
+  const coreRef = useRef<Mesh | null>(null)
+  const blockRefs = Array.from({ length: 4 }, () => useRef<Mesh | null>(null))
   useAnimation((t) => {
     if (coreRef.current) coreRef.current.rotation.y += 0.006
     blockRefs.forEach((r, i) => {
