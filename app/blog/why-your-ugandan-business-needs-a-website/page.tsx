@@ -37,12 +37,12 @@ export default function Post() {
           <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:22, color:'#E4E4F0' }}>4. It cannot work for you while you sleep</h2>
           <p>A website is a 24/7 sales and information tool. Clients can read about your services, fill in a contact form, and get answers to their questions at 11pm on a Sunday — without you doing anything. Social media requires you to be present and active to maintain visibility.</p>
           <h2 style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:22, color:'#E4E4F0' }}>What a website costs vs what it earns</h2>
-          <p>A starter website at Alffy costs UGX 850,000 — a one-time payment. If your website generates even one additional client per month who would not have found you otherwise, it pays for itself within weeks.</p>
+          <p>A starter website at Alffy costs from UGX 1,000,000 — a one-time payment. If your website generates even one additional client per month who would not have found you otherwise, it pays for itself within weeks.</p>
           <p>For most Ugandan businesses, the question is not whether to get a website. The question is why they waited this long.</p>
         </div>
         <div style={{ marginTop:48, padding:'28px', border:'1px solid rgba(44,111,237,0.2)', borderRadius:16, background:'rgba(44,111,237,0.04)' }}>
           <p style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, fontSize:17, color:'#E4E4F0', marginBottom:8 }}>Ready to get online?</p>
-          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:14, color:'#8A8AAA', marginBottom:16 }}>We build websites from UGX 850,000 — delivered in 7 days.</p>
+          <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:14, color:'#8A8AAA', marginBottom:16 }}>We build websites from UGX 1,000,000 — delivered in 7 days.</p>
           <Link href="/contact" style={{ padding:'11px 24px', borderRadius:100, background:'linear-gradient(135deg,#2C6FED,#1A52C4)', color:'#fff', fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:13, textDecoration:'none' }}>Start your project</Link>
         </div>
       </div>

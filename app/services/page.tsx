@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const SERVICES = [
-  { n:'01', slug:'web-design',                title:'Web Design & Development',         icon:'🌐', price:'From UGX 850,000',    desc:'Fast, modern Next.js websites. Mobile-first, SEO-ready, and built to last. From 5-page business sites to complex multi-page platforms.' },
+  { n:'01', slug:'web-design',                title:'Web Design & Development',         icon:'🌐', price:'From UGX 1,000,000',    desc:'Fast, modern Next.js websites. Mobile-first, SEO-ready, and built to last. From 5-page business sites to complex multi-page platforms.' },
   { n:'02', slug:'seo-marketing',             title:'SEO & Digital Marketing',          icon:'📈', price:'From UGX 450,000/mo',  desc:'Keyword research, on-page optimisation, technical SEO, and link building. Monthly ranking reports in plain language.' },
   { n:'03', slug:'branding-design',           title:'Branding & Graphic Design',        icon:'🎨', price:'From UGX 600,000',    desc:'Logo design, brand guidelines, typography systems, and visual identity. Everything a business needs to look professional and consistent.' },
   { n:'04', slug:'media-production',          title:'Video, Animation & Image Editing', icon:'🎬', price:'Custom',              desc:'Video editing, 2D and 3D animation, motion graphics, and image editing. Media that tells your story across every platform.' },

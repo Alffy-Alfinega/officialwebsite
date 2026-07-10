@@ -203,8 +203,8 @@ using in sales conversations or publishing in case studies.
 ### Websites (one-time UGX)
 | Tier | Price |
 |---|---|
-| Starter | 850,000 |
-| Growth | 2,200,000 |
+| Starter | 1,000,000 – 1,125,000 |
+| Growth | 2,000,000 – 2,500,000 |
 | Enterprise | Custom |
 
 ### SEO (monthly UGX)

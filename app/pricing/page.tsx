@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 }
 
 const WEB = [
-  { tier:'Starter', price:'850,000', note:'One-time', features:['5-page website','Mobile responsive','Basic SEO setup','Contact form','1 revision round','Delivered in 7 days'], cta:'Get Started', featured:false },
-  { tier:'Growth', price:'2,200,000', note:'One-time', features:['15-page website','Advanced SEO setup','Blog system','Analytics integration','2 revision rounds','Priority support','Delivered in 14 days'], cta:'Most Popular', featured:true },
+  { tier:'Starter', price:'1,000,000 – 1,125,000', note:'One-time', features:['5-page website','Mobile responsive','Basic SEO setup','Contact form','1 revision round','Delivered in 7 days'], cta:'Get Started', featured:false },
+  { tier:'Growth', price:'2,000,000 – 2,500,000', note:'One-time', features:['15-page website','Advanced SEO setup','Blog system','Analytics integration','2 revision rounds','Priority support','Delivered in 14 days'], cta:'Most Popular', featured:true },
   { tier:'Enterprise', price:'Custom', note:'One-time', features:['Unlimited pages','Custom functionality','E-commerce capable','Full SEO strategy','Dedicated project manager','Unlimited revisions','Priority delivery'], cta:'Contact Us', featured:false },
 ]
 
@@ -47,7 +47,7 @@ export default function PricingPage() {
               {p.featured && <span style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'#2C6FED', color:'#fff', fontFamily:"'Syne',sans-serif", fontWeight:600, fontSize:11, padding:'4px 14px', borderRadius:100 }}>RECOMMENDED</span>}
               <p style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:11, color:'#6A6A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:10 }}>{p.tier}</p>
               <div style={{ marginBottom:4 }}>
-                <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:p.price==='Custom'?32:28, color: p.featured ? '#2C6FED' : '#E4E4F0' }}>{p.price==='Custom' ? 'Custom' : `UGX ${p.price}`}</span>
+                <span style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, fontSize:p.price==='Custom'?32:(p.price.includes('–')?20:28), color: p.featured ? '#2C6FED' : '#E4E4F0' }}>{p.price==='Custom' ? 'Custom' : `UGX ${p.price}`}</span>
               </div>
               <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:12, color:'#6A6A8A', marginBottom:20 }}>{p.note}</p>
               <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:8, marginBottom:24 }}>

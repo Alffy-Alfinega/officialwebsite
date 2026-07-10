@@ -4,7 +4,7 @@ import PageHero from '@/components/sections/PageHero'
 
 export const metadata: Metadata = {
   title: 'Web Design & Development',
-  description: 'Professional website design and development in Kampala, Uganda. Built on Next.js. Fast, mobile-first, SEO-ready. From UGX 850,000.',
+  description: 'Professional website design and development in Kampala, Uganda. Built on Next.js. Fast, mobile-first, SEO-ready. From UGX 1,000,000.',
 }
 
 const WHAT = [
@@ -27,8 +27,8 @@ const PROCESS = [
 ]
 
 const TIERS = [
-  { name:'Starter', price:'850,000', note:'One-time', features:['5 pages','Mobile responsive','Contact form','Basic SEO','7-day delivery','1 revision round'] },
-  { name:'Growth',  price:'2,200,000', note:'One-time', features:['15 pages','Blog system','Advanced SEO','Analytics setup','14-day delivery','2 revision rounds','Priority support'], hot:true },
+  { name:'Starter', price:'1,000,000 – 1,125,000', note:'One-time', features:['5 pages','Mobile responsive','Contact form','Basic SEO','7-day delivery','1 revision round'] },
+  { name:'Growth',  price:'2,000,000 – 2,500,000', note:'One-time', features:['15 pages','Blog system','Advanced SEO','Analytics setup','14-day delivery','2 revision rounds','Priority support'], hot:true },
   { name:'Enterprise', price:'Custom', note:'One-time', features:['Unlimited pages','Custom features','E-commerce','Dedicated PM','Flexible delivery','Unlimited revisions'] },
 ]
 
@@ -64,7 +64,7 @@ export default function WebDesignPage() {
               <div key={t.name} style={{ padding: '24px 24px 28px', border: `1px solid ${t.hot ? '#2C6FED' : '#1C1C34'}`, borderRadius: 16, background: t.hot ? 'rgba(44,111,237,0.05)' : '#0A0A16', position: 'relative' }}>
                 {t.hot && <span style={{ position: 'absolute', top: -11, left: 20, background: '#2C6FED', color: '#fff', fontFamily: "'Syne',sans-serif", fontWeight: 600, fontSize: 10, padding: '3px 12px', borderRadius: 100 }}>MOST POPULAR</span>}
                 <p style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#6A6A8A', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>{t.name}</p>
-                <p style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: 26, color: t.hot ? '#2C6FED' : '#E4E4F0', marginBottom: 2 }}>{t.price === 'Custom' ? 'Custom' : `UGX ${t.price}`}</p>
+                <p style={{ fontFamily: "'Syne',sans-serif", fontWeight: 800, fontSize: t.price === 'Custom' ? 26 : (t.price.includes('–') ? 19 : 26), color: t.hot ? '#2C6FED' : '#E4E4F0', marginBottom: 2 }}>{t.price === 'Custom' ? 'Custom' : `UGX ${t.price}`}</p>
                 <p style={{ fontFamily: "'Outfit',sans-serif", fontSize: 12, color: '#6A6A8A', marginBottom: 18 }}>{t.note}</p>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 7, marginBottom: 22 }}>
                   {t.features.map(f => <li key={f} style={{ fontFamily: "'Outfit',sans-serif", fontSize: 13, color: '#9A9ABB', display: 'flex', gap: 8 }}><span style={{ color: '#2C6FED' }}>✓</span>{f}</li>)}
