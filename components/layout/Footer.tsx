@@ -53,7 +53,7 @@ export default function Footer() {
             <p style={{ fontFamily:"'Outfit',sans-serif", fontSize:13, color:'#6A6A8A', lineHeight:1.7, marginBottom:16, maxWidth:200 }}>
               Web design, SEO, branding & creative media for businesses across Uganda and East Africa.
             </p>
-            <a href="mailto:contact@alfinega.com" style={{ ...lnk, color:'#2C6FED', display:'block', marginBottom:6 }}>contact@alfinega.com</a>
+            <a href="mailto:alffy@alfinega.com" style={{ ...lnk, color:'#2C6FED', display:'block', marginBottom:6 }}>alffy@alfinega.com</a>
             <a href="tel:+256747113059" style={{ ...lnk, display:'block', marginBottom:6 }}>+256 747 113 059</a>
             <p style={{ ...lnk, fontSize:12 }}>Makindye, Kampala, Uganda</p>
             <div style={{ display:'flex', gap:8, marginTop:16, flexWrap:'wrap' }}>
